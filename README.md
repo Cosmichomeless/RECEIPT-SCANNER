@@ -1,488 +1,402 @@
-# RECEIPT SCANNER
+# Receipt Scanner
+
+> Native iOS receipt scanner using on-device OCR, text normalization, and heuristic parsing.
+
+## Overview
+
+Receipt Scanner is a native iOS application capable of scanning purchase receipts and extracting structured information directly on the device.
+
+The project is designed to explore Apple's Vision ecosystem, document scanning, OCR, text normalization, heuristic parsing, and processing imperfect real-world data.
+
+The main challenge is not OCR itself.
+
+The real engineering problem is transforming noisy and inconsistent OCR output into reliable structured information.
+
+## Goals
+
+The application will initially extract:
+
+- Merchant
+- Date
+- Total amount
+- Currency
+
+The project is designed to demonstrate knowledge of:
+
+- Swift
+- SwiftUI
+- Vision
+- VisionKit
+- AVFoundation
+- On-device OCR
+- Image processing
+- Text normalization
+- Heuristic algorithms
+- Parsing
+- SwiftData
+- Swift Concurrency
+- Automated testing
+
+## Tech Stack
+
+- **Language:** Swift
+- **UI:** SwiftUI
+- **Document Scanning:** VisionKit
+- **OCR:** Vision
+- **Camera:** AVFoundation when lower-level control is required
+- **Persistence:** SwiftData
+- **Concurrency:** Swift Concurrency
+- **Testing:** Swift Testing / XCTest
 
-## Project Overview
+The application should process receipts locally whenever possible.
 
-Receipt Scanner is a mobile application capable of scanning purchase receipts using the phone camera and extracting useful information directly on the device.
+No external OCR service is required for the initial version.
+
+## Processing Pipeline
+
+The core processing pipeline will be:
+
+```text
+Camera / Document Scanner
+        ↓
+      Image
+        ↓
+   Vision OCR
+        ↓
+    Raw Text
+        ↓
+Text Normalization
+        ↓
+ Receipt Parser
+        ↓
+Structured Receipt
+        ↓
+User Validation
+        ↓
+    SwiftData
+```
+
+OCR and parsing must remain independent components.
 
-The application must work without requiring a remote OCR server.
+## MVP
+
+The first version should support:
+
+- Document scanning
+- On-device OCR
+- Raw text extraction
+- Merchant detection
+- Date detection
+- Total detection
+- Currency detection
+- Manual correction
+- Receipt persistence
+- Receipt history
 
-The primary technical goal is to explore:
+## Data Model
 
-- Camera processing.
-- OCR.
-- On-device machine learning.
-- Real-world text parsing.
-- Local persistence.
-- Mobile performance.
+Initial model:
+
+```text
+Receipt
+├── id
+├── merchant
+├── date
+├── total
+├── currency
+├── rawText
+├── createdAt
+└── imagePath?
+```
 
-The project should focus on extracting structured information from messy real-world receipt data.
+The original scanned image may optionally be retained depending on storage and privacy decisions.
 
----
+## OCR Architecture
 
-# Main Goal
+OCR should only be responsible for recognizing text.
 
-The application should allow the user to point the camera at a receipt and automatically detect:
+```text
+Receipt Image
+      ↓
+  OCRService
+      ↓
+  OCRResult
+```
 
-- Merchant.
-- Date.
-- Total amount.
-- Currency.
+The parsing engine should then consume the result independently:
 
-Example:
+```text
+OCRResult
+      ↓
+ReceiptParser
+      ↓
+ParsedReceipt
+```
 
-Receipt detected
+This separation allows parsing logic to be tested without requiring a camera or OCR execution.
 
-Merchant:
-Northline Hardware
+## Parsing Strategy
 
-Date:
-04 OCT 2026
+Receipt formats vary significantly between businesses.
 
-Total:
-84.37 €
+The parser will therefore combine several heuristics.
 
-The user should then be able to confirm or correct the detected information before saving it.
+### Total Detection
 
----
+Possible keywords include:
 
-# Key Principle
+```text
+TOTAL
+GRAND TOTAL
+AMOUNT
+AMOUNT DUE
+TOTAL EUR
+TOTAL €
+```
 
-OCR is NOT the main challenge.
+The parser must distinguish them from values such as:
 
-The real challenge is:
+```text
+SUBTOTAL
+TAX
+VAT
+DISCOUNT
+CHANGE
+```
 
-OCR TEXT
-    ↓
-MESSY RECEIPT DATA
-    ↓
-PARSING
-    ↓
-STRUCTURED DATA
+Candidate totals may be scored using:
 
-For example, a receipt may contain:
+- Keyword proximity
+- Position in the document
+- Currency symbols
+- Numeric format
+- Relationship to subtotal and taxes
 
-Subtotal: 76.92
-Tax: 7.45
-Total: 84.37
+### Date Detection
 
-The system must understand that:
+The parser should initially support formats such as:
 
-84.37
+```text
+06/10/2026
+06-10-2026
+2026-10-06
+06 OCT 2026
+06/10/26
+```
 
-is the final total.
+Detected dates should be normalized internally.
 
----
+### Merchant Detection
 
-# Technology Stack
+Merchant detection may analyze the first lines of the receipt while filtering:
 
-## Mobile
+- Addresses
+- Telephone numbers
+- Tax identifiers
+- Postal codes
+- URLs
+- Numeric-only lines
 
-- React Native
-- Expo
-- TypeScript
+A scoring system may be introduced as the parser evolves.
 
-A development build may be required because of native camera / ML dependencies.
+### Currency Detection
 
-## Camera
+Currency may be inferred using:
 
-- React Native VisionCamera
+- Currency symbols
+- Currency codes
+- Numeric formatting
+- Receipt locale when available
 
-## OCR
+## Example
 
-- Google ML Kit Text Recognition
+OCR might produce:
 
-## Local Storage
-
-- MMKV
-
-SQLite may be considered later if the data model becomes more complex.
-
-## Styling
-
-- NativeWind
-
----
-
-# Main Technical Areas
-
-The project should demonstrate:
-
-- Camera permissions.
-- Camera lifecycle.
-- Frame processing.
-- Image analysis.
-- OCR.
-- Text normalization.
-- Pattern recognition.
-- Regex.
-- Heuristics.
-- Parsing unstructured data.
-- Local storage.
-- Error handling.
-
----
-
-# Application Flow
-
-User opens scanner
-
-    ↓
-
-Camera preview
-
-    ↓
-
-Receipt detected
-
-    ↓
-
-Capture frame
-
-    ↓
-
-OCR
-
-    ↓
-
-Raw text
-
-    ↓
-
-Parser
-
-    ↓
-
-Merchant
-Date
-Total
-Currency
-
-    ↓
-
-User confirmation
-
-    ↓
-
-Save locally
-
----
-
-# Functional Requirements
-
-## Scanner
-
-The user must be able to:
-
-- Open the camera.
-- Position a receipt.
-- Capture the receipt.
-- Run OCR locally.
-- View detected fields.
-
----
-
-# OCR Output
-
-Example OCR:
-
+```text
 NORTHLINE HARDWARE
-MARKET ST
-PORTLAND OR
+MARKET STREET
 
-HEX KEY SET 9PC   18.99
-WOOD GLUE 8OZ      6.49
-SANDPAPER          9.96
+HEX KEY SET       18.99
+WOOD GLUE          6.49
 
-SUBTOTAL           76.92
-TAX                 7.45
-TOTAL              84.37
+SUBTOTAL          76.92
+TAX                7.45
+TOTAL             84.37
 
 VISA ****4471
-
-The parser should transform this into:
-
-Receipt {
-    merchant: "Northline Hardware"
-    date: ...
-    total: 84.37
-    currency: "EUR"
-}
-
----
-
-# Parsing Strategy
-
-The parser should use multiple heuristics.
-
-## Total Detection
-
-Look for keywords such as:
-
-- TOTAL
-- GRAND TOTAL
-- AMOUNT
-- AMOUNT DUE
-- TOTAL EUR
-- TOTAL €
-
-Avoid confusing them with:
-
-- SUBTOTAL
-- TAX
-- CHANGE
-- DISCOUNT
-
----
-
-## Date Detection
-
-Possible formats:
-
-DD/MM/YYYY
-DD-MM-YYYY
-YYYY-MM-DD
-04 OCT 2026
-04/10/26
-
-The parser should normalize them to one internal format.
-
----
-
-## Merchant Detection
-
-Possible strategy:
-
-- Analyze first lines.
-- Ignore addresses.
-- Ignore phone numbers.
-- Ignore tax identifiers.
-- Score candidate lines.
-
-Merchant detection will intentionally be heuristic rather than perfect.
-
----
-
-# Data Model
-
-Example:
-
-Receipt {
-    id
-    merchant
-    date
-    total
-    currency
-    rawText
-    createdAt
-    imageUri?
-}
-
----
-
-# Receipt Library
-
-The user should be able to view previous scans.
-
-Example:
-
-Northline Hardware
-84.37 €
-04 Oct 2026
-
-Mercadona
-37.54 €
-03 Oct 2026
-
-Amazon
-22.99 €
-01 Oct 2026
-
----
-
-# Architecture
-
-Suggested structure:
-
-src/
-
-features/
-    scanner/
-    receipts/
-
-services/
-    camera/
-    ocr/
-    parser/
-
-services/parser/
-    merchantParser.ts
-    dateParser.ts
-    totalParser.ts
-    currencyParser.ts
-
-storage/
-
-components/
-
-types/
-
-utils/
-
----
-
-# Important Engineering Principle
-
-OCR and parsing must remain separate.
-
-BAD:
-
-Camera → OCR → UI
-
-BETTER:
-
-Camera
-    ↓
-OCR Service
-    ↓
-Raw OCR Result
-    ↓
-Receipt Parser
-    ↓
-Structured Receipt
-    ↓
-UI
-
-This allows the parser to be tested independently from the camera.
-
----
-
-# MVP
-
-Initial MVP:
-
-- Camera access.
-- Capture receipt.
-- OCR.
-- Extract raw text.
-- Detect total.
-- Detect date.
-- Detect merchant.
-- User correction screen.
-- Save receipt.
-- Receipt history.
-
----
-
-# Features Outside Initial MVP
-
-Do NOT implement initially:
-
-- Accounts.
-- Cloud synchronization.
-- Bank integration.
-- Expense analytics.
-- AI categorization.
-- Automatic budgeting.
-- Shared receipts.
-- Remote OCR API.
-- Complex accounting features.
-
----
-
-# Testing Strategy
-
-The parser should have strong automated tests.
-
-Example fixtures:
-
-receipts/
-    supermarket.txt
-    restaurant.txt
-    hardware-store.txt
-    fuel-station.txt
-
-Tests should verify:
-
-- Correct total.
-- Correct date.
-- Correct merchant.
-
-The parsing engine is one of the most important parts of the project.
-
----
-
-# Development Phases
-
-## Phase 1 — Product Definition
+```
+
+The parser should produce something similar to:
+
+```text
+Merchant: Northline Hardware
+Total: 84.37
+Currency: EUR
+```
+
+## Testing Strategy
+
+Parsing is one of the most important parts of the project and should have strong automated test coverage.
+
+Test fixtures may include:
+
+```text
+Tests/
+└── Fixtures/
+    ├── supermarket/
+    ├── restaurant/
+    ├── fuel-station/
+    ├── hardware-store/
+    └── malformed/
+```
+
+Tests should cover:
+
+- Different receipt layouts
+- Different date formats
+- Decimal separators
+- Currency formats
+- OCR mistakes
+- Missing fields
+- Multiple candidate totals
+- Poorly formatted text
+
+## Project Structure
+
+Initial direction:
+
+```text
+ReceiptScanner/
+├── App/
+├── Features/
+│   ├── Scanner/
+│   ├── ReceiptReview/
+│   └── ReceiptHistory/
+├── OCR/
+├── Parsing/
+│   ├── MerchantParser/
+│   ├── DateParser/
+│   ├── TotalParser/
+│   └── CurrencyParser/
+├── Persistence/
+├── Models/
+└── Tests/
+```
+
+## Development Roadmap
+
+### Phase 1 — Product Definition
 
 Define:
 
-- Scanner UX.
-- Receipt result screen.
-- Receipt library.
+- Product scope
+- MVP
+- Scanner flow
+- Validation flow
+- History flow
 
-## Phase 2 — Camera
+### Phase 2 — Architecture
 
-Implement:
+Define:
 
-- Permissions.
-- Camera preview.
-- Capture.
+- Scanner boundaries
+- OCR service
+- Parser architecture
+- Persistence layer
 
-## Phase 3 — OCR
+### Phase 3 — Data Model
 
-Integrate:
+Design the receipt domain model and persistence strategy.
 
-- ML Kit.
-- Raw text extraction.
+### Phase 4 — Document Scanner
 
-## Phase 4 — Parser
+Implement VisionKit scanning.
 
-Implement:
+### Phase 5 — OCR
 
-- Amount detection.
-- Date detection.
-- Merchant detection.
-- Currency detection.
+Implement on-device text recognition using Vision.
 
-## Phase 5 — Persistence
+### Phase 6 — Text Normalization
 
-Implement local receipt library.
+Normalize:
 
-## Phase 6 — UX Improvements
+- Whitespace
+- Line breaks
+- Decimal formats
+- OCR artifacts
 
-Add:
+### Phase 7 — Total Parser
 
-- Highlight detected areas.
-- Edit detected values.
-- Error states.
+Build and test total detection heuristics.
 
-## Phase 7 — Testing
+### Phase 8 — Date Parser
 
-Build parsing dataset and automated tests.
+Build and test date detection.
 
-## Phase 8 — Documentation
+### Phase 9 — Merchant & Currency
+
+Implement additional parsing heuristics.
+
+### Phase 10 — Persistence
+
+Store validated receipts locally.
+
+### Phase 11 — Validation UI
+
+Allow users to review and correct detected fields.
+
+### Phase 12 — Test Dataset
+
+Build a representative receipt fixture dataset.
+
+### Phase 13 — Optimization
+
+Improve:
+
+- OCR latency
+- Parser accuracy
+- Memory usage
+
+### Phase 14 — Documentation
 
 Document:
 
-- OCR pipeline.
-- Parsing strategy.
-- Technical decisions.
-- Known limitations.
+- OCR architecture
+- Parsing strategies
+- Limitations
+- Technical decisions
 
----
+### Phase 15 — Release
 
-# Portfolio Value
+Prepare final demo and release documentation.
 
-The important part of this project is not that it scans receipts.
+## Out of Scope
 
-It should demonstrate:
+The first version will not include:
 
-- Computer vision integration.
-- On-device processing.
-- OCR.
-- Parsing.
-- Heuristic algorithms.
-- Real-world data handling.
-- Testing of imperfect data.
-- React Native native-module integration.
+- Accounts
+- Cloud synchronization
+- Bank integrations
+- Budget management
+- Expense analytics
+- Generative AI
+- External OCR APIs
+- Collaborative receipts
+
+## Project Philosophy
+
+This project should not be presented simply as:
+
+> An app that scans receipts.
+
+The engineering focus is:
+
+> A native on-device document processing pipeline that transforms imperfect OCR output into structured data using testable heuristic algorithms.
+
+## Status
+
+🚧 **In development**
+
+Current stage:
+
+**Phase 1 — Product Definition**
