@@ -1,0 +1,9 @@
+SHELL
+2201 Route 9
+PUMP 05
+10/06/26 06:41 AM
+GALLONS         11.238
+PRICE/GAL       $3.459
+FUEL SALE       $38.87
+TOTAL           $38.87
+CREDIT          $38.87

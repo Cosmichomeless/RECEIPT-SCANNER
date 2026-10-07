@@ -1,0 +1,11 @@
+NORTHLINE HARDWARE
+MARKET STREET
+
+HEX KEY SET       18.99
+WOOD GLUE          6.49
+
+SUBTOTAL          76.92
+TAX                7.45
+TOTAL             84.37
+
+VISA ****4471

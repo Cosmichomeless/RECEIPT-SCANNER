@@ -1,0 +1,9 @@
+FERRETERIA EL TORNILLO S.L.
+CIF B12345678
+Avda. de la Constitucion 22
+Fecha 06/10/26
+TALADRO 18V        49,95
+BROCAS SET         16,50
+SUBTOTAL           66,45
+DESCUENTO          -5,00
+TOTAL EUR          61,45

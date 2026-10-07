@@ -1,0 +1,10 @@
+{
+  "locale": "es_ES",
+  "merchant": "TIENDA SOL",
+  "date": "2026-10-06",
+  "total": "450.00",
+  "currency": null,
+  "issues": [
+    "ambiguousCurrency"
+  ]
+}

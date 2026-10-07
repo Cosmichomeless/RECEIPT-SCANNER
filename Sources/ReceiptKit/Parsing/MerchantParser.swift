@@ -63,7 +63,11 @@ public struct MerchantParser: Sendable {
     /// Strips decoration (`*** NAME ***`, `--- NAME ---`) and collapses spaces.
     static func clean(_ line: String) -> String? {
         let decoration = CharacterSet(charactersIn: "*-_=#~.:|/\\+<>[]()\"' ")
-        let name = line.trimmingCharacters(in: decoration)
+        var name = line.trimmingCharacters(in: decoration)
+        // "S.A." and "S.L." end in a period that belongs to the name.
+        if line.hasSuffix("."), name.range(of: #"(?<![A-Za-z])[A-Za-z]\.[A-Za-z]$"#, options: .regularExpression) != nil {
+            name += "."
+        }
         return name.contains(where: \.isLetter) ? name : nil
     }
 
@@ -114,7 +118,10 @@ public struct MerchantParser: Sendable {
     private static let emailPattern = #"[^\s@]+@[^\s@]+\.[A-Za-z]{2,}"#
     /// 7+ digits once separators are ignored, or a formatted number like (555) 123-4567.
     private static let phonePattern = #"(\+?\d[\d ().\-]{6,}\d)"#
-    private static let postalPattern = #"(?<![0-9])(\d{5}(-\d{4})?|[A-Z]{1,2}\d[A-Z\d]? ?\d[A-Z]{2})(?![0-9])"#
+    /// A 5-digit code counts only at the start of the line or after a comma or state code
+    /// (`28013 Madrid`, `Springfield, IL 62704`), so `STATION 12345` stays a name.
+    private static let postalPattern =
+        #"(?:^|,\s*|(?<![A-Za-z])[A-Z]{2}\s)\d{5}(-\d{4})?(?![0-9])|(?<![A-Za-z0-9])[A-Z]{1,2}\d[A-Z\d]? ?\d[A-Z]{2}(?![A-Za-z0-9])"#
     private static let datePattern = #"(?<![0-9])\d{1,4}[-/.]\d{1,2}[-/.]\d{2,4}(?![0-9])"#
     private static let timePattern = #"(?<![0-9])\d{1,2}:\d{2}(:\d{2})?\s?([AaPp][Mm])?"#
     private static let amountPattern = #"(?<![0-9])\d+[.,]\d{2}(?![0-9])"#

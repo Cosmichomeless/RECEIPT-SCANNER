@@ -67,4 +67,9 @@ import Testing
     @Test func strayDollarSignIsIgnored() {
         #expect(currency("CAFE $$$ DELUXE\nTOTAL 12.50") == .notFound)
     }
+
+    @Test func standaloneSymbolCountsWithoutNumber() {
+        #expect(currency("SHOP\nTOTAL (€)    7,00") == .found("EUR"))
+        #expect(currency("SHOP\nPRICES IN ($)\nTOTAL 7.00") == .notFound)
+    }
 }

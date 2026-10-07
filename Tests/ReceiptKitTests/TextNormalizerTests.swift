@@ -76,4 +76,9 @@ import Testing
         let result = normalizer.normalize(OCRResult(text: "A\nTOTAL 1,00"))
         #expect(result.lines.map(\.text) == ["A", "TOTAL 1.00"])
     }
+
+    @Test func joinsDecimalsSplitByBothSpaces() {
+        let text = TextNormalizer().normalize(rawText: "TOTAL 3 . 25\nSUB 84 .37")
+        #expect(text.lines.map(\.text) == ["TOTAL 3.25", "SUB 84.37"])
+    }
 }

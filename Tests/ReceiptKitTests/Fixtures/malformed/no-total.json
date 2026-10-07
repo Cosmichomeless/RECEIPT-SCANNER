@@ -1,0 +1,11 @@
+{
+  "locale": "en_US",
+  "merchant": "CORNER SHOP",
+  "date": "2026-10-06",
+  "total": null,
+  "currency": null,
+  "issues": [
+    "missingCurrency",
+    "missingTotal"
+  ]
+}

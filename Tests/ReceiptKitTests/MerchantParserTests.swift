@@ -66,4 +66,13 @@ import Testing
     @Test func nameWithAmpersandAndDigitsIsKept() {
         #expect(merchant("7-ELEVEN\nTOTAL 3.20") == "7-ELEVEN")
     }
+
+    @Test func keepsAbbreviationPeriods() {
+        #expect(merchant("MERCADONA, S.A.\nTOTAL 7,00") == "MERCADONA, S.A.")
+    }
+
+    @Test func stationNumberIsNotAPostalCode() {
+        #expect(merchant("REPSOL ESTACION 12345\nTOTAL 7,00") == "REPSOL ESTACION 12345")
+        #expect(merchant("Springfield, IL 62704\nCORNER BAKERY") == "CORNER BAKERY")
+    }
 }
