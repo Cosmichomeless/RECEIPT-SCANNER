@@ -1,3 +1,4 @@
+import Foundation
 import CoreGraphics
 import Testing
 @testable import ReceiptKit
@@ -67,6 +68,56 @@ private func makeImage() throws -> CGImage {
         await flow.handle(.captured(try makeImage()))
         guard case .failed = flow.state else {
             Issue.record("expected failed, got \(flow.state)")
+            return
+        }
+    }
+}
+
+private struct FailingRepository: ReceiptRepository {
+    struct Boom: LocalizedError { var errorDescription: String? { "disk full" } }
+    func save(_ receipt: Receipt) async throws { throw Boom() }
+    func fetchAll() async throws -> [Receipt] { [] }
+    func receipt(id: Receipt.ID) async throws -> Receipt? { nil }
+    func delete(id: Receipt.ID) async throws {}
+}
+
+@MainActor
+@Suite struct ScanFlowSavingTests {
+    private func reviewDraft() -> ReceiptDraft {
+        ReceiptDraft(ParsedReceipt(
+            merchant: "CAFE LUNA", total: Decimal(string: "9.50"), currencyCode: "EUR", rawText: "raw"
+        ))
+    }
+
+    @Test func savingStoresCorrectedReceiptAndReturnsToIdle() async throws {
+        let repository = InMemoryReceiptRepository()
+        let flow = ScanFlow(processor: ReceiptProcessor(ocr: EchoOCR(), parser: TextParser()), repository: repository)
+        var draft = reviewDraft()
+        draft.merchant = "Café Luna"
+        #expect(await flow.save(draft))
+        #expect(try await repository.fetchAll().map(\.merchant) == ["Café Luna"])
+        guard case .idle = flow.state else {
+            Issue.record("expected idle, got \(flow.state)")
+            return
+        }
+    }
+
+    @Test func incompleteDraftIsNotSaved() async throws {
+        let repository = InMemoryReceiptRepository()
+        let flow = ScanFlow(processor: ReceiptProcessor(ocr: EchoOCR(), parser: TextParser()), repository: repository)
+        var draft = reviewDraft()
+        draft.totalText = ""
+        #expect(await flow.save(draft) == false)
+        #expect(try await repository.fetchAll().isEmpty)
+    }
+
+    @Test func storageFailureKeepsReviewAndReportsError() async throws {
+        let flow = ScanFlow(processor: ReceiptProcessor(ocr: EchoOCR(), parser: TextParser()), repository: FailingRepository())
+        await flow.handle(.captured(try makeImage()))
+        #expect(await flow.save(reviewDraft()) == false)
+        #expect(flow.saveError == "disk full")
+        guard case .review = flow.state else {
+            Issue.record("expected review, got \(flow.state)")
             return
         }
     }

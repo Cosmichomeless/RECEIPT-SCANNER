@@ -17,8 +17,8 @@ struct ScanHomeView: View {
                     )
                 case .processing:
                     ProgressView("Reading receipt…")
-                case .review(let parsed, _):
-                    Text(parsed.rawText.isEmpty ? "No text found." : parsed.rawText)
+                case .review(let parsed, let image):
+                    ReviewView(flow: flow, parsed: parsed, image: image)
                 case .failed(let message):
                     ContentUnavailableView {
                         Label("Something went wrong", systemImage: "exclamationmark.triangle")
