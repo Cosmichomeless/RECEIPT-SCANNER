@@ -7,6 +7,9 @@ struct ReviewView: View {
     let image: CGImage
     @State private var draft: ReceiptDraft
     @State private var isSaving = false
+    @FocusState private var focusedField: Field?
+
+    private enum Field { case merchant, total }
 
     init(flow: ScanFlow, parsed: ParsedReceipt, image: CGImage) {
         self.flow = flow
@@ -16,9 +19,29 @@ struct ReviewView: View {
 
     var body: some View {
         Form {
+            Section("Scan") {
+                Image(decorative: image, scale: 1)
+                    .resizable()
+                    .scaledToFit()
+                    .frame(maxWidth: .infinity, maxHeight: 120)
+                    .accessibilityElement()
+                    .accessibilityLabel("Scanned receipt")
+                    .accessibilityIdentifier("scanThumbnail")
+            }
+
             Section("Merchant") {
-                TextField("Merchant", text: $draft.merchant)
+                TextField("Merchant", text: $draft.merchant, axis: .vertical)
+                    .lineLimit(1...3)
                     .textInputAutocapitalization(.words)
+                    .focused($focusedField, equals: .merchant)
+                    .submitLabel(.done)
+                    .onChange(of: draft.merchant) { _, name in
+                        // A multi-line field would turn Return into a line break; treat it as Done.
+                        guard name.contains("\n") else { return }
+                        draft.merchant = name.replacingOccurrences(of: "\n", with: " ")
+                            .trimmingCharacters(in: .whitespaces)
+                        focusedField = nil
+                    }
                 hint(for: .missingMerchant, "Not detected. Type the merchant name.")
             }
 
@@ -40,6 +63,7 @@ struct ReviewView: View {
             Section("Total") {
                 TextField("0.00", text: $draft.totalText)
                     .keyboardType(.decimalPad)
+                    .focused($focusedField, equals: .total)
                 hint(for: .missingTotal, "Not detected. Type the total.")
                 if draft.problems.contains(.invalidTotal) {
                     Text("Enter a positive amount, for example 84.37.")
@@ -48,22 +72,16 @@ struct ReviewView: View {
             }
 
             Section("Currency") {
-                TextField("EUR", text: $draft.currencyCode)
-                    .textInputAutocapitalization(.characters)
-                    .autocorrectionDisabled()
+                Picker("Currency", selection: $draft.currencyCode) {
+                    Text("Not set").tag("")
+                    ForEach(currencyOptions, id: \.self) { Text($0).tag($0) }
+                }
+                .pickerStyle(.menu)
                 if !draft.currencySuggestions.isEmpty {
-                    Picker("Suggestions", selection: $draft.currencyCode) {
-                        Text("—").tag("")
-                        ForEach(draft.currencySuggestions, id: \.self) { Text($0).tag($0) }
-                    }
-                    .pickerStyle(.segmented)
                     Text("The symbol on the receipt fits several currencies.")
                         .font(.footnote).foregroundStyle(.orange)
                 }
-                hint(for: .missingCurrency, "Not detected. Enter a 3-letter code such as EUR or USD.")
-                if draft.problems.contains(.invalidCurrency) {
-                    Text("Use a 3-letter ISO code.").font(.footnote).foregroundStyle(.red)
-                }
+                hint(for: .missingCurrency, "Not detected. Choose the currency.")
             }
 
             Section {
@@ -86,9 +104,14 @@ struct ReviewView: View {
                 Section { Text(error).foregroundStyle(.red) }
             }
         }
+        .scrollDismissesKeyboard(.interactively)
         .navigationTitle("Review")
         .navigationBarTitleDisplayMode(.inline)
         .toolbar {
+            ToolbarItemGroup(placement: .keyboard) {
+                Spacer()
+                Button("Done") { focusedField = nil }
+            }
             ToolbarItem(placement: .cancellationAction) {
                 Button("Discard", role: .destructive) { flow.reset() }
             }
@@ -112,6 +135,19 @@ struct ReviewView: View {
             Text(message).font(.footnote).foregroundStyle(.orange)
         }
     }
+
+    /// Suggestions from the parser first, then common codes, always including the current value.
+    private var currencyOptions: [String] {
+        var seen = Set<String>()
+        let candidates = draft.currencySuggestions + [draft.currencyCode] + Self.commonCurrencies
+        return candidates.filter { !$0.isEmpty && seen.insert($0).inserted }
+    }
+
+    private static let commonCurrencies = [
+        "EUR", "USD", "GBP", "CHF", "JPY", "CAD", "AUD", "NZD", "SEK", "NOK", "DKK",
+        "PLN", "CZK", "HUF", "RON", "MXN", "BRL", "ARS", "CLP", "COP", "PEN",
+        "CNY", "HKD", "INR", "KRW", "SGD", "TRY", "ZAR", "AED"
+    ]
 
     private var hasDate: Binding<Bool> {
         Binding(
