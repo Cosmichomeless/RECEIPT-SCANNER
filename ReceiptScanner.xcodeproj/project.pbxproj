@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		1940981077F85B36D23BD918 /* FullFlowUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 359DEE424B2E891083707843 /* FullFlowUITests.swift */; };
+		0FFCBC65B62F174BC4C2B3CB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 657B591D201E75C907CD1E6C /* Assets.xcassets */; };
 		4C1CBB9DF42C0213211C1FD0 /* HistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56BF7424AD8305E16296155B /* HistoryView.swift */; };
 		7EE013237451A3FD231C2C68 /* ReceiptKit in Frameworks */ = {isa = PBXBuildFile; productRef = 15D52BD8E5B8D832CE49FCF8 /* ReceiptKit */; };
 		88818EDDDDEC501026BBEF7D /* DocumentScannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B047C6807EAEA734D7085702 /* DocumentScannerView.swift */; };
@@ -34,6 +34,7 @@
 		30C1B79216CBD2EFD09981A8 /* ReviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewView.swift; sourceTree = "<group>"; };
 		359DEE424B2E891083707843 /* FullFlowUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FullFlowUITests.swift; sourceTree = "<group>"; };
 		56BF7424AD8305E16296155B /* HistoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryView.swift; sourceTree = "<group>"; };
+		657B591D201E75C907CD1E6C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		853171B29CEC14D122C55C54 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		B047C6807EAEA734D7085702 /* DocumentScannerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentScannerView.swift; sourceTree = "<group>"; };
 		C67E67F355EB723F0C6C2FDA /* SampleReceipt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SampleReceipt.swift; sourceTree = "<group>"; };
@@ -110,6 +111,7 @@
 		76ACB69EFEBC4C03EE7B9E63 /* ReceiptScanner */ = {
 			isa = PBXGroup;
 			children = (
+				657B591D201E75C907CD1E6C /* Assets.xcassets */,
 				853171B29CEC14D122C55C54 /* Info.plist */,
 				247E57183D80F75FBD1A67EA /* App */,
 				68D46F0C272B775B0D6A6455 /* Features */,
@@ -168,6 +170,7 @@
 			buildConfigurationList = DEAA9FEEB1BB95EBCA6883DD /* Build configuration list for PBXNativeTarget "ReceiptScanner" */;
 			buildPhases = (
 				91101EE9E5C1978DE91953B5 /* Sources */,
+				2FABFF563BA2E833679067B6 /* Resources */,
 				D7CA9168A404A40D5D77158A /* Frameworks */,
 			);
 			buildRules = (
@@ -218,6 +221,17 @@
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		2FABFF563BA2E833679067B6 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0FFCBC65B62F174BC4C2B3CB /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		76E07FEC32B266446DA0CFE0 /* Sources */ = {
