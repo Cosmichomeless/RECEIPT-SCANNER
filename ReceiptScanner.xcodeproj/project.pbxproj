@@ -10,6 +10,7 @@
 		4C1CBB9DF42C0213211C1FD0 /* HistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56BF7424AD8305E16296155B /* HistoryView.swift */; };
 		7EE013237451A3FD231C2C68 /* ReceiptKit in Frameworks */ = {isa = PBXBuildFile; productRef = 15D52BD8E5B8D832CE49FCF8 /* ReceiptKit */; };
 		88818EDDDDEC501026BBEF7D /* DocumentScannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B047C6807EAEA734D7085702 /* DocumentScannerView.swift */; };
+		8C8C1692C2F243411F7532D2 /* SampleReceipt.swift in Sources */ = {isa = PBXBuildFile; fileRef = C67E67F355EB723F0C6C2FDA /* SampleReceipt.swift */; };
 		9D621209A4C5BE1EB387F0E7 /* ReviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30C1B79216CBD2EFD09981A8 /* ReviewView.swift */; };
 		A28CD803B3FB4A2F0A175E2E /* ReceiptScannerApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F0B637EAA72832C41131385 /* ReceiptScannerApp.swift */; };
 		F3927B05C665A20EC341D1CB /* ScanHomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AC453380C6DB793C186D0AA /* ScanHomeView.swift */; };
@@ -23,6 +24,7 @@
 		56BF7424AD8305E16296155B /* HistoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryView.swift; sourceTree = "<group>"; };
 		853171B29CEC14D122C55C54 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		B047C6807EAEA734D7085702 /* DocumentScannerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentScannerView.swift; sourceTree = "<group>"; };
+		C67E67F355EB723F0C6C2FDA /* SampleReceipt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SampleReceipt.swift; sourceTree = "<group>"; };
 		D326442E77051E7FF2981CF1 /* RECEIPT-SCANNER */ = {isa = PBXFileReference; lastKnownFileType = folder; name = "RECEIPT-SCANNER"; path = .; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
@@ -50,6 +52,7 @@
 			isa = PBXGroup;
 			children = (
 				B047C6807EAEA734D7085702 /* DocumentScannerView.swift */,
+				C67E67F355EB723F0C6C2FDA /* SampleReceipt.swift */,
 				0AC453380C6DB793C186D0AA /* ScanHomeView.swift */,
 			);
 			path = Scanner;
@@ -180,6 +183,7 @@
 				4C1CBB9DF42C0213211C1FD0 /* HistoryView.swift in Sources */,
 				A28CD803B3FB4A2F0A175E2E /* ReceiptScannerApp.swift in Sources */,
 				9D621209A4C5BE1EB387F0E7 /* ReviewView.swift in Sources */,
+				8C8C1692C2F243411F7532D2 /* SampleReceipt.swift in Sources */,
 				F3927B05C665A20EC341D1CB /* ScanHomeView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

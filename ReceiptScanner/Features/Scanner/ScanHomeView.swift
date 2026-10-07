@@ -30,6 +30,12 @@ struct ScanHomeView: View {
             .navigationTitle("Receipts")
             .task(id: flow.savedCount) { await history.reload() }
             .toolbar {
+                #if DEBUG
+                ToolbarItem(placement: .secondaryAction) {
+                    Button("Try sample receipt", systemImage: "doc.text.image") { scanSample() }
+                        .disabled(isBusy)
+                }
+                #endif
                 ToolbarItem(placement: .primaryAction) {
                     Button("Scan", systemImage: "camera.viewfinder") { startScan() }
                         .disabled(isBusy)
@@ -54,6 +60,14 @@ struct ScanHomeView: View {
             set: { if !$0, case .scanning = flow.state { flow.reset() } }
         )
     }
+
+    #if DEBUG
+    /// Debug builds only: feeds a drawn receipt through the same path as a camera capture.
+    private func scanSample() {
+        guard let image = SampleReceipt.makeImage() else { return }
+        Task { await flow.handle(.captured(image)) }
+    }
+    #endif
 
     private func startScan() {
         guard DocumentScannerView.isSupported else {
