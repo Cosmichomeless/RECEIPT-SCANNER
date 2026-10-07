@@ -8,6 +8,8 @@ public enum ParsingIssue: Hashable, Sendable {
     case ambiguousDate(candidates: [CalendarDate])
     case missingTotal
     case missingCurrency
+    /// The marks on the receipt fit several currencies; the user picks one.
+    case ambiguousCurrency(candidates: [String])
 }
 
 /// Structured output of the parser. Unknown fields are `nil`, never guessed.

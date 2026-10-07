@@ -15,10 +15,14 @@ public final class ScanFlow {
     }
 
     public private(set) var state: State = .idle
+    /// Set when saving fails; the review state is kept so nothing the user typed is lost.
+    public private(set) var saveError: String?
     private let processor: ReceiptProcessor
+    private let repository: any ReceiptRepository
 
-    public init(processor: ReceiptProcessor) {
+    public init(processor: ReceiptProcessor, repository: any ReceiptRepository = InMemoryReceiptRepository()) {
         self.processor = processor
+        self.repository = repository
     }
 
     public func startScan() {
@@ -42,7 +46,24 @@ public final class ScanFlow {
         }
     }
 
+    /// Saves the corrected receipt and returns to idle. Returns `false`, staying in review,
+    /// when the draft is incomplete or storage fails.
+    @discardableResult
+    public func save(_ draft: ReceiptDraft) async -> Bool {
+        guard let receipt = draft.makeReceipt() else { return false }
+        do {
+            try await repository.save(receipt)
+            saveError = nil
+            state = .idle
+            return true
+        } catch {
+            saveError = error.localizedDescription
+            return false
+        }
+    }
+
     public func reset() {
+        saveError = nil
         state = .idle
     }
 
