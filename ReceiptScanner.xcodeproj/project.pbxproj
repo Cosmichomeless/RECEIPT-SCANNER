@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1940981077F85B36D23BD918 /* FullFlowUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 359DEE424B2E891083707843 /* FullFlowUITests.swift */; };
 		0FFCBC65B62F174BC4C2B3CB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 657B591D201E75C907CD1E6C /* Assets.xcassets */; };
 		4C1CBB9DF42C0213211C1FD0 /* HistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56BF7424AD8305E16296155B /* HistoryView.swift */; };
 		7EE013237451A3FD231C2C68 /* ReceiptKit in Frameworks */ = {isa = PBXBuildFile; productRef = 15D52BD8E5B8D832CE49FCF8 /* ReceiptKit */; };

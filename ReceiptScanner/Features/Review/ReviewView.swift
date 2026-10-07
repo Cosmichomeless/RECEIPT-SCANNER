@@ -19,15 +19,23 @@ struct ReviewView: View {
 
     var body: some View {
         Form {
+            Section {
+                Label("Check the details before saving", systemImage: "checkmark.circle")
+                    .font(.subheadline.weight(.medium))
+                    .foregroundStyle(ReceiptStyle.accent)
+            }
+            .listRowBackground(ReceiptStyle.surface)
             Section("Scan") {
                 Image(decorative: image, scale: 1)
                     .resizable()
                     .scaledToFit()
-                    .frame(maxWidth: .infinity, maxHeight: 120)
+                    .frame(maxWidth: .infinity, maxHeight: 160)
+                    .padding(.vertical, 8)
                     .accessibilityElement()
                     .accessibilityLabel("Scanned receipt")
                     .accessibilityIdentifier("scanThumbnail")
             }
+            .listRowBackground(ReceiptStyle.surface)
 
             Section("Merchant") {
                 TextField("Merchant", text: $draft.merchant, axis: .vertical)
@@ -44,6 +52,7 @@ struct ReviewView: View {
                     }
                 hint(for: .missingMerchant, "Not detected. Type the merchant name.")
             }
+            .listRowBackground(ReceiptStyle.surface)
 
             Section("Date") {
                 Toggle("Has a date", isOn: hasDate)
@@ -59,6 +68,7 @@ struct ReviewView: View {
                         .font(.footnote).foregroundStyle(.orange)
                 }
             }
+            .listRowBackground(ReceiptStyle.surface)
 
             Section("Total") {
                 TextField("0.00", text: $draft.totalText)
@@ -70,6 +80,7 @@ struct ReviewView: View {
                         .font(.footnote).foregroundStyle(.red)
                 }
             }
+            .listRowBackground(ReceiptStyle.surface)
 
             Section("Currency") {
                 Picker("Currency", selection: $draft.currencyCode) {
@@ -83,6 +94,7 @@ struct ReviewView: View {
                 }
                 hint(for: .missingCurrency, "Not detected. Choose the currency.")
             }
+            .listRowBackground(ReceiptStyle.surface)
 
             Section {
                 DisclosureGroup("Recognized text") {
@@ -99,11 +111,15 @@ struct ReviewView: View {
                     .font(.footnote)
                 }
             }
+            .listRowBackground(ReceiptStyle.surface)
 
             if let error = flow.saveError {
                 Section { Text(error).foregroundStyle(.red) }
+                    .listRowBackground(ReceiptStyle.surface)
             }
         }
+        .scrollContentBackground(.hidden)
+        .background(ReceiptStyle.canvas)
         .scrollDismissesKeyboard(.interactively)
         .navigationTitle("Review")
         .navigationBarTitleDisplayMode(.inline)
