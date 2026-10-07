@@ -72,10 +72,14 @@ public final class ReceiptEntity {
 }
 
 public enum ReceiptSchema {
-    public static func makeContainer(inMemory: Bool = false) throws -> ModelContainer {
-        try ModelContainer(
-            for: ReceiptEntity.self,
-            configurations: ModelConfiguration(isStoredInMemoryOnly: inMemory)
-        )
+    /// `url` selects an on-disk store location (tests use it to simulate an app restart);
+    /// `nil` uses the app's default store.
+    public static func makeContainer(inMemory: Bool = false, url: URL? = nil) throws -> ModelContainer {
+        let configuration = if let url {
+            ModelConfiguration(url: url)
+        } else {
+            ModelConfiguration(isStoredInMemoryOnly: inMemory)
+        }
+        return try ModelContainer(for: ReceiptEntity.self, configurations: configuration)
     }
 }

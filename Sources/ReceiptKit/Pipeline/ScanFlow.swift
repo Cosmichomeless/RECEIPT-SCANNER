@@ -17,6 +17,8 @@ public final class ScanFlow {
     public private(set) var state: State = .idle
     /// Set when saving fails; the review state is kept so nothing the user typed is lost.
     public private(set) var saveError: String?
+    /// Increments after each successful save so screens can refresh their lists.
+    public private(set) var savedCount = 0
     private let processor: ReceiptProcessor
     private let repository: any ReceiptRepository
 
@@ -54,6 +56,7 @@ public final class ScanFlow {
         do {
             try await repository.save(receipt)
             saveError = nil
+            savedCount += 1
             state = .idle
             return true
         } catch {
