@@ -53,7 +53,8 @@ The camera is the only piece it replaces.
 
 `xcodebuild test -project ReceiptScanner.xcodeproj -scheme ReceiptScanner -destination 'platform=iOS Simulator,name=iPhone 17 Pro' -only-testing:ReceiptScannerUITests`
 drives the real UI in the simulator through the same script (sample receipt, Done button, currency menu, save, detail,
-delete). Set `TEST_RUNNER_SHOT_DIR=<dir>` to also write a screenshot of each step.
+delete). The test writes step PNGs inside its runner's temporary directory; it does not copy them to the host.
+The four curated simulator captures in [screenshots](screenshots/) are committed separately for the README.
 
 ## Not shown (known gaps)
 

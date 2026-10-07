@@ -42,8 +42,9 @@ Manual, on a physical device with a Release or TestFlight build:
 Distribution (requires the developer's own Apple account; none of this is done by the repo or its automated checks):
 
 - [ ] Set the signing team and a unique bundle identifier (currently `dev.cosmichomeless.ReceiptScanner`).
-- [ ] Add an app icon (none yet) and, for the App Store, a privacy policy and the "Data Not Collected"
-  privacy answers (the app has no network use or analytics).
+- [x] Include an app icon in the asset catalog.
+- [ ] For the App Store, provide a privacy policy and the "Data Not Collected" privacy answers
+  (the app has no network use or analytics).
 - [ ] Archive, upload to TestFlight, and test the uploaded build.
 - [ ] Only then submit for review.
 
