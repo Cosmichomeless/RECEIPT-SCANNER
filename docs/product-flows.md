@@ -18,9 +18,9 @@ Scan → OCR → Parse → Review / Correct → Save → History
 |---|--------|---------|
 | 1 | **History** (home) | Lists saved receipts, newest first. Entry point to scanning. Empty state invites the first scan. |
 | 2 | **Scanner** | Full-screen VisionKit document camera. Cancel returns to History. |
-| 3 | **Processing** | Short progress state while OCR and parsing run. Failure shows a retry / cancel choice. |
+| 3 | **Processing** | Short progress state while OCR and parsing run. Failure shows an error and a Dismiss action. |
 | 4 | **Review** | Shows the scanned image thumbnail plus editable merchant, date, total and currency. Fields the parser could not resolve are highlighted as "needs review". Save / Discard. |
-| 5 | **Receipt detail** | Reopens a saved receipt: fields, raw OCR text, optional image. Fields can be edited again. |
+| 5 | **Receipt detail** | Reopens saved fields and raw OCR text; the scanned image is not retained. The receipt can be deleted, but not edited after saving. |
 
 ## Flows
 
@@ -29,7 +29,7 @@ Scan → OCR → Parse → Review / Correct → Save → History
 1. User taps **Scan** on History.
 2. Scanner presents the VisionKit camera. User captures one receipt page.
 3. If the user cancels, return to History, nothing is stored.
-4. If the scanner fails, show an error and offer to retry.
+4. If the scanner fails, show an error and return to History with Dismiss; a new scan can then be started.
 5. The captured image is handed to the OCR pipeline (Processing screen).
 
 ### Review flow
@@ -42,14 +42,14 @@ Scan → OCR → Parse → Review / Correct → Save → History
 5. **Save** is enabled once the receipt is valid (see below). **Discard** returns to
    History without storing anything.
 
-A receipt is valid to save when it has a total amount and a currency. Merchant and
-date may be left empty; the history shows them as "Unknown merchant" / no date.
+A receipt is valid to save when merchant, positive total amount and currency are present.
+Date may be left empty; History shows no date in that case.
 
 ### History flow
 
 1. History lists saved receipts (merchant, date, total + currency).
-2. Tapping a row opens the detail screen; edits are persisted.
-3. Swipe to delete removes the receipt and any stored image.
+2. Tapping a row opens the read-only detail screen.
+3. Swipe to delete, or use Delete receipt in detail, to remove the saved receipt. No scanned image is stored.
 4. The list is read from the local store, so it survives app restarts.
 
 ## Processing guarantees
