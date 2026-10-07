@@ -393,10 +393,21 @@ The engineering focus is:
 
 > A native on-device document processing pipeline that transforms imperfect OCR output into structured data using testable heuristic algorithms.
 
+## Documentation
+
+- [Product flows](docs/product-flows.md)
+- [Architecture](docs/architecture.md)
+- [OCR pipeline and parsing trade-offs](docs/ocr-and-parsing.md)
+- [Performance, accuracy and limitations](docs/performance.md)
+- [Data model, privacy and image retention](docs/privacy-and-storage.md)
+
 ## Status
 
 🚧 **In development**
 
+Phases 1–14 are implemented: scanning, on-device OCR, normalization, merchant/date/total/currency parsing,
+review and correction, SwiftData history, a 23-receipt fixture suite, performance work and documentation.
+
 Current stage:
 
-**Phase 1 — Product Definition**
+**Phase 15 — Release**

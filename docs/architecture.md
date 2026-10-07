@@ -44,13 +44,15 @@ The parser takes an `OCRResult` and returns a value. Tests build input with
 Package.swift
 Sources/ReceiptKit/
 ├── Capture/       ReceiptImageCapture
-├── OCR/           OCRService, OCRResult
-├── Parsing/       ReceiptParser (+ field parsers in later work)
-├── Pipeline/      ReceiptProcessor
-├── Persistence/   ReceiptRepository
+├── OCR/           OCRService, OCRResult, VisionOCRService, ImageDownscaler
+├── Parsing/       TextNormalizer, Merchant/Date/Total/CurrencyParser, DefaultReceiptParser, RegexCache
+├── Pipeline/      ReceiptProcessor, ScanFlow, ReceiptDraft, HistoryStore
+├── Persistence/   ReceiptRepository, SwiftDataReceiptRepository, InMemoryReceiptRepository, ReceiptEntity
 └── Models/        Receipt, ParsedReceipt, CalendarDate
-Tests/ReceiptKitTests/
+Tests/ReceiptKitTests/   unit tests, fixture regression tests, Fixtures/
+ReceiptScanner/          SwiftUI app (App/, Features/Scanner, Review, History); project.yml for XcodeGen
 ```
 
-UI (SwiftUI), the VisionKit scanner and the SwiftData-backed repository are added on
-top of this package without changing its boundaries.
+UI (SwiftUI), the VisionKit scanner and the SwiftData repository sit on top of this package
+without changing its boundaries. For the OCR and parsing details, see
+[ocr-and-parsing.md](ocr-and-parsing.md); for measurements, [performance.md](performance.md).

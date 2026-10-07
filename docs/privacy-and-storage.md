@@ -22,16 +22,25 @@ SwiftData keeps entities out of the rest of the app because `@Model` classes are
 
 ## Image retention policy
 
-**Decision: the scanned image is not kept by default.**
+**Decision: the scanned image is not kept.**
+
+**Current status: images are never written to disk.** `Receipt.imagePath` exists in the model and in
+`ReceiptEntity` but is always `nil`; no code saves, reads or deletes image files yet.
 
 - Receipts can contain card fragments, names and purchase habits. The structured fields
   and raw text are all the MVP needs for history.
-- By default the image lives only in memory during scanning and review and is discarded
-  on save or discard (`ImageRetention.discard`).
-- If the user opts in (`ImageRetention.keep`), the image is written inside the app's own
-  container (Application Support), with complete file protection, excluded from
-  iCloud/device backups. `imagePath` is relative to that folder.
-- Deleting a receipt also deletes its image file.
-- Nothing is ever uploaded: there is no network use in receipt processing.
-- `rawText` is stored because the user has validated it; it can include sensitive lines
-  such as `VISA ****4471`. This is a known trade-off, documented in the pipeline docs.
+- The image lives only in memory while scanning and reviewing (`ScanFlow.State.review` holds it) and is
+  released when the receipt is saved or discarded. Large captures are downscaled to 2400 px before OCR.
+- Nothing is uploaded: receipt processing has no network use, Vision runs on device, and there is no
+  analytics or crash-reporting SDK.
+- Timing logs (`ReceiptKit` subsystem) contain image size and durations only, never receipt text.
+- `rawText` is stored because the user validated it; it can include sensitive lines such as
+  `VISA ****4471`. This is a known trade-off: it is kept for traceability and re-parsing, and deleting a receipt
+  from history removes it. A future option could mask card-like numbers before saving.
+
+### If keeping images is added later (not implemented)
+
+`ImageRetention.keep` is reserved for an explicit per-scan opt-in. The intended design: write inside the app
+container (Application Support) with complete file protection, exclude it from iCloud and device backups,
+store a path relative to that folder in `imagePath`, and delete the file when the receipt is deleted.
+Until then `ImageRetention.default` (`.discard`) is the only behavior.
