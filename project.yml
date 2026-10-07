@@ -33,3 +33,15 @@ targets:
         PRODUCT_BUNDLE_IDENTIFIER: dev.cosmichomeless.ReceiptScanner
         TARGETED_DEVICE_FAMILY: "1"
         GENERATE_INFOPLIST_FILE: NO
+  ReceiptScannerUITests:
+    type: bundle.ui-testing
+    platform: iOS
+    sources:
+      - ReceiptScannerUITests
+    dependencies:
+      - target: ReceiptScanner
+    settings:
+      base:
+        GENERATE_INFOPLIST_FILE: YES
+        PRODUCT_BUNDLE_IDENTIFIER: dev.cosmichomeless.ReceiptScannerUITests
+        TEST_TARGET_NAME: ReceiptScanner
