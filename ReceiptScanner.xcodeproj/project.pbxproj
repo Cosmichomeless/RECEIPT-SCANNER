@@ -1,0 +1,365 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 77;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		7EE013237451A3FD231C2C68 /* ReceiptKit in Frameworks */ = {isa = PBXBuildFile; productRef = 15D52BD8E5B8D832CE49FCF8 /* ReceiptKit */; };
+		88818EDDDDEC501026BBEF7D /* DocumentScannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B047C6807EAEA734D7085702 /* DocumentScannerView.swift */; };
+		A28CD803B3FB4A2F0A175E2E /* ReceiptScannerApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F0B637EAA72832C41131385 /* ReceiptScannerApp.swift */; };
+		EB4B9B2A36946E14F16D55C2 /* Pipeline+App.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26BE9AD6755C8E11B3E527D2 /* Pipeline+App.swift */; };
+		F3927B05C665A20EC341D1CB /* ScanHomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AC453380C6DB793C186D0AA /* ScanHomeView.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		0AC453380C6DB793C186D0AA /* ScanHomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScanHomeView.swift; sourceTree = "<group>"; };
+		0DD2D05AF8660070BE20531E /* ReceiptScanner.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = ReceiptScanner.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		26BE9AD6755C8E11B3E527D2 /* Pipeline+App.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Pipeline+App.swift"; sourceTree = "<group>"; };
+		2F0B637EAA72832C41131385 /* ReceiptScannerApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReceiptScannerApp.swift; sourceTree = "<group>"; };
+		853171B29CEC14D122C55C54 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		B047C6807EAEA734D7085702 /* DocumentScannerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentScannerView.swift; sourceTree = "<group>"; };
+		D326442E77051E7FF2981CF1 /* RECEIPT-SCANNER */ = {isa = PBXFileReference; lastKnownFileType = folder; name = "RECEIPT-SCANNER"; path = .; sourceTree = SOURCE_ROOT; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		D7CA9168A404A40D5D77158A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7EE013237451A3FD231C2C68 /* ReceiptKit in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		0EA5A5BD042A44A7E00773A6 /* Packages */ = {
+			isa = PBXGroup;
+			children = (
+				D326442E77051E7FF2981CF1 /* RECEIPT-SCANNER */,
+			);
+			name = Packages;
+			sourceTree = "<group>";
+		};
+		131ABBC50776A0638D815B66 /* Scanner */ = {
+			isa = PBXGroup;
+			children = (
+				B047C6807EAEA734D7085702 /* DocumentScannerView.swift */,
+				0AC453380C6DB793C186D0AA /* ScanHomeView.swift */,
+			);
+			path = Scanner;
+			sourceTree = "<group>";
+		};
+		247E57183D80F75FBD1A67EA /* App */ = {
+			isa = PBXGroup;
+			children = (
+				26BE9AD6755C8E11B3E527D2 /* Pipeline+App.swift */,
+				2F0B637EAA72832C41131385 /* ReceiptScannerApp.swift */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		6668D9B73C2EB5DE7A2AD745 = {
+			isa = PBXGroup;
+			children = (
+				0EA5A5BD042A44A7E00773A6 /* Packages */,
+				76ACB69EFEBC4C03EE7B9E63 /* ReceiptScanner */,
+				835EB9C5D3FF8CAA18D7A3A8 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		68D46F0C272B775B0D6A6455 /* Features */ = {
+			isa = PBXGroup;
+			children = (
+				131ABBC50776A0638D815B66 /* Scanner */,
+			);
+			path = Features;
+			sourceTree = "<group>";
+		};
+		76ACB69EFEBC4C03EE7B9E63 /* ReceiptScanner */ = {
+			isa = PBXGroup;
+			children = (
+				853171B29CEC14D122C55C54 /* Info.plist */,
+				247E57183D80F75FBD1A67EA /* App */,
+				68D46F0C272B775B0D6A6455 /* Features */,
+			);
+			path = ReceiptScanner;
+			sourceTree = "<group>";
+		};
+		835EB9C5D3FF8CAA18D7A3A8 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				0DD2D05AF8660070BE20531E /* ReceiptScanner.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		E43FADB7A4D46456C064BB2B /* ReceiptScanner */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = DEAA9FEEB1BB95EBCA6883DD /* Build configuration list for PBXNativeTarget "ReceiptScanner" */;
+			buildPhases = (
+				91101EE9E5C1978DE91953B5 /* Sources */,
+				D7CA9168A404A40D5D77158A /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = ReceiptScanner;
+			packageProductDependencies = (
+				15D52BD8E5B8D832CE49FCF8 /* ReceiptKit */,
+			);
+			productName = ReceiptScanner;
+			productReference = 0DD2D05AF8660070BE20531E /* ReceiptScanner.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		F58F941AFC9693EFC8BCF60C /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = YES;
+				LastUpgradeCheck = 1430;
+				TargetAttributes = {
+				};
+			};
+			buildConfigurationList = 6227B7B0C11184415B593F43 /* Build configuration list for PBXProject "ReceiptScanner" */;
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				Base,
+				en,
+			);
+			mainGroup = 6668D9B73C2EB5DE7A2AD745;
+			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				62E9A44826BB83D297B7DE9C /* XCLocalSwiftPackageReference "." */,
+			);
+			preferredProjectObjectVersion = 77;
+			productRefGroup = 835EB9C5D3FF8CAA18D7A3A8 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				E43FADB7A4D46456C064BB2B /* ReceiptScanner */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		91101EE9E5C1978DE91953B5 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				88818EDDDDEC501026BBEF7D /* DocumentScannerView.swift in Sources */,
+				EB4B9B2A36946E14F16D55C2 /* Pipeline+App.swift in Sources */,
+				A28CD803B3FB4A2F0A175E2E /* ReceiptScannerApp.swift in Sources */,
+				F3927B05C665A20EC341D1CB /* ScanHomeView.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		8A49EE0F14D968D39D0BAFED /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"DEBUG=1",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MARKETING_VERSION = 0.1.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 6.0;
+			};
+			name = Debug;
+		};
+		8CA7F433151503049C1A6A50 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MARKETING_VERSION = 0.1.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 6.0;
+			};
+			name = Release;
+		};
+		B003074E8DA7C80E20AF8DB1 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = ReceiptScanner/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = dev.cosmichomeless.ReceiptScanner;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Debug;
+		};
+		C4E88546DDBF21756B4CA954 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = ReceiptScanner/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = dev.cosmichomeless.ReceiptScanner;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		6227B7B0C11184415B593F43 /* Build configuration list for PBXProject "ReceiptScanner" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8A49EE0F14D968D39D0BAFED /* Debug */,
+				8CA7F433151503049C1A6A50 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		DEAA9FEEB1BB95EBCA6883DD /* Build configuration list for PBXNativeTarget "ReceiptScanner" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B003074E8DA7C80E20AF8DB1 /* Debug */,
+				C4E88546DDBF21756B4CA954 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCLocalSwiftPackageReference section */
+		62E9A44826BB83D297B7DE9C /* XCLocalSwiftPackageReference "." */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = .;
+		};
+/* End XCLocalSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		15D52BD8E5B8D832CE49FCF8 /* ReceiptKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = ReceiptKit;
+		};
+/* End XCSwiftPackageProductDependency section */
+	};
+	rootObject = F58F941AFC9693EFC8BCF60C /* Project object */;
+}
