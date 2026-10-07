@@ -19,6 +19,8 @@ public final class ScanFlow {
     public private(set) var saveError: String?
     /// Increments after each successful save so screens can refresh their lists.
     public private(set) var savedCount = 0
+    /// Stage timings of the most recent scan, for diagnostics.
+    public private(set) var lastTimings: ProcessingTimings?
     private let processor: ReceiptProcessor
     private let repository: any ReceiptRepository
 
@@ -41,7 +43,9 @@ public final class ScanFlow {
         case .captured(let image):
             state = .processing
             do {
-                state = .review(try await processor.process(image), image: image)
+                let (receipt, timings) = try await processor.processMeasured(image)
+                lastTimings = timings
+                state = .review(receipt, image: image)
             } catch {
                 state = .failed(message: error.localizedDescription)
             }

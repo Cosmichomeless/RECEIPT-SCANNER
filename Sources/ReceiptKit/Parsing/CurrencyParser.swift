@@ -137,7 +137,6 @@ public struct CurrencyParser: Sendable {
     }
 
     private static func count(_ pattern: String, in text: String) -> Int {
-        (try? NSRegularExpression(pattern: pattern))?
-            .numberOfMatches(in: text, range: NSRange(location: 0, length: (text as NSString).length)) ?? 0
+        RegexCache.shared.count(pattern, in: text)
     }
 }

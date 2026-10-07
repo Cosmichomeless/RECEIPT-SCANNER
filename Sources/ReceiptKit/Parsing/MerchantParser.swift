@@ -65,7 +65,7 @@ public struct MerchantParser: Sendable {
         let decoration = CharacterSet(charactersIn: "*-_=#~.:|/\\+<>[]()\"' ")
         var name = line.trimmingCharacters(in: decoration)
         // "S.A." and "S.L." end in a period that belongs to the name.
-        if line.hasSuffix("."), name.range(of: #"(?<![A-Za-z])[A-Za-z]\.[A-Za-z]$"#, options: .regularExpression) != nil {
+        if line.hasSuffix("."), RegexCache.shared.matches(#"(?<![A-Za-z])[A-Za-z]\.[A-Za-z]$"#, in: name) {
             name += "."
         }
         return name.contains(where: \.isLetter) ? name : nil
@@ -127,13 +127,13 @@ public struct MerchantParser: Sendable {
     private static let amountPattern = #"(?<![0-9])\d+[.,]\d{2}(?![0-9])"#
 
     private static func matches(_ pattern: String, _ text: String) -> Bool {
-        text.range(of: pattern, options: .regularExpression) != nil
+        RegexCache.shared.matches(pattern, in: text)
     }
 
     private static func containsWord(_ text: String, _ word: String) -> Bool {
-        text.range(
-            of: "(?<![A-Za-z0-9])\(NSRegularExpression.escapedPattern(for: word))(?![A-Za-z0-9])",
-            options: [.regularExpression, .caseInsensitive]
-        ) != nil
+        RegexCache.shared.matches(
+            "(?<![A-Za-z0-9])\(NSRegularExpression.escapedPattern(for: word))(?![A-Za-z0-9])",
+            in: text, caseInsensitive: true
+        )
     }
 }
