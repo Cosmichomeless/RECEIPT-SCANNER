@@ -1,8 +1,6 @@
 import XCTest
 
 /// Drives the real app through sample receipt -> review -> correct -> save -> history -> detail -> delete.
-/// It expects an empty history: if an earlier run stopped before the delete step, reinstall the app first
-/// (`xcrun simctl uninstall <device> dev.cosmichomeless.ReceiptScanner`).
 final class FullFlowUITests: XCTestCase {
     private let shotDir = ProcessInfo.processInfo.environment["SHOT_DIR"] ?? NSTemporaryDirectory()
 
@@ -23,6 +21,9 @@ final class FullFlowUITests: XCTestCase {
         let app = XCUIApplication()
         app.launch()
         shot("1-home")
+        let initiallyEmpty = app.staticTexts["No receipts yet"].exists
+        XCTAssertTrue(app.staticTexts["Your receipts, in one place"].exists)
+        XCTAssertTrue(app.buttons["Scan receipt"].exists)
 
         let more = app.buttons["More"].firstMatch
         XCTAssertTrue(more.waitForExistence(timeout: 5), app.debugDescription)
@@ -61,13 +62,20 @@ final class FullFlowUITests: XCTestCase {
         app.buttons["Save"].tap()
         XCTAssertTrue(app.staticTexts["NORTHLINE HARDWARE"].waitForExistence(timeout: 10))
         shot("7-history")
+        app.swipeUp()
+        shot("7-history-scrolled")
 
-        app.cells.firstMatch.tap()
+        let targetRows = app.cells.containing(.staticText, identifier: "NORTHLINE HARDWARE")
+        let targetCountBeforeDelete = targetRows.count
+        XCTAssertGreaterThan(targetCountBeforeDelete, 0)
+        targetRows.firstMatch.tap()
         shot("8-detail")
         let delete = app.buttons["Delete receipt"]
         scrollIntoView(app, delete)
         delete.tap()
-        XCTAssertTrue(app.staticTexts["No receipts yet"].waitForExistence(timeout: 5))
+        XCTAssertTrue(app.navigationBars["Receipts"].waitForExistence(timeout: 5))
+        XCTAssertLessThan(targetRows.count, targetCountBeforeDelete)
+        if initiallyEmpty { XCTAssertTrue(app.staticTexts["No receipts yet"].exists) }
         shot("9-after-delete")
     }
 }

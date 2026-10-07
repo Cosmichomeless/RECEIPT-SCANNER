@@ -13,7 +13,16 @@ struct ScanHomeView: View {
                 case .idle, .scanning:
                     HistoryView(history: history)
                 case .processing:
-                    ProgressView("Reading receipt…")
+                    VStack(spacing: 20) {
+                        Image(systemName: "doc.text.viewfinder")
+                            .font(.system(size: 52, weight: .light))
+                            .foregroundStyle(ReceiptStyle.accent)
+                        ProgressView("Reading receipt…")
+                            .font(.headline)
+                    }
+                    .padding(32)
+                    .frame(maxWidth: .infinity, maxHeight: .infinity)
+                    .background(ReceiptStyle.canvas)
                 case .review(let parsed, let image):
                     ReviewView(flow: flow, parsed: parsed, image: image)
                 case .failed(let message):
@@ -23,11 +32,29 @@ struct ScanHomeView: View {
                         Text(message)
                     } actions: {
                         Button("Dismiss") { flow.reset() }
+                            .buttonStyle(.borderedProminent)
                     }
+                    .frame(maxWidth: .infinity, maxHeight: .infinity)
+                    .background(ReceiptStyle.canvas)
                 }
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity)
             .navigationTitle("Receipts")
+            .safeAreaInset(edge: .bottom) {
+                if isIdle {
+                    Button(action: startScan) {
+                        Label("Scan receipt", systemImage: "camera.viewfinder")
+                            .font(.headline)
+                            .frame(maxWidth: .infinity)
+                            .padding(.vertical, 8)
+                    }
+                    .buttonStyle(.borderedProminent)
+                    .tint(ReceiptStyle.deepBlue)
+                    .padding(.horizontal, 20)
+                    .padding(.vertical, 12)
+                    .background(ReceiptStyle.canvas)
+                }
+            }
             .task(id: flow.savedCount) { await history.reload() }
             .toolbar {
                 if isIdle {
