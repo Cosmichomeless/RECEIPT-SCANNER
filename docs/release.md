@@ -1,9 +1,9 @@
 # Release notes and checklist
 
-Version **0.1.0** (build 1), the MVP. Version numbers live in `project.yml` (`MARKETING_VERSION`,
+Version **1.0.0** (build 1), the portfolio MVP. This is a source tag, not an App Store release. Version numbers live in `project.yml` (`MARKETING_VERSION`,
 `CURRENT_PROJECT_VERSION`); run `xcodegen generate` after changing them.
 
-## What is in 0.1.0
+## What is in 1.0.0
 
 - Document scanning with VisionKit; on-device text recognition with Vision (no network use).
 - Text normalization and heuristic parsing of merchant, date, total and currency, with ambiguity reported
@@ -50,5 +50,5 @@ Distribution (requires the developer's own Apple account; none of this is done b
 
 ## Tagging
 
-After the final merge to `main`: `git tag -a v0.1.0 -m "MVP"` and `git push origin v0.1.0`, then create the
-GitHub release from the notes above.
+Tag the verified main commit as `v1.0.0` and push that tag to GitHub. A GitHub Release is a separate,
+optional publication; no App Store submission or TestFlight upload is implied by this tag.

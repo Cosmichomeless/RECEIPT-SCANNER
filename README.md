@@ -96,4 +96,4 @@ flowchart LR
 
 ## Distribution and license
 
-No TestFlight or App Store build has been published. Signing, privacy answers and physical-device checks are documented in [the release checklist](docs/release.md). Licensed under [MIT](LICENSE).
+The source is tagged v1.0.0 for the portfolio. No GitHub Release, TestFlight or App Store build has been published. Signing, privacy answers and physical-device checks are documented in [the release checklist](docs/release.md). Licensed under [MIT](LICENSE).
