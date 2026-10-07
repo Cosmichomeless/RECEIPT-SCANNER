@@ -400,14 +400,16 @@ The engineering focus is:
 - [OCR pipeline and parsing trade-offs](docs/ocr-and-parsing.md)
 - [Performance, accuracy and limitations](docs/performance.md)
 - [Data model, privacy and image retention](docs/privacy-and-storage.md)
+- [Demo walkthrough](docs/demo.md)
+- [Release notes and checklist](docs/release.md) · [Changelog](CHANGELOG.md)
 
 ## Status
 
 🚧 **In development**
 
-Phases 1–14 are implemented: scanning, on-device OCR, normalization, merchant/date/total/currency parsing,
+All 15 phases are implemented: scanning, on-device OCR, normalization, merchant/date/total/currency parsing,
 review and correction, SwiftData history, a 23-receipt fixture suite, performance work and documentation.
 
 Current stage:
 
-**Phase 15 — Release**
+**Phase 15 — Release (0.1.0, pending device checks listed in [docs/release.md](docs/release.md))**
