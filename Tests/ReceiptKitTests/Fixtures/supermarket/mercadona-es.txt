@@ -1,0 +1,15 @@
+MERCADONA, S.A.
+A-46103834
+C/ GRAN VIA 45
+28013 MADRID
+TELEFONO: 912345678
+06/10/2026 18:32   OP: 1234
+-----------------------------------
+Descripcion        P. Unit   Importe
+1 LECHE ENTERA 1L    0,89     0,89
+2 PAN DE MOLDE       1,35     2,70
+1 MANZANAS KG        2,19     3,41
+-----------------------------------
+TOTAL (€)                      7,00
+TARJETA BANCARIA               7,00
+IVA 10%   BASE 6,36  CUOTA 0,64

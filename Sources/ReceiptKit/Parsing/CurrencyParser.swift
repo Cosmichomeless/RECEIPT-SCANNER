@@ -94,16 +94,24 @@ public struct CurrencyParser: Sendable {
         )
     }()
 
+    /// Symbols nobody uses for anything else, so `TOTAL (€)` counts without a number beside it.
+    private static let standaloneMarks = ["€", "£", "₹", "₩", "₽", "₺", "₪", "฿", "₫"]
+
     /// Votes for single-currency symbols, and counts of each shared-symbol candidate list.
     private static func symbols(in text: NormalizedText) -> (specific: [String: Int], shared: [[String]: Int]) {
         var specific: [String: Int] = [:]
         var shared: [[String]: Int] = [:]
         for line in text.lines {
             let ns = line.text as NSString
+            for mark in standaloneMarks where line.text.contains(mark) {
+                guard let entry = symbols.first(where: { $0.mark == mark }) else { continue }
+                specific[entry.currencies[0], default: 0] += 1
+            }
             for match in symbolPattern.matches(in: line.text, range: NSRange(location: 0, length: ns.length)) {
                 let range = match.range(at: 1).location != NSNotFound ? match.range(at: 1) : match.range(at: 2)
                 let mark = ns.substring(with: range)
                 guard let entry = symbols.first(where: { $0.mark == mark }) else { continue }
+                if standaloneMarks.contains(mark) { continue }
                 if entry.currencies.count == 1 { specific[entry.currencies[0], default: 0] += 1 }
                 else { shared[entry.currencies, default: 0] += 1 }
             }

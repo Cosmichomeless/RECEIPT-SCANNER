@@ -1,0 +1,13 @@
+{
+  "locale": "en_US",
+  "merchant": null,
+  "date": null,
+  "total": null,
+  "currency": null,
+  "issues": [
+    "missingCurrency",
+    "missingDate",
+    "missingMerchant",
+    "missingTotal"
+  ]
+}

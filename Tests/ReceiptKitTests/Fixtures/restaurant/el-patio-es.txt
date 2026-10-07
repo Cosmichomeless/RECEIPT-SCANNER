@@ -1,0 +1,11 @@
+RESTAURANTE EL PATIO
+Calle Mayor 14, 28013 Madrid
+NIF B87654321
+Mesa 7
+Fecha: 06 de octubre de 2026
+2 MENU DEL DIA     29,80
+2 CAFE              4,00
+2 AGUA              2,00
+TOTAL              35,80 EUR
+IVA INCLUIDO 10%
+GRACIAS POR SU VISITA

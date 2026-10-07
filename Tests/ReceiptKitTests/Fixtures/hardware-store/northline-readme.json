@@ -1,0 +1,11 @@
+{
+  "locale": "en_US",
+  "merchant": "NORTHLINE HARDWARE",
+  "date": null,
+  "total": "84.37",
+  "currency": null,
+  "issues": [
+    "missingCurrency",
+    "missingDate"
+  ]
+}

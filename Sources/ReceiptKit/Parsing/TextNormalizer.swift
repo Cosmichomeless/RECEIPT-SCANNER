@@ -74,11 +74,11 @@ public struct TextNormalizer: Sendable {
 
     // MARK: - Decimal formats
 
-    /// `84 .37` → `84.37` (a space OCR inserted before the decimal mark).
-    private static let splitDecimal = try! NSRegularExpression(pattern: #"(?<=\d) +(?=[.,]\d{2}(?![\d]))"#)
+    /// `84 .37` and `3 . 25` → `84.37` / `3.25` (spaces OCR put around the decimal mark).
+    private static let splitDecimal = try! NSRegularExpression(pattern: #"(?<=\d) +[.,] ?(?=\d{2}(?![\d]))"#)
 
     private static func joinSplitDecimals(in text: String) -> String {
-        replaceMatches(of: splitDecimal, in: text) { _ in "" }
+        replaceMatches(of: splitDecimal, in: text) { token in token.filter { $0 != " " } }
     }
 
     /// Rewrites amounts with two decimals to `1234.56`: `1.234,56`, `1,234.56`, `84,37`.

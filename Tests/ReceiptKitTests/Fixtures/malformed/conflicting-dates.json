@@ -1,0 +1,10 @@
+{
+  "locale": "en_US",
+  "merchant": "PHARMACY ONE",
+  "date": null,
+  "total": "12.40",
+  "currency": "USD",
+  "issues": [
+    "ambiguousDate"
+  ]
+}

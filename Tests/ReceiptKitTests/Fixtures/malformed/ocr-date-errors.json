@@ -1,0 +1,10 @@
+{
+  "locale": "es_ES",
+  "merchant": "LIBRERIA NORTE",
+  "date": null,
+  "total": "18.00",
+  "currency": "EUR",
+  "issues": [
+    "missingDate"
+  ]
+}

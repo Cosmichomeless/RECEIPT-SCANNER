@@ -1,0 +1,10 @@
+{
+  "locale": "en_US",
+  "merchant": "THE GOLDEN FORK",
+  "date": "2026-10-06",
+  "total": "88.56",
+  "currency": null,
+  "issues": [
+    "missingCurrency"
+  ]
+}

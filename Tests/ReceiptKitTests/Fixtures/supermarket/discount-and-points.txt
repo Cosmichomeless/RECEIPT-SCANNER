@@ -1,0 +1,10 @@
+GREENFIELD STORES LTD
+14 High Road, London N1 9GU
+06/10/2026 11:02
+BREAD 800G              £1.25
+CHEESE 400G             £3.50
+SUBTOTAL                £4.75
+MEMBER DISCOUNT        -£0.75
+TOTAL                   £4.00
+YOU SAVED               £0.75
+POINTS EARNED              40

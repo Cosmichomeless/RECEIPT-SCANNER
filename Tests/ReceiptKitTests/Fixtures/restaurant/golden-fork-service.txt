@@ -1,0 +1,12 @@
+THE GOLDEN FORK
+88 Harbor Ave
+New York, NY 10004
+Server: Dana   Table 12
+10/06/2026 07:45 PM
+2 CAESAR SALAD       24.00
+1 GRILLED SALMON     28.50
+2 HOUSE WINE         22.00
+SUBTOTAL             74.50
+SERVICE 10%           7.45
+TAX 8.875%            6.61
+TOTAL                88.56
