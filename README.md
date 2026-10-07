@@ -10,6 +10,8 @@
 
 </div>
 
+[![Receipt Scanner icon beside real receipt history and review screenshots](docs/screenshots/00-showcase.png)](#screenshots)
+
 Receipt Scanner uses VisionKit and on-device Vision OCR to extract a merchant, date, total and currency. You review uncertain fields before anything is saved to a local SwiftData history. There is no public demo or App Store build yet.
 
 ## What it includes
@@ -28,13 +30,15 @@ Requires Xcode with an iPhone simulator. Build with one command, then open Recei
 
 ## Screenshots
 
-Captured on an iPhone 17 Pro simulator with the sample receipt. The UI test and [demo walkthrough](docs/demo.md) describe the same flow; these PNGs are committed so the README renders on GitHub.
+The cover pairs the real app icon with crops of the screens below. Captured on an iPhone 17 Pro simulator with the sample receipt. The UI test and [demo walkthrough](docs/demo.md) describe the same flow; these PNGs are committed so the README renders on GitHub. Select an image to view it at full size. After updating the committed PNGs, rebuild the cover with Pillow:
 
-| History | Review before saving |
+    python3 docs/screenshots/build-showcase.py
+
+| **History** | **Review before saving** |
 | --- | --- |
-| ![Blue receipt history with a saved sample purchase](docs/screenshots/01-history.png) | ![Review form and scanned sample receipt thumbnail](docs/screenshots/02-review.png) |
+| [![Blue receipt history with a saved sample purchase](docs/screenshots/01-history.png)](docs/screenshots/01-history.png) | [![Review form and scanned sample receipt thumbnail](docs/screenshots/02-review.png)](docs/screenshots/02-review.png) |
 | **Saved detail** | **Dark appearance** |
-| ![Saved receipt details and delete action](docs/screenshots/03-detail.png) | ![Receipt history in dark appearance](docs/screenshots/04-dark-history.png) |
+| [![Saved receipt details and delete action](docs/screenshots/03-detail.png)](docs/screenshots/03-detail.png) | [![Receipt history in dark appearance](docs/screenshots/04-dark-history.png)](docs/screenshots/04-dark-history.png) |
 
 ## Architecture
 
