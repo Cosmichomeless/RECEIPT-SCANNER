@@ -27,7 +27,8 @@ Or from the terminal: `xcodebuild -project ReceiptScanner.xcodeproj -scheme Rece
    - Currency: **empty and flagged**. The receipt prints no currency, so the app asks instead of guessing.
 
    Expand **Recognized text** to see what OCR returned, and **Diagnostics** for image size and timings.
-5. **Correct.** Type `EUR` as the currency (Save is disabled until merchant, total and currency are valid).
+5. **Correct.** Pick `EUR` from the **Currency** menu (Save is disabled until merchant, total and currency are valid).
+   A thumbnail of the scan sits at the top; the keyboard has a **Done** button, and dragging the form dismisses it.
    Optionally fix the merchant capitalization. Try typing a bad total such as `abc` to see the validation message.
 6. **Save.** The receipt appears in history, newest first, with merchant, date and amount.
 7. **Open it** to see the saved fields and the raw text. Swipe left on a row (or use **Delete receipt** in the detail) to delete.
@@ -49,6 +50,10 @@ Or from the terminal: `xcodebuild -project ReceiptScanner.xcodeproj -scheme Rece
 `swift test --filter EndToEndFlowTests` runs the same path on macOS with real Vision OCR: render a receipt,
 scan, correct the draft, save to SwiftData, read it back in a new container (the relaunch), delete it.
 The camera is the only piece it replaces.
+
+`xcodebuild test -project ReceiptScanner.xcodeproj -scheme ReceiptScanner -destination 'platform=iOS Simulator,name=iPhone 17 Pro' -only-testing:ReceiptScannerUITests`
+drives the real UI in the simulator through the same script (sample receipt, Done button, currency menu, save, detail,
+delete). Set `TEST_RUNNER_SHOT_DIR=<dir>` to also write a screenshot of each step.
 
 ## Not shown (known gaps)
 

@@ -30,15 +30,15 @@ struct ScanHomeView: View {
             .navigationTitle("Receipts")
             .task(id: flow.savedCount) { await history.reload() }
             .toolbar {
-                #if DEBUG
-                ToolbarItem(placement: .secondaryAction) {
-                    Button("Try sample receipt", systemImage: "doc.text.image") { scanSample() }
-                        .disabled(isBusy)
-                }
-                #endif
-                ToolbarItem(placement: .primaryAction) {
-                    Button("Scan", systemImage: "camera.viewfinder") { startScan() }
-                        .disabled(isBusy)
+                if isIdle {
+                    #if DEBUG
+                    ToolbarItem(placement: .secondaryAction) {
+                        Button("Try sample receipt", systemImage: "doc.text.image") { scanSample() }
+                    }
+                    #endif
+                    ToolbarItem(placement: .primaryAction) {
+                        Button("Scan", systemImage: "camera.viewfinder") { startScan() }
+                    }
                 }
             }
             .fullScreenCover(isPresented: isScanning) {
@@ -50,8 +50,9 @@ struct ScanHomeView: View {
         }
     }
 
-    private var isBusy: Bool {
-        if case .processing = flow.state { true } else { false }
+    /// Scan actions only make sense from the history; hide them while reviewing or processing.
+    private var isIdle: Bool {
+        if case .idle = flow.state { true } else { false }
     }
 
     private var isScanning: Binding<Bool> {
