@@ -4,17 +4,14 @@ import SwiftUI
 /// Entry point that presents the scanner and shows the flow state.
 struct ScanHomeView: View {
     let flow: ScanFlow
+    let history: HistoryStore
 
     var body: some View {
         NavigationStack {
             VStack(spacing: 16) {
                 switch flow.state {
                 case .idle, .scanning:
-                    ContentUnavailableView(
-                        "No receipts yet",
-                        systemImage: "doc.text.viewfinder",
-                        description: Text("Scan a receipt to get started.")
-                    )
+                    HistoryView(history: history)
                 case .processing:
                     ProgressView("Reading receipt…")
                 case .review(let parsed, let image):
@@ -31,6 +28,7 @@ struct ScanHomeView: View {
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity)
             .navigationTitle("Receipts")
+            .task(id: flow.savedCount) { await history.reload() }
             .toolbar {
                 ToolbarItem(placement: .primaryAction) {
                     Button("Scan", systemImage: "camera.viewfinder") { startScan() }

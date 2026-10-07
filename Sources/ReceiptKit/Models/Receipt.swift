@@ -1,7 +1,7 @@
 import Foundation
 
 /// A validated receipt as saved to history.
-public struct Receipt: Identifiable, Equatable, Sendable {
+public struct Receipt: Identifiable, Hashable, Sendable {
     public let id: UUID
     public var merchant: String
     public var date: Date?

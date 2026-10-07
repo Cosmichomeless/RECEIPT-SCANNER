@@ -95,6 +95,7 @@ private struct FailingRepository: ReceiptRepository {
         var draft = reviewDraft()
         draft.merchant = "Café Luna"
         #expect(await flow.save(draft))
+        #expect(flow.savedCount == 1)
         #expect(try await repository.fetchAll().map(\.merchant) == ["Café Luna"])
         guard case .idle = flow.state else {
             Issue.record("expected idle, got \(flow.state)")
