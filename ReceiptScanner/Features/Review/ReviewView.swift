@@ -72,6 +72,14 @@ struct ReviewView: View {
                         .font(.footnote.monospaced())
                         .textSelection(.enabled)
                 }
+                if let timings = flow.lastTimings {
+                    DisclosureGroup("Diagnostics") {
+                        LabeledContent("Image", value: "\(timings.imageWidth)×\(timings.imageHeight)")
+                        LabeledContent("Text recognition", value: timings.ocr.formatted(.units(allowed: [.seconds, .milliseconds], width: .narrow)))
+                        LabeledContent("Parsing", value: timings.parsing.formatted(.units(allowed: [.milliseconds, .microseconds], width: .narrow)))
+                    }
+                    .font(.footnote)
+                }
             }
 
             if let error = flow.saveError {

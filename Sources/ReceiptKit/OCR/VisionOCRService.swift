@@ -3,12 +3,18 @@ import Vision
 
 /// On-device text recognition with Vision. Nothing leaves the device.
 public struct VisionOCRService: OCRService {
-    public init() {}
+    /// Longest side, in pixels, sent to Vision. `0` disables downscaling.
+    public let maxPixelDimension: Int
+
+    public init(maxPixelDimension: Int = 2400) {
+        self.maxPixelDimension = maxPixelDimension
+    }
 
     public func recognizeText(in image: CGImage) async throws -> OCRResult {
         guard image.width > 0, image.height > 0 else { throw OCRError.invalidImage }
+        let maxPixelDimension = maxPixelDimension
         return try await Task.detached(priority: .userInitiated) {
-            try Self.recognize(image)
+            try Self.recognize(ImageDownscaler.downscaled(image, maxDimension: maxPixelDimension))
         }.value
     }
 
