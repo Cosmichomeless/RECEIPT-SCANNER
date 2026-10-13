@@ -11,11 +11,11 @@ public enum OCRError: Error, Equatable, Sendable, LocalizedError {
     public var errorDescription: String? {
         switch self {
         case .invalidImage:
-            "The scanned image could not be read."
+            Localized.string("The scanned image could not be read.")
         case .noTextFound:
-            "No text was found. Try scanning again with better light."
+            Localized.string("No text was found. Try scanning again with better light.")
         case .recognitionFailed(let reason):
-            "Text recognition failed: \(reason)"
+            Localized.string("Text recognition failed: \(reason)")
         }
     }
 

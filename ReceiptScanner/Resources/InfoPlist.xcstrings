@@ -1,0 +1,28 @@
+{
+  "sourceLanguage" : "en",
+  "strings" : {
+    "NSCameraUsageDescription" : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Receipt Scanner usa la cámara para escanear tickets en papel. Las imágenes se procesan en tu dispositivo y nunca se suben."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Receipt Scanner utilise l’appareil photo pour scanner les tickets papier. Les images sont traitées sur votre appareil et ne sont jamais envoyées."
+          }
+        },
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Receipt Scanner verwendet die Kamera, um Papierbelege zu scannen. Bilder werden auf deinem Gerät verarbeitet und nie hochgeladen."
+          }
+        }
+      }
+    }
+  },
+  "version" : "1.0"
+}

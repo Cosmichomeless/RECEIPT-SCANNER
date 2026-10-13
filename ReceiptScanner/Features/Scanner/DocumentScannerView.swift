@@ -31,7 +31,7 @@ struct DocumentScannerView: UIViewControllerRepresentable {
             didFinishWith scan: VNDocumentCameraScan
         ) {
             guard scan.pageCount > 0, let image = scan.imageOfPage(at: 0).cgImage else {
-                onOutcome(.failed(.scannerFailed("The scan contained no pages.")))
+                onOutcome(.failed(.scannerFailed(String(localized: "The scan contained no pages."))))
                 return
             }
             onOutcome(.captured(image))

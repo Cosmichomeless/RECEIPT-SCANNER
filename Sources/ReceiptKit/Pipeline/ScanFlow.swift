@@ -77,9 +77,9 @@ public final class ScanFlow {
     private static func message(for error: CaptureError) -> String {
         switch error {
         case .cameraUnavailable:
-            "The document camera is not available on this device."
+            Localized.string("The document camera is not available on this device.")
         case .scannerFailed(let reason):
-            "Scanning failed: \(reason)"
+            Localized.string("Scanning failed: \(reason)")
         }
     }
 }

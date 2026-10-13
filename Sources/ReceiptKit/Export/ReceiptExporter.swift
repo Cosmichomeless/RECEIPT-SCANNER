@@ -103,8 +103,8 @@ public struct ReceiptExporter: Sendable {
         let style = Date.FormatStyle(date: .abbreviated, time: .omitted).locale(locale)
         switch (range.from, range.to) {
         case let (from?, to?): return "\(from.formatted(style)) – \(to.formatted(style))"
-        case let (from?, nil): return "From \(from.formatted(style))"
-        case let (nil, to?): return "Until \(to.formatted(style))"
+        case let (from?, nil): return Localized.string("From \(from.formatted(style))", locale: locale)
+        case let (nil, to?): return Localized.string("Until \(to.formatted(style))", locale: locale)
         case (nil, nil): return nil
         }
     }

@@ -11,8 +11,10 @@
 		1940981077F85B36D23BD918 /* FullFlowUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 359DEE424B2E891083707843 /* FullFlowUITests.swift */; };
 		3D5EF4C9E6C879352C8B1EDA /* ExportView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22688D0876B73146BC9CD4DA /* ExportView.swift */; };
 		4C1CBB9DF42C0213211C1FD0 /* HistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56BF7424AD8305E16296155B /* HistoryView.swift */; };
+		734607BC2FA1E9A9B7088340 /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 405DD379017C93CA954EE334 /* Localizable.xcstrings */; };
 		7B445F2032BCF51A581358F6 /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = A1C6EF9C8A551EC711F486D2 /* PrivacyInfo.xcprivacy */; };
 		7EE013237451A3FD231C2C68 /* ReceiptKit in Frameworks */ = {isa = PBXBuildFile; productRef = 15D52BD8E5B8D832CE49FCF8 /* ReceiptKit */; };
+		873DF4A2DF04605EDE04F448 /* InfoPlist.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 5E5956FAA46D09EEDD96F6CF /* InfoPlist.xcstrings */; };
 		88818EDDDDEC501026BBEF7D /* DocumentScannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B047C6807EAEA734D7085702 /* DocumentScannerView.swift */; };
 		8C8C1692C2F243411F7532D2 /* SampleReceipt.swift in Sources */ = {isa = PBXBuildFile; fileRef = C67E67F355EB723F0C6C2FDA /* SampleReceipt.swift */; };
 		9D621209A4C5BE1EB387F0E7 /* ReviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30C1B79216CBD2EFD09981A8 /* ReviewView.swift */; };
@@ -37,7 +39,9 @@
 		2F0B637EAA72832C41131385 /* ReceiptScannerApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReceiptScannerApp.swift; sourceTree = "<group>"; };
 		30C1B79216CBD2EFD09981A8 /* ReviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewView.swift; sourceTree = "<group>"; };
 		359DEE424B2E891083707843 /* FullFlowUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FullFlowUITests.swift; sourceTree = "<group>"; };
+		405DD379017C93CA954EE334 /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
 		56BF7424AD8305E16296155B /* HistoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryView.swift; sourceTree = "<group>"; };
+		5E5956FAA46D09EEDD96F6CF /* InfoPlist.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = InfoPlist.xcstrings; sourceTree = "<group>"; };
 		657B591D201E75C907CD1E6C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		853171B29CEC14D122C55C54 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		A1C6EF9C8A551EC711F486D2 /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
@@ -93,6 +97,15 @@
 			path = Review;
 			sourceTree = "<group>";
 		};
+		525D5BF2EFAE78EDA1C4B1DF /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				5E5956FAA46D09EEDD96F6CF /* InfoPlist.xcstrings */,
+				405DD379017C93CA954EE334 /* Localizable.xcstrings */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
 		6668D9B73C2EB5DE7A2AD745 = {
 			isa = PBXGroup;
 			children = (
@@ -121,6 +134,7 @@
 				A1C6EF9C8A551EC711F486D2 /* PrivacyInfo.xcprivacy */,
 				247E57183D80F75FBD1A67EA /* App */,
 				68D46F0C272B775B0D6A6455 /* Features */,
+				525D5BF2EFAE78EDA1C4B1DF /* Resources */,
 			);
 			path = ReceiptScanner;
 			sourceTree = "<group>";
@@ -211,7 +225,10 @@
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				Base,
+				de,
 				en,
+				es,
+				fr,
 			);
 			mainGroup = 6668D9B73C2EB5DE7A2AD745;
 			minimizedProjectReferenceProxies = 1;
@@ -235,6 +252,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				0FFCBC65B62F174BC4C2B3CB /* Assets.xcassets in Resources */,
+				873DF4A2DF04605EDE04F448 /* InfoPlist.xcstrings in Resources */,
+				734607BC2FA1E9A9B7088340 /* Localizable.xcstrings in Resources */,
 				7B445F2032BCF51A581358F6 /* PrivacyInfo.xcprivacy in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

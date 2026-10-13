@@ -25,7 +25,7 @@ struct ReviewView: View {
                     .foregroundStyle(ReceiptStyle.accent)
             }
             .listRowBackground(ReceiptStyle.surface)
-            Section("Scan") {
+            Section("Scanned receipt") {
                 Image(decorative: image, scale: 1)
                     .resizable()
                     .scaledToFit()
@@ -123,7 +123,7 @@ struct ReviewView: View {
 
             Section {
                 DisclosureGroup("Recognized text") {
-                    Text(draft.rawText.isEmpty ? "No text found." : draft.rawText)
+                    (draft.rawText.isEmpty ? Text("No text found.") : Text(verbatim: draft.rawText))
                         .font(.footnote.monospaced())
                         .textSelection(.enabled)
                 }

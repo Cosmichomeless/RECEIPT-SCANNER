@@ -58,13 +58,13 @@ struct ExportView: View {
                     case .preparing:
                         ProgressView("Preparing…")
                     case .ready(let url, let count):
-                        Text(count == 1 ? "1 receipt ready to share." : "\(count) receipts ready to share.")
+                        Text("\(count) receipts ready to share.")
                         ShareLink(item: url) {
                             Label("Share", systemImage: "square.and.arrow.up")
                         }
                         .accessibilityIdentifier("shareExport")
                     case .empty:
-                        Text(options.format == .images ? "No scans were kept for these dates." : "No receipts in these dates.")
+                        Text(options.format == .images ? LocalizedStringKey("No scans were kept for these dates.") : LocalizedStringKey("No receipts in these dates."))
                             .foregroundStyle(.secondary)
                     case .failed(let message):
                         Text(message).foregroundStyle(.red)

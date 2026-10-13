@@ -10,8 +10,8 @@ public struct PDFSummary: Sendable {
     private let locale: Locale
     private let calendar: Calendar
 
-    public init(title: String = "Receipts", subtitle: String? = nil, locale: Locale = .current, calendar: Calendar = .current) {
-        self.title = title
+    public init(title: String? = nil, subtitle: String? = nil, locale: Locale = .current, calendar: Calendar = .current) {
+        self.title = title ?? Localized.string("Receipts", locale: locale)
         self.subtitle = subtitle
         self.locale = locale
         self.calendar = calendar
@@ -33,7 +33,7 @@ public struct PDFSummary: Sendable {
             page.text(subtitle, x: Layout.margin, y: page.cursor, size: 11, gray: 0.35)
             page.cursor -= 16
         }
-        page.text("\(receipts.count) \(receipts.count == 1 ? "receipt" : "receipts")",
+        page.text(Localized.string("\(receipts.count) receipts", locale: locale),
                   x: Layout.margin, y: page.cursor, size: 11, gray: 0.35)
         page.cursor -= 26
         page.header()
@@ -70,7 +70,7 @@ public struct PDFSummary: Sendable {
         page.rule()
         for code in order {
             guard let sum = totals[code] else { continue }
-            page.row(date: "", merchant: "Total \(code)", vat: money(sum.vat, code), total: money(sum.total, code), bold: true)
+            page.row(date: "", merchant: Localized.string("Total \(code)", locale: locale), vat: money(sum.vat, code), total: money(sum.total, code), bold: true)
         }
         page.end()
         context.closePDF()
@@ -116,10 +116,10 @@ public struct PDFSummary: Sendable {
         }
 
         mutating func header() {
-            text("Date", x: Layout.dateX, y: cursor, size: 9, bold: true, gray: 0.35)
-            text("Merchant", x: Layout.merchantX, y: cursor, size: 9, bold: true, gray: 0.35)
-            text("VAT", x: Layout.vatRight, y: cursor, size: 9, bold: true, gray: 0.35, align: .right)
-            text("Total", x: Layout.totalRight, y: cursor, size: 9, bold: true, gray: 0.35, align: .right)
+            text(Localized.string("Date", locale: locale), x: Layout.dateX, y: cursor, size: 9, bold: true, gray: 0.35)
+            text(Localized.string("Merchant", locale: locale), x: Layout.merchantX, y: cursor, size: 9, bold: true, gray: 0.35)
+            text(Localized.string("VAT", locale: locale), x: Layout.vatRight, y: cursor, size: 9, bold: true, gray: 0.35, align: .right)
+            text(Localized.string("Total", locale: locale), x: Layout.totalRight, y: cursor, size: 9, bold: true, gray: 0.35, align: .right)
             cursor -= 8
             rule()
         }

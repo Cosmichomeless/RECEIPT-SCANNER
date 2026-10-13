@@ -168,7 +168,7 @@ struct ReceiptDetailView: View {
             LabeledContent("Saved") { Text(receipt.createdAt, format: .dateTime) }
             Section {
                 DisclosureGroup("Recognized text") {
-                    Text(receipt.rawText.isEmpty ? "No text." : receipt.rawText)
+                    (receipt.rawText.isEmpty ? Text("No text.") : Text(verbatim: receipt.rawText))
                         .font(.footnote.monospaced())
                         .textSelection(.enabled)
                 }

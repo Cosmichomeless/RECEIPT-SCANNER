@@ -19,6 +19,7 @@ final class FullFlowUITests: XCTestCase {
     @MainActor
     func testFullFlow() throws {
         let app = XCUIApplication()
+        app.launchArguments += ["-AppleLanguages", "(en)", "-AppleLocale", "en_US"]
         app.launch()
         shot("1-home")
         let initiallyEmpty = app.staticTexts["No receipts yet"].exists
@@ -89,5 +90,34 @@ final class FullFlowUITests: XCTestCase {
         XCTAssertLessThan(targetRows.count, targetCountBeforeDelete)
         if initiallyEmpty { XCTAssertTrue(app.staticTexts["No receipts yet"].exists) }
         shot("9-after-delete")
+    }
+
+    /// The interface follows the device language, including the long German labels.
+    @MainActor
+    func testTranslatedInterface() throws {
+        let languages: [(code: String, locale: String, heading: String, review: String, vat: String)] = [
+            ("es", "es_ES", "Tus tickets, en un solo lugar", "Revisar", "IVA"),
+            ("de", "de_DE", "Deine Belege an einem Ort", "Prüfen", "MwSt."),
+            ("fr", "fr_FR", "Vos tickets, au même endroit", "Vérifier", "TVA"),
+        ]
+        for language in languages {
+            let app = XCUIApplication()
+            app.launchArguments += ["-AppleLanguages", "(\(language.code))", "-AppleLocale", language.locale]
+            app.launch()
+            XCTAssertTrue(app.staticTexts[language.heading].waitForExistence(timeout: 10), app.debugDescription)
+            shot("\(language.code)-1-home")
+
+            // The system names this button per language ("Más", "Weitere"...); its identifier does not change.
+            let more = app.buttons["OverflowBarButtonItem"].firstMatch
+            XCTAssertTrue(more.waitForExistence(timeout: 5), app.debugDescription)
+            more.tap()
+            app.buttons["Try sample receipt"].tap()
+            XCTAssertTrue(app.navigationBars[language.review].waitForExistence(timeout: 20), app.debugDescription)
+            shot("\(language.code)-2-review")
+            app.swipeUp()
+            XCTAssertTrue(app.staticTexts[language.vat].firstMatch.exists || app.staticTexts[language.vat.uppercased()].firstMatch.exists)
+            shot("\(language.code)-3-review-vat")
+            app.terminate()
+        }
     }
 }
