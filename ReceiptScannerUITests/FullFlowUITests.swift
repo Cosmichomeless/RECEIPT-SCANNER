@@ -65,6 +65,18 @@ final class FullFlowUITests: XCTestCase {
         app.swipeUp()
         shot("7-history-scrolled")
 
+        // Export: the sheet prepares a CSV and offers the share sheet.
+        app.swipeDown()
+        app.buttons["More"].firstMatch.tap()
+        app.buttons["Export"].tap()
+        XCTAssertTrue(app.buttons["shareExport"].waitForExistence(timeout: 10), app.debugDescription)
+        shot("7-export-csv")
+        app.buttons["PDF"].tap()
+        XCTAssertTrue(app.buttons["shareExport"].waitForExistence(timeout: 10))
+        shot("7-export-pdf")
+        app.buttons["Done"].tap()
+        XCTAssertTrue(app.navigationBars["Receipts"].waitForExistence(timeout: 5))
+
         let targetRows = app.cells.containing(.staticText, identifier: "NORTHLINE HARDWARE")
         let targetCountBeforeDelete = targetRows.count
         XCTAssertGreaterThan(targetCountBeforeDelete, 0)

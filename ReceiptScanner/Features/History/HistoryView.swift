@@ -4,6 +4,7 @@ import SwiftUI
 /// Saved receipts, newest first. Tapping one reopens it.
 struct HistoryView: View {
     let history: HistoryStore
+    @State private var isExporting = false
 
     var body: some View {
         List {
@@ -65,6 +66,14 @@ struct HistoryView: View {
             }
         }
         .navigationDestination(for: Receipt.self) { ReceiptDetailView(receipt: $0, history: history) }
+        .toolbar {
+            ToolbarItem(placement: .secondaryAction) {
+                Button("Export", systemImage: "square.and.arrow.up") { isExporting = true }
+                    .disabled(history.receipts.isEmpty)
+                    .accessibilityIdentifier("exportButton")
+            }
+        }
+        .sheet(isPresented: $isExporting) { ExportView(receipts: history.receipts) }
     }
 }
 
