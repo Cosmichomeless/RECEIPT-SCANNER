@@ -136,6 +136,26 @@ struct ReceiptDetailView: View {
             }
             LabeledContent("Total") { Text(receipt.total, format: .currency(code: receipt.currencyCode)) }
             LabeledContent("Currency", value: receipt.currencyCode)
+            if !receipt.tax.isEmpty || receipt.taxID != nil {
+                Section("VAT") {
+                    if let base = receipt.tax.base {
+                        LabeledContent("Base") { Text(base, format: .currency(code: receipt.currencyCode)) }
+                    }
+                    if let rate = receipt.tax.rate {
+                        LabeledContent("Rate") { Text("\(rate.formatted())%") }
+                    }
+                    if let amount = receipt.tax.amount {
+                        LabeledContent("VAT amount") { Text(amount, format: .currency(code: receipt.currencyCode)) }
+                    }
+                    if let taxID = receipt.taxID {
+                        LabeledContent("Merchant tax ID", value: taxID)
+                    }
+                    if receipt.tax.isEstimated {
+                        Text("Calculated from the total and the rate on the receipt.")
+                            .font(.footnote).foregroundStyle(.secondary)
+                    }
+                }
+            }
             LabeledContent("Saved") { Text(receipt.createdAt, format: .dateTime) }
             Section {
                 DisclosureGroup("Recognized text") {

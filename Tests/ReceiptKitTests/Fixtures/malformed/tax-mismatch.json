@@ -1,0 +1,13 @@
+{
+  "locale": "es_ES",
+  "merchant": "TALLER MECANICO LOPEZ",
+  "date": "2026-10-06",
+  "total": "86.80",
+  "currency": "EUR",
+  "issues": [
+    "taxMismatch"
+  ],
+  "taxBase": "80.00",
+  "taxRate": "21",
+  "taxAmount": "16.80"
+}

@@ -1,0 +1,16 @@
+DIA SUPERMERCADOS S.A.
+CIF B12345674
+AVDA. DE AMERICA 101
+28002 MADRID
+06/10/2026 11:20
+LECHE 6 UD            5,40
+PAN                   3,00
+FRUTA                 4,80
+DETERGENTE            6,18
+BOLSA                 3,50
+TOTAL A PAGAR EUR    22,88
+TARJETA              22,88
+TIPO IVA   BASE   CUOTA
+10%       12,00    1,20
+21%        8,00    1,68
+TOTAL IVA          2,88

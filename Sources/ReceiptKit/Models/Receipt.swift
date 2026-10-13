@@ -8,6 +8,9 @@ public struct Receipt: Identifiable, Hashable, Sendable {
     public var total: Decimal
     /// ISO 4217 code, for example `EUR`.
     public var currencyCode: String
+    public var tax: TaxBreakdown
+    /// NIF, CIF or NIE of the merchant.
+    public var taxID: String?
     public var rawText: String
     public let createdAt: Date
     /// Relative path of the retained scan, if the user chose to keep it.
@@ -19,6 +22,8 @@ public struct Receipt: Identifiable, Hashable, Sendable {
         date: Date?,
         total: Decimal,
         currencyCode: String,
+        tax: TaxBreakdown = TaxBreakdown(),
+        taxID: String? = nil,
         rawText: String,
         createdAt: Date = Date(),
         imagePath: String? = nil
@@ -28,6 +33,8 @@ public struct Receipt: Identifiable, Hashable, Sendable {
         self.date = date
         self.total = total
         self.currencyCode = currencyCode
+        self.tax = tax
+        self.taxID = taxID
         self.rawText = rawText
         self.createdAt = createdAt
         self.imagePath = imagePath

@@ -10,6 +10,8 @@ public enum ParsingIssue: Hashable, Sendable {
     case missingCurrency
     /// The marks on the receipt fit several currencies; the user picks one.
     case ambiguousCurrency(candidates: [String])
+    /// Base plus VAT does not give the total. Either figure may be misread.
+    case taxMismatch
 }
 
 /// Structured output of the parser. Unknown fields are `nil`, never guessed.
@@ -19,6 +21,10 @@ public struct ParsedReceipt: Equatable, Sendable {
     public var total: Decimal?
     /// ISO 4217 code, for example `EUR`.
     public var currencyCode: String?
+    /// VAT figures, when the receipt shows any.
+    public var tax: TaxBreakdown?
+    /// Tax number of the merchant (NIF, CIF or NIE), without separators.
+    public var merchantTaxID: String?
     /// Untouched OCR text, kept so results stay traceable.
     public var rawText: String
     public var issues: [ParsingIssue]
@@ -28,6 +34,8 @@ public struct ParsedReceipt: Equatable, Sendable {
         date: CalendarDate? = nil,
         total: Decimal? = nil,
         currencyCode: String? = nil,
+        tax: TaxBreakdown? = nil,
+        merchantTaxID: String? = nil,
         rawText: String,
         issues: [ParsingIssue] = []
     ) {
@@ -35,6 +43,8 @@ public struct ParsedReceipt: Equatable, Sendable {
         self.date = date
         self.total = total
         self.currencyCode = currencyCode
+        self.tax = tax
+        self.merchantTaxID = merchantTaxID
         self.rawText = rawText
         self.issues = issues
     }

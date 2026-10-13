@@ -10,6 +10,12 @@ public final class ReceiptEntity {
     public var date: Date?
     public var total: Decimal
     public var currencyCode: String
+    // Optional so existing stores migrate without a version step.
+    public var taxBase: Decimal?
+    public var taxRate: Decimal?
+    public var taxAmount: Decimal?
+    public var taxIsEstimated: Bool?
+    public var taxID: String?
     public var rawText: String
     public var createdAt: Date
     public var imagePath: String?
@@ -20,6 +26,8 @@ public final class ReceiptEntity {
         date: Date?,
         total: Decimal,
         currencyCode: String,
+        tax: TaxBreakdown = TaxBreakdown(),
+        taxID: String? = nil,
         rawText: String,
         createdAt: Date,
         imagePath: String?
@@ -29,6 +37,11 @@ public final class ReceiptEntity {
         self.date = date
         self.total = total
         self.currencyCode = currencyCode
+        self.taxBase = tax.base
+        self.taxRate = tax.rate
+        self.taxAmount = tax.amount
+        self.taxIsEstimated = tax.isEstimated
+        self.taxID = taxID
         self.rawText = rawText
         self.createdAt = createdAt
         self.imagePath = imagePath
@@ -41,6 +54,8 @@ public final class ReceiptEntity {
             date: receipt.date,
             total: receipt.total,
             currencyCode: receipt.currencyCode,
+            tax: receipt.tax,
+            taxID: receipt.taxID,
             rawText: receipt.rawText,
             createdAt: receipt.createdAt,
             imagePath: receipt.imagePath
@@ -53,6 +68,11 @@ public final class ReceiptEntity {
         date = receipt.date
         total = receipt.total
         currencyCode = receipt.currencyCode
+        taxBase = receipt.tax.base
+        taxRate = receipt.tax.rate
+        taxAmount = receipt.tax.amount
+        taxIsEstimated = receipt.tax.isEstimated
+        taxID = receipt.taxID
         rawText = receipt.rawText
         imagePath = receipt.imagePath
     }
@@ -64,6 +84,8 @@ public final class ReceiptEntity {
             date: date,
             total: total,
             currencyCode: currencyCode,
+            tax: TaxBreakdown(base: taxBase, rate: taxRate, amount: taxAmount, isEstimated: taxIsEstimated ?? false),
+            taxID: taxID,
             rawText: rawText,
             createdAt: createdAt,
             imagePath: imagePath

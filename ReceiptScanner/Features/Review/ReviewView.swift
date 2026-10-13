@@ -9,7 +9,7 @@ struct ReviewView: View {
     @State private var isSaving = false
     @FocusState private var focusedField: Field?
 
-    private enum Field { case merchant, total }
+    private enum Field { case merchant, total, taxBase, taxRate, taxAmount, taxID }
 
     init(flow: ScanFlow, parsed: ParsedReceipt, image: CGImage) {
         self.flow = flow
@@ -82,6 +82,31 @@ struct ReviewView: View {
             }
             .listRowBackground(ReceiptStyle.surface)
 
+            Section("VAT") {
+                taxField("Base", text: $draft.taxBaseText, field: .taxBase, invalid: .invalidTaxBase)
+                taxField("Rate (%)", text: $draft.taxRateText, field: .taxRate, invalid: .invalidTaxRate)
+                taxField("VAT amount", text: $draft.taxAmountText, field: .taxAmount, invalid: .invalidTaxAmount)
+                TextField("Merchant tax ID (NIF/CIF)", text: $draft.taxID)
+                    .textInputAutocapitalization(.characters)
+                    .autocorrectionDisabled()
+                    .focused($focusedField, equals: .taxID)
+                    .accessibilityIdentifier("taxID")
+                if draft.taxIsEstimated {
+                    Text("Calculated from the total and the rate on the receipt. Check it.")
+                        .font(.footnote).foregroundStyle(.orange)
+                }
+                if draft.taxMismatch {
+                    Text("Base plus VAT does not match the total. Check the amounts.")
+                        .font(.footnote).foregroundStyle(.orange)
+                }
+                Text("Optional. Leave it empty if the receipt shows no VAT.")
+                    .font(.footnote).foregroundStyle(.secondary)
+            }
+            .listRowBackground(ReceiptStyle.surface)
+            .onChange(of: draft.taxBaseText) { draft.taxIsEstimated = false }
+            .onChange(of: draft.taxRateText) { draft.taxIsEstimated = false }
+            .onChange(of: draft.taxAmountText) { draft.taxIsEstimated = false }
+
             Section("Currency") {
                 Picker("Currency", selection: $draft.currencyCode) {
                     Text("Not set").tag("")
@@ -141,6 +166,19 @@ struct ReviewView: View {
                 }
                 .disabled(!draft.canSave || isSaving)
             }
+        }
+    }
+
+    @ViewBuilder
+    private func taxField(_ title: LocalizedStringKey, text: Binding<String>, field: Field, invalid: ReceiptDraft.Problem) -> some View {
+        LabeledContent(title) {
+            TextField("—", text: text)
+                .keyboardType(.decimalPad)
+                .multilineTextAlignment(.trailing)
+                .focused($focusedField, equals: field)
+        }
+        if draft.problems.contains(invalid) {
+            Text("Enter a valid number.").font(.footnote).foregroundStyle(.red)
         }
     }
 

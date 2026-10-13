@@ -4,5 +4,9 @@
   "date": "2026-10-06",
   "total": "35.80",
   "currency": "EUR",
-  "issues": []
+  "issues": [],
+  "taxBase": "32.55",
+  "taxRate": "10",
+  "taxAmount": "3.25",
+  "taxID": "B87654321"
 }

@@ -4,5 +4,6 @@
   "date": "2026-10-06",
   "total": "61.45",
   "currency": "EUR",
-  "issues": []
+  "issues": [],
+  "taxID": "B12345678"
 }

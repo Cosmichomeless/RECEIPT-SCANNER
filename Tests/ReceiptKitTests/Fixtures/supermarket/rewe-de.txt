@@ -1,0 +1,13 @@
+REWE MARKT GMBH
+Domstrasse 20
+50668 Koeln
+06.10.2026 14:12
+BROT               2,49 B
+MILCH              1,19 B
+SHAMPOO            2,95 A
+SUMME            EUR 6,63
+Gegeben BAR       10,00
+Rückgeld           3,37
+Steuer %   Netto   Steuer   Brutto
+A 19,0%     2,48     0,47     2,95
+B  7,0%     3,44     0,24     3,68

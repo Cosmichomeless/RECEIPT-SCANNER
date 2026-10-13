@@ -25,7 +25,9 @@ public struct TextNormalizer: Sendable {
     // MARK: - Line cleanup
 
     static func cleanLine(_ line: String) -> String {
-        var text = collapseWhitespace(line)
+        var text = joinGroupedDigits(in: line)
+        text = collapseWhitespace(text)
+        text = joinSpacedThousands(in: text)
         text = fixDigitLookalikes(in: text)
         text = joinSplitDecimals(in: text)
         text = canonicalizeAmounts(in: text)
@@ -47,6 +49,27 @@ public struct TextNormalizer: Sendable {
             }
         }
         return result.trimmingCharacters(in: .whitespaces)
+    }
+
+    // MARK: - Digit grouping
+
+    /// `1 234,56` written with a no-break, narrow or thin space, or Swiss `1'234.56`: the mark
+    /// groups thousands, so it goes. Plain spaces are left alone here (see `joinSpacedThousands`).
+    private static let groupMark = try! NSRegularExpression(pattern: #"(?<=\d)[\u00A0\u202F\u2009'’](?=\d{3}(?!\d))"#)
+
+    private static func joinGroupedDigits(in text: String) -> String {
+        replaceMatches(of: groupMark, in: text) { _ in "" }
+    }
+
+    /// `TOTAL 1 234,56` with a plain space between the groups. Only joined after some text on the
+    /// line and before a two-digit decimal part, so a quantity before a price (`2 100,00` at the
+    /// start of a line) is not merged into one number.
+    private static let spacedThousands = try! NSRegularExpression(
+        pattern: #"(?<=[^\d\s] )\d{1,3}(?: \d{3})+(?=[.,]\d{2}(?!\d))"#
+    )
+
+    private static func joinSpacedThousands(in text: String) -> String {
+        replaceMatches(of: spacedThousands, in: text) { $0.replacingOccurrences(of: " ", with: "") }
     }
 
     // MARK: - OCR artifacts

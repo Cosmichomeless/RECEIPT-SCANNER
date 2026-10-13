@@ -11,6 +11,12 @@ struct ReceiptFixture: Sendable, CustomTestStringConvertible {
         let total: String?
         let currency: String?
         let issues: [String]
+        // VAT figures and tax ID are checked only when the file has them. An explicit `null`
+        // for `taxRate` means the receipt mixes rates.
+        let taxBase: String?
+        let taxRate: String?
+        let taxAmount: String?
+        let taxID: String?
     }
 
     let category: String
@@ -56,6 +62,7 @@ extension ParsingIssue {
         case .missingTotal: "missingTotal"
         case .missingCurrency: "missingCurrency"
         case .ambiguousCurrency: "ambiguousCurrency"
+        case .taxMismatch: "taxMismatch"
         }
     }
 }
@@ -76,6 +83,14 @@ extension ParsingIssue {
         #expect(parsed.total == expected.total.flatMap { Decimal(string: $0) }, "total")
         #expect(parsed.currencyCode == expected.currency, "currency")
         #expect(Set(parsed.issues.map(\.kind)) == Set(expected.issues), "issues")
+        if expected.taxBase != nil || expected.taxAmount != nil {
+            #expect(parsed.tax?.base == expected.taxBase.flatMap { Decimal(string: $0) }, "tax base")
+            #expect(parsed.tax?.rate == expected.taxRate.flatMap { Decimal(string: $0) }, "tax rate")
+            #expect(parsed.tax?.amount == expected.taxAmount.flatMap { Decimal(string: $0) }, "tax amount")
+        }
+        if let taxID = expected.taxID {
+            #expect(parsed.merchantTaxID == taxID, "tax ID")
+        }
     }
 
     private static func iso(_ date: CalendarDate) -> String {

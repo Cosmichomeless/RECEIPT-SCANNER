@@ -9,6 +9,14 @@ public struct ReceiptDraft: Equatable, Sendable {
     /// Amount exactly as typed, for example `84.37` or `84,37`.
     public var totalText: String
     public var currencyCode: String
+    /// VAT fields as typed. Empty when the receipt has none; all optional.
+    public var taxBaseText: String
+    public var taxRateText: String
+    public var taxAmountText: String
+    /// NIF, CIF or NIE of the merchant. Empty when unknown.
+    public var taxID: String
+    /// The tax figures were computed from the total and the rate, not read from the receipt.
+    public var taxIsEstimated: Bool
     public let rawText: String
     /// Fields the parser could not fill with confidence, so the UI can highlight them.
     public let issues: [ParsingIssue]
@@ -21,6 +29,11 @@ public struct ReceiptDraft: Equatable, Sendable {
         date = parsed.date
         totalText = parsed.total.map { Self.format($0) } ?? ""
         currencyCode = parsed.currencyCode ?? ""
+        taxBaseText = parsed.tax?.base.map { Self.format($0) } ?? ""
+        taxRateText = parsed.tax?.rate.map { Self.format($0) } ?? ""
+        taxAmountText = parsed.tax?.amount.map { Self.format($0) } ?? ""
+        taxID = parsed.merchantTaxID ?? ""
+        taxIsEstimated = parsed.tax?.isEstimated ?? false
         rawText = parsed.rawText
         issues = parsed.issues
         dateSuggestions = parsed.issues.compactMap {
@@ -33,6 +46,7 @@ public struct ReceiptDraft: Equatable, Sendable {
 
     public enum Problem: Hashable, Sendable {
         case missingMerchant, missingTotal, invalidTotal, missingCurrency, invalidCurrency
+        case invalidTaxBase, invalidTaxRate, invalidTaxAmount
     }
 
     /// Everything that blocks saving. Empty means `makeReceipt` succeeds.
@@ -45,8 +59,25 @@ public struct ReceiptDraft: Equatable, Sendable {
         let code = currencyCode.trimmingCharacters(in: .whitespaces)
         if code.isEmpty { result.append(.missingCurrency) }
         else if !Self.isCurrencyCode(code) { result.append(.invalidCurrency) }
+        if !taxBaseText.isBlank, Self.parseAmount(taxBaseText) == nil { result.append(.invalidTaxBase) }
+        if !taxRateText.isBlank, Self.parseRate(taxRateText) == nil { result.append(.invalidTaxRate) }
+        if !taxAmountText.isBlank, Self.parseAmount(taxAmountText) == nil { result.append(.invalidTaxAmount) }
         return result
     }
+
+    /// The VAT figures that were typed or detected, already validated.
+    public var tax: TaxBreakdown {
+        TaxBreakdown(
+            base: Self.parseAmount(taxBaseText),
+            rate: Self.parseRate(taxRateText),
+            amount: Self.parseAmount(taxAmountText),
+            isEstimated: taxIsEstimated
+        )
+    }
+
+    /// `true` when base and VAT are both set and do not add up to the total. A warning, not a blocker:
+    /// the user may know better than the arithmetic (a tip, a rounding in the printed ticket).
+    public var taxMismatch: Bool { !tax.isConsistent(withTotal: total) }
 
     public var canSave: Bool { problems.isEmpty }
 
@@ -61,6 +92,8 @@ public struct ReceiptDraft: Equatable, Sendable {
             date: date?.date(in: calendar),
             total: total,
             currencyCode: currencyCode.trimmingCharacters(in: .whitespaces).uppercased(),
+            tax: tax,
+            taxID: taxID.isBlank ? nil : taxID.trimmingCharacters(in: .whitespaces).uppercased(),
             rawText: rawText,
             createdAt: now
         )
@@ -94,7 +127,20 @@ public struct ReceiptDraft: Equatable, Sendable {
         return amount
     }
 
+    /// A percentage between 0 and 100, `.` or `,` as the decimal mark. Zero is a valid rate.
+    static func parseRate(_ text: String) -> Decimal? {
+        let value = text.trimmingCharacters(in: .whitespaces).replacingOccurrences(of: ",", with: ".")
+        guard !value.isEmpty, value.allSatisfy({ $0.isASCIIDigit || $0 == "." }), value.filter({ $0 == "." }).count <= 1,
+              let rate = Decimal(string: value, locale: Locale(identifier: "en_US_POSIX")), rate <= 100
+        else { return nil }
+        return rate
+    }
+
     static func format(_ amount: Decimal) -> String {
         NSDecimalNumber(decimal: amount).stringValue
     }
+}
+
+private extension String {
+    var isBlank: Bool { trimmingCharacters(in: .whitespacesAndNewlines).isEmpty }
 }

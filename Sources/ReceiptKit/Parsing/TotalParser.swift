@@ -51,15 +51,21 @@ public struct TotalParser: Sendable {
         "SUBTOTAL", "SUB TOTAL", "SUB-TOTAL", "TAX", "VAT", "IVA", "IGIC", "DISCOUNT", "DESCUENTO",
         "CHANGE", "CAMBIO", "CASH", "EFECTIVO", "TENDER", "TIP", "PROPINA", "SAVINGS", "COUPON",
         "ENTREGADO", "RECIBIDO", "BASE IMPONIBLE",
+        // German and French: tax, net amount, change, tip, intermediate sum.
+        "MWST", "UST", "NETTO", "ZWISCHENSUMME", "RUECKGELD", "RÜCKGELD", "TRINKGELD", "BAR GEGEBEN", "GEGEBEN",
+        "TVA", "TOTAL HT", "MONTANT HT", "RENDU", "POURBOIRE", "ESPECES",
     ]
 
     private static let strongKeywords = [
         "GRAND TOTAL", "AMOUNT DUE", "TOTAL DUE", "BALANCE DUE", "TOTAL A PAGAR", "A PAGAR",
         "IMPORTE TOTAL", "TOTAL AMOUNT", "TOTAL EUR", "TOTAL USD", "TOTAL GBP", "TOTAL €", "TOTAL $",
         "TOTAL £", "TO PAY",
+        // German: ZU ZAHLEN, GESAMTBETRAG. French: TOTAL TTC, NET A PAYER.
+        "ZU ZAHLEN", "ZAHLBETRAG", "GESAMTBETRAG", "GESAMTSUMME", "ENDBETRAG", "TOTAL TTC", "NET A PAYER",
+        "NET À PAYER", "À PAYER", "MONTANT TTC",
     ]
 
-    private static let weakKeywords = ["TOTAL", "AMOUNT", "IMPORTE", "BALANCE", "SUMA"]
+    private static let weakKeywords = ["TOTAL", "AMOUNT", "IMPORTE", "BALANCE", "SUMA", "SUMME", "GESAMT", "MONTANT"]
 
     private static func labelScore(for text: String, previous: String?) -> Int {
         let upper = text.uppercased()
@@ -80,7 +86,7 @@ public struct TotalParser: Sendable {
         return 0
     }
 
-    private static func containsWord(_ word: String, in upper: String) -> Bool {
+    static func containsWord(_ word: String, in upper: String) -> Bool {
         var searchRange = upper.startIndex..<upper.endIndex
         while let found = upper.range(of: word, range: searchRange) {
             let before = found.lowerBound == upper.startIndex ? nil : upper[upper.index(before: found.lowerBound)]

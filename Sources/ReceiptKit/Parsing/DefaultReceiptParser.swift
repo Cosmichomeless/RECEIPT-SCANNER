@@ -5,6 +5,8 @@ import Foundation
 public struct DefaultReceiptParser: ReceiptParser {
     private let normalizer = TextNormalizer()
     private let totalParser = TotalParser()
+    private let taxParser = TaxParser()
+    private let taxIDParser = TaxIDParser()
     private let merchantParser = MerchantParser()
     private let dateParser: DateParser
     private let currencyParser: CurrencyParser
@@ -35,6 +37,10 @@ public struct DefaultReceiptParser: ReceiptParser {
         case .ambiguous(let candidates): receipt.issues.append(.ambiguousCurrency(candidates: candidates))
         case .notFound: receipt.issues.append(.missingCurrency)
         }
+
+        receipt.tax = taxParser.parse(text, total: receipt.total)
+        if let tax = receipt.tax, !tax.isConsistent(withTotal: receipt.total) { receipt.issues.append(.taxMismatch) }
+        receipt.merchantTaxID = taxIDParser.parse(text)
         return receipt
     }
 }

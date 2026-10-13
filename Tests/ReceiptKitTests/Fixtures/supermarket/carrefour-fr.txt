@@ -1,0 +1,11 @@
+CARREFOUR MARKET
+12 RUE DE RIVOLI
+75001 PARIS
+06/10/2026 17:45
+BAGUETTE            1,30
+FROMAGE             5,90
+LAIT 1L             1,10
+TOTAL TTC EUR       8,30
+CB                  8,30
+MONTANT HT          7,87
+TVA 5,5%            0,43

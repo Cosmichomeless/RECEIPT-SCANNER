@@ -1,0 +1,12 @@
+{
+  "locale": "es_ES",
+  "merchant": "DIA SUPERMERCADOS S.A.",
+  "date": "2026-10-06",
+  "total": "22.88",
+  "currency": "EUR",
+  "issues": [],
+  "taxBase": "20.00",
+  "taxRate": null,
+  "taxAmount": "2.88",
+  "taxID": "B12345674"
+}
