@@ -20,6 +20,8 @@
 	<string>1.0</string>
 	<key>CFBundleVersion</key>
 	<string>1</string>
+	<key>ITSAppUsesNonExemptEncryption</key>
+	<false/>
 	<key>NSCameraUsageDescription</key>
 	<string>Receipt Scanner uses the camera to scan paper receipts. Images are processed on your device and never uploaded.</string>
 	<key>UILaunchScreen</key>

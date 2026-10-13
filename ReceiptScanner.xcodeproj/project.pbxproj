@@ -10,6 +10,7 @@
 		0FFCBC65B62F174BC4C2B3CB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 657B591D201E75C907CD1E6C /* Assets.xcassets */; };
 		1940981077F85B36D23BD918 /* FullFlowUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 359DEE424B2E891083707843 /* FullFlowUITests.swift */; };
 		4C1CBB9DF42C0213211C1FD0 /* HistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56BF7424AD8305E16296155B /* HistoryView.swift */; };
+		7B445F2032BCF51A581358F6 /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = A1C6EF9C8A551EC711F486D2 /* PrivacyInfo.xcprivacy */; };
 		7EE013237451A3FD231C2C68 /* ReceiptKit in Frameworks */ = {isa = PBXBuildFile; productRef = 15D52BD8E5B8D832CE49FCF8 /* ReceiptKit */; };
 		88818EDDDDEC501026BBEF7D /* DocumentScannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B047C6807EAEA734D7085702 /* DocumentScannerView.swift */; };
 		8C8C1692C2F243411F7532D2 /* SampleReceipt.swift in Sources */ = {isa = PBXBuildFile; fileRef = C67E67F355EB723F0C6C2FDA /* SampleReceipt.swift */; };
@@ -37,6 +38,7 @@
 		56BF7424AD8305E16296155B /* HistoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryView.swift; sourceTree = "<group>"; };
 		657B591D201E75C907CD1E6C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		853171B29CEC14D122C55C54 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		A1C6EF9C8A551EC711F486D2 /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
 		B047C6807EAEA734D7085702 /* DocumentScannerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentScannerView.swift; sourceTree = "<group>"; };
 		C67E67F355EB723F0C6C2FDA /* SampleReceipt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SampleReceipt.swift; sourceTree = "<group>"; };
 		CE5A3B1D2192A7A059051AD0 /* ReceiptScannerUITests.xctest */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.cfbundle; path = ReceiptScannerUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -114,6 +116,7 @@
 			children = (
 				657B591D201E75C907CD1E6C /* Assets.xcassets */,
 				853171B29CEC14D122C55C54 /* Info.plist */,
+				A1C6EF9C8A551EC711F486D2 /* PrivacyInfo.xcprivacy */,
 				247E57183D80F75FBD1A67EA /* App */,
 				68D46F0C272B775B0D6A6455 /* Features */,
 			);
@@ -229,6 +232,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0FFCBC65B62F174BC4C2B3CB /* Assets.xcassets in Resources */,
+				7B445F2032BCF51A581358F6 /* PrivacyInfo.xcprivacy in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
