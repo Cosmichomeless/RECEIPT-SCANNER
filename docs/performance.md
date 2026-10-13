@@ -91,6 +91,18 @@ Findings:
   faded thermal print**, so the safe cap is higher than this table suggests. 2400 px is a conservative
   choice, not a measured optimum.
 
+## Memory (reviewed by code, not yet measured on a device)
+
+A 12 MP capture is about 48 MB decoded, so the pipeline avoids holding it:
+
+- `VisionOCRService` reads a copy downscaled to 2400 px (about 22 MB) that lives only during recognition.
+- `ScanFlow` swaps the capture for a 1200 px image (`ScanFlow.reviewImageMaxDimension`, about 4 MB) as soon as
+  the scan is processed. Before this change the full-size image stayed in memory for the whole review, because
+  the `.review` state held it only to draw a thumbnail. `ScanFlowTests` check that OCR still sees the full
+  size, that the review image is capped, and that small images are untouched.
+- A second capture delivered while one is being processed is ignored, so two recognitions never overlap.
+- Images are never persisted; SwiftData holds text fields only.
+
 ## Device measurements
 
 Not taken yet: the numbers above come from a Mac with synthetic images. To collect real ones, scan receipts on
@@ -98,7 +110,8 @@ a device and open **Review → Diagnostics**, which shows image size, text recog
 for the last scan. The same values are logged under subsystem `ReceiptKit`, category `processing`
 (no receipt text is logged). Memory is not measured in code; use Xcode's Memory gauge or Instruments
 (Allocations) during a scan. If real receipts lose characters at 2400 px, raise `maxPixelDimension` in
-`VisionOCRService.init`.
+`VisionOCRService.init`. The full list of things to check on the phone, with a results table, is in
+[device-testing.md](device-testing.md).
 
 ## Known limitations
 

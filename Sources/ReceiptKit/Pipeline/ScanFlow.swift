@@ -21,6 +21,10 @@ public final class ScanFlow {
     public private(set) var savedCount = 0
     /// Stage timings of the most recent scan, for diagnostics.
     public private(set) var lastTimings: ProcessingTimings?
+    /// Longest side, in pixels, of the image kept while the user reviews. The review screen shows a
+    /// small thumbnail, so holding the full-resolution capture (about 48 MB for 12 MP) would only
+    /// cost memory. OCR still reads the full capture.
+    public static let reviewImageMaxDimension = 1200
     private let processor: ReceiptProcessor
     private let repository: any ReceiptRepository
 
@@ -33,8 +37,10 @@ public final class ScanFlow {
         state = .scanning
     }
 
-    /// Cancelling returns to idle and stores nothing.
+    /// Cancelling returns to idle and stores nothing. While a capture is being processed any other
+    /// outcome is ignored, so a second delivery cannot start a second recognition on top of the first.
     public func handle(_ outcome: CaptureOutcome) async {
+        if case .processing = state { return }
         switch outcome {
         case .cancelled:
             state = .idle
@@ -45,7 +51,7 @@ public final class ScanFlow {
             do {
                 let (receipt, timings) = try await processor.processMeasured(image)
                 lastTimings = timings
-                state = .review(receipt, image: image)
+                state = .review(receipt, image: ImageDownscaler.downscaled(image, maxDimension: Self.reviewImageMaxDimension))
             } catch {
                 state = .failed(message: error.localizedDescription)
             }

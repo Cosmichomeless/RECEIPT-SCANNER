@@ -2,6 +2,9 @@
 
 ## Unreleased
 
+- Memory: after a scan is processed, the review state keeps a 1200 px image instead of the full-resolution
+  capture (about 48 MB at 12 MP), and captures delivered while one is processing are ignored.
+- `docs/device-testing.md`: checklist for what must be tried on a physical iPhone.
 - Parsers: totals that say they include tax (`TOTAL INCL VAT`, `Gesamt inkl. MwSt`, `IVA incluido`) are still the
   total; sums of savings (`TOTAL DESCUENTOS`, `TOTAL REMISES`, `RABATT`) are not; `BETRAG` and `A PAYER` count as
   total labels; German and French month names (`12 März 2026`, `6 févr. 2026`) are read; `T0TAL`-style keywords with

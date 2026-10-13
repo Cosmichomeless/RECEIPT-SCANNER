@@ -31,6 +31,7 @@ Manual, on a physical device with a Release or TestFlight build:
 - [ ] Scan at least five real receipts (supermarket, restaurant, fuel, hardware, one crumpled or faded).
   Note which fields needed correction; add the failures as fixtures, or measure a batch with
   `scripts/ocr-tickets.sh` and `scripts/measure-accuracy.sh`.
+- [ ] Go through [device-testing.md](device-testing.md).
 - [ ] Record **Review → Diagnostics** numbers and update [performance.md](performance.md) (OCR time, image size).
   Check memory in Instruments during a scan.
 - [ ] Camera permission prompt shows the text from `NSCameraUsageDescription`; denying it shows the "camera
