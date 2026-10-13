@@ -1,0 +1,9 @@
+PIZZERIA L'ANTICA
+Av. de America 45
+Tel. 913 456 789
+Fecha: 06-10-2026
+1 MARGHERITA        8,50
+1 DIAVOLA          10,00
+2 REFRESCO          5,00
+TOTAL
+23,50 €

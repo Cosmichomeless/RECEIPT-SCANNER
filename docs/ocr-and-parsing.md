@@ -75,11 +75,11 @@ the candidates, then by the decimal separator seen in the original text. Otherwi
 
 ## Accuracy limits
 
-- Fixture accuracy is 100 % (23 receipts) but fixtures are clean text written with the parsers. It shows there
+- Fixture accuracy is 100 % (89 receipts, es/de/fr/en) but fixtures are clean text written with the parsers. It shows there
   are no known regressions, not real-world accuracy. See [performance.md](performance.md) for how to read it.
 - Not covered: skewed or crumpled paper, glare, faded thermal print, multiple receipts in one photo.
 - Known wrong or missing cases: space-grouped thousands (`1 234,56`), OCR errors inside dates (reported
-  as a missing date), tips added by hand, German and French keywords.
+  as a missing date), tips added by hand, languages other than English, Spanish, German and French.
 - Anything the parser cannot read ends up in `ParsingIssue`, so the failure mode is "ask the user", not
   "save the wrong number".
 

@@ -28,5 +28,20 @@ three figures are compared, so an explicit `"taxRate": null` means the receipt m
 { "taxBase": "6.36", "taxRate": "10", "taxAmount": "0.64", "taxID": "A46103834" }
 ```
 
-Categories: `supermarket`, `restaurant`, `fuel-station`, `hardware-store`, `malformed`.
+Categories: `supermarket`, `restaurant`, `fuel-station`, `hardware-store`, `pharmacy`, `taxi`, `malformed`.
+Locales in the set: `es_ES` (36), `en_US` (15), `de_DE` (13), `fr_FR` (12), `en_GB` (11), `es_MX`, `de_CH`.
 To add a case, drop a new pair in a category. `FixtureRegressionTests` picks it up automatically.
+
+Write ground truth from the receipt, not from the parser. When a fixture fails, fix the parser if the fixture
+is what a reader would extract; the failure mode to protect is "ask the user" (an issue), never a wrong value.
+
+## Real tickets
+
+Tickets that must not enter the repository (they hold personal data) are measured from any folder:
+
+```sh
+scripts/ocr-tickets.sh ~/tickets/photos ~/tickets/pairs es_ES   # photos -> name.txt + draft name.json
+# correct every name.json against the paper ticket
+scripts/measure-accuracy.sh ~/tickets/pairs ~/tickets/report.md  # accuracy by field, locale and category
+```
+

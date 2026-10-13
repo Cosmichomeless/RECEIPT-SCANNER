@@ -1,0 +1,8 @@
+BAZAR LI
+06/10/2026
+3 x 2,50          7,50
+2 x 4,00          8,00
+TOTAL            15,50 EUR
+VISA **** 1234
+IMPORTE          15,50 EUR
+AUT 123456

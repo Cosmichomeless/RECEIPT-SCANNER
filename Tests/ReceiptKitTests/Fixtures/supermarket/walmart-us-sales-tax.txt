@@ -1,0 +1,13 @@
+WALMART SUPERCENTER
+5200 N Main Street
+Dayton, OH 45415
+(937) 555-0188
+10/06/2026 07:41 PM
+BREAD 2PK            3.88
+EGGS 18CT            4.98
+PAPER TOWELS        10.97
+SUBTOTAL            19.83
+TAX 1 6.250%         1.24
+TOTAL               $21.07
+VISA TEND           $21.07
+CHANGE DUE           $0.00

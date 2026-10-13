@@ -29,6 +29,7 @@ public struct TextNormalizer: Sendable {
         text = collapseWhitespace(text)
         text = joinSpacedThousands(in: text)
         text = fixDigitLookalikes(in: text)
+        text = fixKeywordLookalikes(in: text)
         text = joinSplitDecimals(in: text)
         text = canonicalizeAmounts(in: text)
         return text
@@ -92,6 +93,36 @@ public struct TextNormalizer: Sendable {
                 default: character
                 }
             })
+        }
+    }
+
+    /// Words the parsers look for. `T0TAL` and `IMP0RTE` are read as the real word when a digit
+    /// stands in for a letter; any other token is left alone.
+    private static let keywords: Set<String> = [
+        "TOTAL", "SUBTOTAL", "IMPORTE", "EFECTIVO", "CAMBIO", "TARJETA", "PROPINA", "DESCUENTO",
+        "FECHA", "BETRAG", "SUMME", "GESAMT", "TOTALE", "MONTANT", "AMOUNT", "BALANCE", "CHANGE", "TENDER",
+    ]
+    private static let wordWithDigits = try! NSRegularExpression(
+        pattern: #"(?<![A-Za-z0-9])(?=[A-Za-z0-9]*[A-Za-z])(?=[A-Za-z0-9]*[0158])[A-Za-z0-9]{4,10}(?![A-Za-z0-9])"#
+    )
+
+    private static func fixKeywordLookalikes(in text: String) -> String {
+        replaceMatches(of: wordWithDigits, in: text) { token in
+            let upper = token.uppercased()
+            // 0 is O, 5 is S, 8 is B, and 1 is either I or L (`TOTA1`, `S1MPLE`): try both.
+            let base = String(upper.map { character -> Character in
+                switch character {
+                case "0": "O"
+                case "5": "S"
+                case "8": "B"
+                default: character
+                }
+            })
+            for variant in [base.replacingOccurrences(of: "1", with: "L"), base.replacingOccurrences(of: "1", with: "I")]
+            where keywords.contains(variant) {
+                return variant
+            }
+            return nil
         }
     }
 

@@ -83,6 +83,16 @@ import Testing
         #expect(!tax.isConsistent(withTotal: 125))
         #expect(TaxBreakdown(rate: 21).isConsistent(withTotal: 5), "nothing to compare")
     }
+
+    @Test func totalLineThatContainsTaxIsNotTheTax() {
+        let tax = parse("TOTAL INCL VAT 7.20\nVAT 20% 1.20", total: "7.20")
+        #expect(tax == TaxBreakdown(base: d("6.00"), rate: 20, amount: d("1.20")))
+    }
+
+    @Test func superReducedSpanishRate() {
+        let tax = parse("IVA 2,1%  BASE 10,00  CUOTA 0,21", total: "10.21")
+        #expect(tax == TaxBreakdown(base: d("10.00"), rate: d("2.1"), amount: d("0.21")))
+    }
 }
 
 @Suite struct TaxIDParserTests {

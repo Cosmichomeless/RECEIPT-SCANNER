@@ -1,0 +1,6 @@
+YELLOW CAB CO
+Medallion 4B21
+Oct 6, 2026 10:42 PM
+FARE      $14.50
+TIP        $3.00
+TOTAL     $17.50

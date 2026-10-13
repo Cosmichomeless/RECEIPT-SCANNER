@@ -1,0 +1,11 @@
+EROSKI CITY
+Calle Mayor 3
+48001 BILBAO
+06/10/2026 09:12
+PAN INTEGRAL          1,85
+HUEVOS DOCENA         2,69
+MANTEQUILLA           1,99
+ARTICULOS: 3
+TOTAL                 6,53
+ENTREGADO            10,00
+CAMBIO                3,47

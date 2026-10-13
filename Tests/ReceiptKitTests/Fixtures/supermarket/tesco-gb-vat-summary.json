@@ -1,0 +1,11 @@
+{
+  "locale": "en_GB",
+  "merchant": "TESCO STORES LTD",
+  "date": "2026-10-06",
+  "total": "10.40",
+  "currency": "GBP",
+  "issues": [],
+  "taxBase": "8.67",
+  "taxRate": "20",
+  "taxAmount": "1.73"
+}

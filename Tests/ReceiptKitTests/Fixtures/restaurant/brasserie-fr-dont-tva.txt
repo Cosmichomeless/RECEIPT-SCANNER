@@ -1,0 +1,11 @@
+Brasserie Le Central
+12 rue Victor Hugo
+69002 LYON
+Addition  Table 8
+Date: 06/10/2026  21:15
+2 PLAT DU JOUR    28,00
+2 DESSERT         12,00
+1 VIN             16,00
+TOTAL TTC  EUR    56,00
+dont TVA 10%       5,09
+Service compris

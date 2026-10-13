@@ -1,0 +1,10 @@
+{
+  "locale": "en_US",
+  "merchant": "CVS/pharmacy",
+  "date": "2026-10-06",
+  "total": "23.48",
+  "currency": null,
+  "issues": [
+    "missingCurrency"
+  ]
+}

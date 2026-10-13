@@ -1,0 +1,13 @@
+TESCO STORES LTD
+VAT NO: GB 220 4302 31
+Oxford Street
+LONDON W1D 1BS
+Date: 06/10/2026 13:27
+MILK 2PT            1.55
+BREAD               1.20
+CHICKEN             5.75
+ORANGE JUICE        1.90
+SUBTOTAL           10.40
+BALANCE TO PAY    £10.40
+CARD               £10.40
+VAT  A 20.00%  Net 8.67  VAT 1.73

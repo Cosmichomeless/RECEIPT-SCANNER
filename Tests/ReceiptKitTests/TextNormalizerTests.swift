@@ -87,4 +87,19 @@ import Testing
         let text = TextNormalizer().normalize(rawText: "TOTAL 3 . 25\nSUB 84 .37")
         #expect(text.lines.map(\.text) == ["TOTAL 3.25", "SUB 84.37"])
     }
+
+    @Test(arguments: [
+        ("T0TAL 5.00", "TOTAL 5.00"), ("IMP0RTE TOTAL 5.00", "IMPORTE TOTAL 5.00"),
+        ("SUBT0TAL 5.00", "SUBTOTAL 5.00"), ("TOTA1 5.00", "TOTAL 5.00"), ("EFECT1V0 5.00", "EFECTIVO 5.00"),
+        ("T0TAL", "TOTAL"),
+    ])
+    func repairsKeywordsWithDigitLookalikes(_ raw: String, _ expected: String) {
+        #expect(lines(raw) == [expected])
+    }
+
+    @Test func leavesOtherWordsWithDigitsAlone() {
+        #expect(lines("A5 PAPEL 2.00") == ["A5 PAPEL 2.00"])
+        #expect(lines("LOTE 8 B0TELLA") == ["LOTE 8 B0TELLA"])
+        #expect(lines("Pizza 4 Stagioni 9.50") == ["Pizza 4 Stagioni 9.50"])
+    }
 }

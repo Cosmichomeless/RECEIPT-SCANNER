@@ -1,0 +1,11 @@
+{
+  "locale": "de_DE",
+  "merchant": "EDEKA Müller",
+  "date": "2026-10-06",
+  "total": "10.77",
+  "currency": "EUR",
+  "issues": [],
+  "taxBase": "9.40",
+  "taxRate": null,
+  "taxAmount": "1.37"
+}

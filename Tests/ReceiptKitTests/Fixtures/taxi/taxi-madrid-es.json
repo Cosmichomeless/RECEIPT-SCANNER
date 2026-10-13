@@ -1,0 +1,11 @@
+{
+  "locale": "es_ES",
+  "merchant": "RADIO TAXI MADRID",
+  "date": "2026-10-06",
+  "total": "21.80",
+  "currency": "EUR",
+  "issues": [],
+  "taxBase": "19.82",
+  "taxRate": "10",
+  "taxAmount": "1.98"
+}

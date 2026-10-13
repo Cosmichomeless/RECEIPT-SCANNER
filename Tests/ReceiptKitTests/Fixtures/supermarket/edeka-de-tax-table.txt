@@ -1,0 +1,13 @@
+EDEKA Müller
+Hauptstraße 5
+80331 München
+Datum: 06.10.2026 Uhrzeit: 17:22
+BIO MILCH 1L       1,29 B
+VOLLKORNBROT       2,49 B
+KAFFEE 500G        6,99 A
+Zwischensumme     10,77
+SUMME EUR         10,77
+EC-Karte          10,77
+MwSt   Netto   Steuer   Brutto
+B 7%    3,53    0,25     3,78
+A 19%   5,87    1,12     6,99

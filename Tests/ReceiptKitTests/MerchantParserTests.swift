@@ -75,4 +75,14 @@ import Testing
         #expect(merchant("REPSOL ESTACION 12345\nTOTAL 7,00") == "REPSOL ESTACION 12345")
         #expect(merchant("Springfield, IL 62704\nCORNER BAKERY") == "CORNER BAKERY")
     }
+
+    @Test func totalIsABrandNextToStation() {
+        #expect(merchant("STATION TOTAL LES PINS\nRoute de Marseille\n06/10/2026\nTOTAL 52,10") == "STATION TOTAL LES PINS")
+        #expect(merchant("TOTAL ACCESS\n06/10/2026\nTOTAL 52,10") == "TOTAL ACCESS")
+    }
+
+    @Test func lineOfJustTotalIsNeverAMerchant() {
+        #expect(merchant("TOTAL 52,10") == nil)
+        #expect(merchant("TOTAL\n52,10") == nil)
+    }
 }

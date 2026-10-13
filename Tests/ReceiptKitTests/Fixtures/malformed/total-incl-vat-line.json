@@ -1,0 +1,11 @@
+{
+  "locale": "en_GB",
+  "merchant": "OFFICE SUPPLIES LTD",
+  "date": "2026-10-06",
+  "total": "7.20",
+  "currency": "GBP",
+  "issues": [],
+  "taxBase": "6.00",
+  "taxRate": "20",
+  "taxAmount": "1.20"
+}

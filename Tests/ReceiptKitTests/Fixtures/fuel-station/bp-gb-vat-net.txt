@@ -1,0 +1,9 @@
+BP CONNECT
+A40 Westway
+LONDON W3 7QD
+06/10/2026 18:20
+PUMP 4 UNLEADED
+28.34 L @ 142.9p
+FUEL                 £40.50
+TOTAL                £40.50
+VAT @20%  £6.75  NET £33.75

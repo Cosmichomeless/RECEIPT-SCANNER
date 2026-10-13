@@ -64,14 +64,14 @@ flowchart LR
 
 ## Known limitations
 
-- Accuracy on real-world receipts has not been measured; the 23 fixtures are clean text, not a field benchmark.
-- German and French keywords, some grouped numbers, and OCR-damaged dates are not handled automatically.
+- Accuracy on real-world receipts has not been measured; the 89 fixtures are clean text written by hand (es, de, fr, en), not a field benchmark. `scripts/ocr-tickets.sh` and `scripts/measure-accuracy.sh` measure real tickets once available.
+- OCR-damaged dates and tips added by hand are not repaired; the app asks instead.
 - There is no export, search, account or sync; history stays on this device.
 - Physical-device camera, permission, memory and TestFlight checks in [the release checklist](docs/release.md) are still pending; an App Store release is not promised.
 
 ## Quality
 
-- 99 Swift tests pass, including the 23-receipt fixture suite and OCR/performance checks on macOS.
+- 157 Swift tests pass, including the 89-receipt fixture suite and OCR/performance checks on macOS.
 - FullFlowUITests exercises sample → review → correction → save → detail → delete on a simulator; it does not test a real camera.
 - No hosted CI or public deployment is claimed here.
 

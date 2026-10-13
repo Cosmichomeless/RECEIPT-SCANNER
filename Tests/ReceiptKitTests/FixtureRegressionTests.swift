@@ -28,24 +28,38 @@ struct ReceiptFixture: Sendable, CustomTestStringConvertible {
 
     static let all: [ReceiptFixture] = {
         guard let root = Bundle.module.resourceURL?.appendingPathComponent("Fixtures") else { return [] }
+        return load(from: root)
+    }()
+
+    /// Fixtures from a directory: either one folder per category (`supermarket/a.txt` + `a.json`)
+    /// or the pairs directly inside it, which get the category `real`.
+    static func load(from root: URL) -> [ReceiptFixture] {
         let manager = FileManager.default
-        let categories = (try? manager.contentsOfDirectory(atPath: root.path)) ?? []
-        var fixtures: [ReceiptFixture] = []
-        for category in categories.sorted() {
+        let entries = ((try? manager.contentsOfDirectory(atPath: root.path)) ?? []).sorted()
+        var fixtures = pairs(in: root, category: "real")
+        for category in entries {
+            var isDirectory: ObjCBool = false
             let directory = root.appendingPathComponent(category)
-            let files = (try? manager.contentsOfDirectory(atPath: directory.path)) ?? []
-            for file in files.sorted() where file.hasSuffix(".txt") {
-                let name = String(file.dropLast(4))
-                guard
-                    let text = try? String(contentsOf: directory.appendingPathComponent(file), encoding: .utf8),
-                    let json = try? Data(contentsOf: directory.appendingPathComponent(name + ".json")),
-                    let expected = try? JSONDecoder().decode(Expected.self, from: json)
-                else { continue }
-                fixtures.append(ReceiptFixture(category: category, name: name, text: text, expected: expected))
-            }
+            guard manager.fileExists(atPath: directory.path, isDirectory: &isDirectory), isDirectory.boolValue else { continue }
+            fixtures += pairs(in: directory, category: category)
         }
         return fixtures
-    }()
+    }
+
+    private static func pairs(in directory: URL, category: String) -> [ReceiptFixture] {
+        let files = ((try? FileManager.default.contentsOfDirectory(atPath: directory.path)) ?? []).sorted()
+        var fixtures: [ReceiptFixture] = []
+        for file in files where file.hasSuffix(".txt") {
+            let name = String(file.dropLast(4))
+            guard
+                let text = try? String(contentsOf: directory.appendingPathComponent(file), encoding: .utf8),
+                let json = try? Data(contentsOf: directory.appendingPathComponent(name + ".json")),
+                let expected = try? JSONDecoder().decode(Expected.self, from: json)
+            else { continue }
+            fixtures.append(ReceiptFixture(category: category, name: name, text: text, expected: expected))
+        }
+        return fixtures
+    }
 
     func parse() -> ParsedReceipt {
         DefaultReceiptParser(locale: Locale(identifier: expected.locale)).parse(OCRResult(text: text))
@@ -70,7 +84,7 @@ extension ParsingIssue {
 @Suite struct FixtureRegressionTests {
     @Test func fixturesAreCoveringEveryCategory() {
         let categories = Set(ReceiptFixture.all.map(\.category))
-        #expect(categories == ["supermarket", "restaurant", "fuel-station", "hardware-store", "malformed"])
+        #expect(categories == ["supermarket", "restaurant", "fuel-station", "hardware-store", "pharmacy", "taxi", "malformed"])
         #expect(ReceiptFixture.all.count >= 20)
     }
 

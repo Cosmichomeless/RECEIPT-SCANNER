@@ -65,4 +65,27 @@ import Testing
         #expect(DateOrder.forLocale(Locale(identifier: "en_US")) == .monthFirst)
         #expect(DateOrder.forLocale(Locale(identifier: "es_ES")) == .dayFirst)
     }
+
+    @Test(arguments: [
+        "06 Okt 2026", "6. Oktober 2026", "06 Okt. 2026",
+        "06 octobre 2026", "6 oct. 2026", "06-OCT-26", "6. Oktober 26",
+    ])
+    func germanAndFrenchOctober(_ text: String) {
+        #expect(parse("CAFE\n\(text)\nTOTAL 9.50") == .found(oct6))
+    }
+
+    @Test(arguments: [
+        ("12 März 2026", 3), ("12 Maerz 2026", 3), ("12 mars 2026", 3), ("12 Mär 2026", 3),
+        ("12 Dez 2026", 12), ("12 décembre 2026", 12), ("12 déc. 2026", 12),
+        ("12 Januar 2026", 1), ("12 janv. 2026", 1), ("12 févr. 2026", 2), ("12 février 2026", 2),
+        ("12 avr. 2026", 4), ("12 mai 2026", 5), ("12 juin 2026", 6), ("12 juil. 2026", 7),
+        ("12 août 2026", 8), ("12 sept. 2026", 9),
+    ])
+    func germanAndFrenchMonths(_ text: String, _ month: Int) {
+        #expect(parse("CAFE\n\(text)") == .found(CalendarDate(year: 2026, month: month, day: 12)))
+    }
+
+    @Test func ordinaryWordsAreNotMonths() {
+        #expect(parse("12 Mandarinen 2026") == .notFound)
+    }
 }

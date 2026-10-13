@@ -7,17 +7,16 @@ Version **1.0.0** (build 1), the portfolio MVP. This is a source tag, not an App
 
 - Document scanning with VisionKit; on-device text recognition with Vision (no network use).
 - Text normalization and heuristic parsing of merchant, date, total and currency, with ambiguity reported
-  rather than guessed (English and Spanish keywords).
+  rather than guessed (English, Spanish, German and French keywords).
 - Review screen to correct or fill any field before saving.
 - Local history with SwiftData: list, detail, delete, persists across launches.
-- 23-receipt fixture suite and regression tests; per-field accuracy report; parse-time budget.
+- 89-receipt fixture suite (es, de, fr, en) and regression tests; per-field accuracy report; parse-time budget.
 - Debug builds only: "Try sample receipt" for running the flow without a camera.
 
 ## Known limitations
 
 See [performance.md](performance.md) and [ocr-and-parsing.md](ocr-and-parsing.md). In short: real-world
-accuracy is unmeasured (fixtures are clean text), German/French are not supported, space-grouped thousands and
-dates with OCR errors are not repaired, scanned images are not kept, and there is no export, sync or search.
+accuracy on real tickets is unmeasured (fixtures are clean text; see `scripts/measure-accuracy.sh`), dates with OCR errors are not repaired, scanned images are not kept, and there is no export, sync or search.
 
 ## Checklist before shipping a build
 
@@ -30,7 +29,8 @@ Automated, run from the repo root:
 Manual, on a physical device with a Release or TestFlight build:
 
 - [ ] Scan at least five real receipts (supermarket, restaurant, fuel, hardware, one crumpled or faded).
-  Note which fields needed correction; add the failures as fixtures.
+  Note which fields needed correction; add the failures as fixtures, or measure a batch with
+  `scripts/ocr-tickets.sh` and `scripts/measure-accuracy.sh`.
 - [ ] Record **Review → Diagnostics** numbers and update [performance.md](performance.md) (OCR time, image size).
   Check memory in Instruments during a scan.
 - [ ] Camera permission prompt shows the text from `NSCameraUsageDescription`; denying it shows the "camera

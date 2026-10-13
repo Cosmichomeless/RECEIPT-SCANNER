@@ -1,0 +1,12 @@
+JOE'S DINER
+410 Broadway
+New York, NY 10013
+Oct 6, 2026 7:42 PM
+1 CHEESEBURGER       12.50
+1 FRIES               4.00
+2 SODA                5.00
+SUBTOTAL             21.50
+TAX 8.875%            1.91
+TOTAL                23.41
+Suggested tip 15%     3.51
+Suggested tip 20%     4.68

@@ -1,0 +1,11 @@
+{
+  "locale": "fr_FR",
+  "merchant": "MONOPRIX",
+  "date": "2026-10-06",
+  "total": "10.00",
+  "currency": "EUR",
+  "issues": [],
+  "taxBase": "8.96",
+  "taxRate": null,
+  "taxAmount": "1.04"
+}

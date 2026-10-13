@@ -1,0 +1,6 @@
+Taxi Berlin Zentrale
+Konzession 4711
+Datum 06.10.2026  23:15
+Fahrpreis       18,40 EUR
+Gesamt          18,40 EUR
+inkl. 7% MwSt    1,20

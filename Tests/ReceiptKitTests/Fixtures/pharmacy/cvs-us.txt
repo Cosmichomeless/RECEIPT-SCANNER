@@ -1,0 +1,11 @@
+CVS/pharmacy
+1700 Market St
+Philadelphia, PA 19103
+RX# 1234567
+10/06/2026 03:15 PM
+VITAMIN D3           9.99
+ALLERGY RELIEF      12.49
+TAX                  1.00
+TOTAL               23.48
+CASH                30.00
+CHANGE               6.52

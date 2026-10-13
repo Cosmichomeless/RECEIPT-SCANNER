@@ -1,0 +1,10 @@
+{
+  "locale": "es_ES",
+  "merchant": "TAXI BARCELONA",
+  "date": "2026-10-06",
+  "total": "14.35",
+  "currency": null,
+  "issues": [
+    "missingCurrency"
+  ]
+}

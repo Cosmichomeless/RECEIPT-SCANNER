@@ -1,0 +1,10 @@
+COOP Pronto Shop
+Bahnhofstrasse 21
+8001 Zürich
+06.10.2026 08:30
+KAFFEE            4.50
+SANDWICH          6.90
+MINERALWASSER     2.10
+Total CHF        13.50
+Karte CHF        13.50
+MWST 7.7%         0.97

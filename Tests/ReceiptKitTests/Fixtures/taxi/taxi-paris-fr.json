@@ -1,0 +1,11 @@
+{
+  "locale": "fr_FR",
+  "merchant": "TAXI PARISIEN",
+  "date": "2026-10-06",
+  "total": "23.50",
+  "currency": "EUR",
+  "issues": [],
+  "taxBase": "21.36",
+  "taxRate": "10",
+  "taxAmount": "2.14"
+}

@@ -1,0 +1,11 @@
+{
+  "locale": "es_ES",
+  "merchant": "CARREFOUR HIPERMERCADOS",
+  "date": "2026-10-06",
+  "total": "23.58",
+  "currency": null,
+  "issues": [
+    "missingCurrency"
+  ],
+  "taxID": "A28425270"
+}

@@ -48,12 +48,25 @@ public struct TotalParser: Sendable {
     /// Words that mark a line as NOT being the total. Checked before total keywords so that
     /// `SUBTOTAL` is not read as `TOTAL`.
     private static let excluded = [
-        "SUBTOTAL", "SUB TOTAL", "SUB-TOTAL", "TAX", "VAT", "IVA", "IGIC", "DISCOUNT", "DESCUENTO",
+        "SUBTOTAL", "SUB TOTAL", "SUB-TOTAL", "DISCOUNT", "DESCUENTO",
         "CHANGE", "CAMBIO", "CASH", "EFECTIVO", "TENDER", "TIP", "PROPINA", "SAVINGS", "COUPON",
         "ENTREGADO", "RECIBIDO", "BASE IMPONIBLE",
-        // German and French: tax, net amount, change, tip, intermediate sum.
-        "MWST", "UST", "NETTO", "ZWISCHENSUMME", "RUECKGELD", "RÜCKGELD", "TRINKGELD", "BAR GEGEBEN", "GEGEBEN",
-        "TVA", "TOTAL HT", "MONTANT HT", "RENDU", "POURBOIRE", "ESPECES",
+        // "TOTAL DESCUENTOS", "TOTAL AHORRO", "TOTAL REMISES": a sum of savings is not the total.
+        "DISCOUNTS", "SAVED", "DESCUENTOS", "DTO", "DTOS", "AHORRO", "AHORROS", "AHORRADO", "PUNTOS",
+        "REMISE", "REMISES", "ECONOMISE", "ECONOMIES",
+        // German and French: net amount, change, tip, intermediate sum, savings.
+        "NETTO", "ZWISCHENSUMME", "RUECKGELD", "RÜCKGELD", "TRINKGELD", "BAR GEGEBEN", "GEGEBEN",
+        "TOTAL HT", "MONTANT HT", "RENDU", "POURBOIRE", "ESPECES", "RABATT", "RABATTE", "ERSPARNIS",
+    ] + taxWords
+
+    /// Tax words mark a tax line (`VAT 1.20`), unless the line is a total that says it contains
+    /// the tax (`TOTAL INCL VAT 7.20`, see `isInclusiveTotal`).
+    static let taxWords = ["TAX", "VAT", "IVA", "IGIC", "MWST", "UST", "TVA"]
+
+    /// Words that say a total contains the tax.
+    private static let inclusiveMarkers = [
+        "INCL", "INC", "INCLUDING", "INCLUDED", "INCLUSIVE", "INCLUIDO", "INCLUIDA", "INKL", "INKLUSIVE",
+        "INCLUS", "INCLUSE", "CON", "WITH", "MIT", "AVEC",
     ]
 
     private static let strongKeywords = [
@@ -65,12 +78,24 @@ public struct TotalParser: Sendable {
         "NET À PAYER", "À PAYER", "MONTANT TTC",
     ]
 
-    private static let weakKeywords = ["TOTAL", "AMOUNT", "IMPORTE", "BALANCE", "SUMA", "SUMME", "GESAMT", "MONTANT"]
+    private static let weakKeywords = [
+        "TOTAL", "AMOUNT", "IMPORTE", "BALANCE", "SUMA", "SUMME", "GESAMT", "MONTANT", "BETRAG", "A PAYER",
+    ]
+
+    /// A total line that states the tax is inside it: `TOTAL INCL VAT 7.20`, `Gesamt inkl. MwSt 14,00`,
+    /// `TOTAL A PAGAR (IVA INCLUIDO) 6,65`. Without a total keyword the line is a tax line
+    /// (`inkl. 19% MwSt 7,63`) and stays excluded.
+    static func isInclusiveTotal(_ upper: String) -> Bool {
+        guard taxWords.contains(where: { containsWord($0, in: upper) }),
+              inclusiveMarkers.contains(where: { containsWord($0, in: upper) }) else { return false }
+        return strongKeywords.contains { upper.contains($0) } || weakKeywords.contains { containsWord($0, in: upper) }
+    }
 
     private static func labelScore(for text: String, previous: String?) -> Int {
         let upper = text.uppercased()
         // Excluded words win, so `TOTAL TAX` and `SUBTOTAL` are never totals.
-        if excluded.contains(where: { containsWord($0, in: upper) }) { return -60 }
+        let inclusive = isInclusiveTotal(upper)
+        if excluded.contains(where: { containsWord($0, in: upper) && !(inclusive && taxWords.contains($0)) }) { return -60 }
         if strongKeywords.contains(where: { upper.contains($0) }) { return 60 }
         if weakKeywords.contains(where: { containsWord($0, in: upper) }) { return 45 }
         // A bare amount directly under a lone keyword line ("TOTAL" / "84.37").
@@ -145,7 +170,7 @@ public struct TotalParser: Sendable {
 
     private static func containsTax(_ text: String) -> Bool {
         let upper = text.uppercased()
-        return ["TAX", "VAT", "IVA"].contains { containsWord($0, in: upper) }
+        return ["TAX", "VAT", "IVA"].contains { containsWord($0, in: upper) } && !isInclusiveTotal(upper)
     }
 
     // MARK: - Amount extraction

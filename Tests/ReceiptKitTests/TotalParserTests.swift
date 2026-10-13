@@ -111,4 +111,31 @@ import Testing
     @Test func datesAndCardNumbersAreNotAmounts() {
         #expect(total("TOTAL\n06.10.2026\nVISA ****4471") == nil)
     }
+
+    @Test func sumsOfSavingsAreNotTotals() {
+        #expect(total("SUPER\nTOTAL 41.20\nTOTAL DESCUENTOS 3.10") == Decimal(string: "41.20"))
+        #expect(total("SUPER\nTOTAL AHORRO 2.50\nTOTAL A PAGAR 18.40") == Decimal(string: "18.40"))
+        #expect(total("MARCHE\nTOTAL REMISES 1.80\nTOTAL TTC 22.60") == Decimal(string: "22.60"))
+        #expect(total("MARKT\nRABATT 1,20\nZU ZAHLEN 12,40") == Decimal(string: "12.40"))
+    }
+
+    @Test(arguments: [
+        ("TOTAL INCL VAT 7.20\nVAT 20% 1.20", "7.20"),
+        ("Gesamt inkl. MwSt 14,00\ninkl. 19% MwSt 2,24", "14.00"),
+        ("TOTAL A PAGAR (IVA INCLUIDO) 6,65\nIVA 10% 0,60", "6.65"),
+        ("Total TTC avec TVA 9,90\nTVA 20% 1,65", "9.90"),
+    ])
+    func totalThatSaysItContainsTaxIsStillTheTotal(_ raw: String, _ expected: String) {
+        #expect(total("SHOP\n" + raw) == Decimal(string: expected))
+    }
+
+    @Test func taxLineThatMentionsIncludedIsStillTax() {
+        let raw = "SHOP\nITEM 11.90\ninkl. 19% MwSt 1.90\nTOTAL 11.90"
+        #expect(total(raw) == Decimal(string: "11.90"))
+        #expect(candidates(raw).first { $0.lineText.contains("MwSt") }.map { $0.score < TotalParser.acceptanceThreshold } ?? true)
+    }
+
+    @Test func betragAloneIsEnoughEvidence() {
+        #expect(total("TANKSTELLE\nBetrag 52,10\nMwSt 19% 8,32") == Decimal(string: "52.10"))
+    }
 }

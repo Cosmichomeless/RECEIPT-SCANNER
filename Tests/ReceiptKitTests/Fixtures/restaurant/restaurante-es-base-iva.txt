@@ -1,0 +1,11 @@
+RESTAURANTE LA PARRILLA
+NIF B87654321
+Paseo de la Castellana 120
+Mesa 12   Camarero: LUIS
+06/10/2026 21:47
+2 CHULETON            58,00
+1 ENSALADA            8,50
+2 VINO TINTO         16,00
+BASE IMPONIBLE       75,00
+IVA 10%               7,50
+TOTAL               82,50 EUR

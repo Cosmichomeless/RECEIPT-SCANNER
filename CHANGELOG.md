@@ -1,5 +1,15 @@
 # Changelog
 
+## Unreleased
+
+- Parsers: totals that say they include tax (`TOTAL INCL VAT`, `Gesamt inkl. MwSt`, `IVA incluido`) are still the
+  total; sums of savings (`TOTAL DESCUENTOS`, `TOTAL REMISES`, `RABATT`) are not; `BETRAG` and `A PAYER` count as
+  total labels; German and French month names (`12 März 2026`, `6 févr. 2026`) are read; `T0TAL`-style keywords with
+  digit look-alikes are repaired; `STATION TOTAL` is accepted as a merchant; 2.1 % VAT is a known rate.
+- Fixtures: 89 receipts (was 28) across es, de, fr, en, with pharmacy and taxi categories. Accuracy report adds
+  tax and tax ID, and a breakdown by locale and category.
+- `scripts/ocr-tickets.sh` and `scripts/measure-accuracy.sh` measure real tickets outside the repository.
+
 ## 1.0.0 — Portfolio MVP
 
 - Review: currency is a menu instead of free text, the keyboard has a Done button and dismisses on drag, a thumbnail of

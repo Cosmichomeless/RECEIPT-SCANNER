@@ -1,0 +1,8 @@
+www.supermercados-ejemplo.es
+TIENDA 0345
+CAJA 3
+SUPERMERCADOS EJEMPLO S.L.
+CIF B12345674
+06/10/2026 17:55
+ZUMO         1,99
+TOTAL        1,99 EUR

@@ -1,0 +1,10 @@
+PENNY MARKT
+Bahnhofstr. 12
+10115 Berlin
+Datum 06.10.2026
+MINERALWASSER 6x   3,54
+Pfand              1,50
+Pfandrückgabe     -0,75
+SUMME              4,29 €
+Gegeben Bar        5,00
+Rückgeld           0,71

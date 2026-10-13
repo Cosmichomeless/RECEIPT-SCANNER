@@ -24,7 +24,7 @@ public enum DateParseResult: Equatable, Sendable {
 /// Detects the purchase date in normalized text.
 ///
 /// Supported: `06/10/2026`, `06-10-2026`, `06.10.2026`, `06/10/26`, `2026-10-06`,
-/// `06 OCT 2026`, `6-oct-26`, `OCT 06, 2026` and Spanish month names.
+/// `06 OCT 2026`, `6-oct-26`, `OCT 06, 2026` and month names in English, Spanish, German and French.
 public struct DateParser: Sendable {
     /// `nil` makes numeric dates with two possible readings (`06/10/2026`) ambiguous.
     public let order: DateOrder?
@@ -122,10 +122,10 @@ public struct DateParser: Sendable {
         pattern: #"(?<![0-9])(\d{1,2})[-/.](\d{1,2})[-/.](\d{4}|\d{2})(?![0-9])"#
     )
     private static let dayMonthNamePattern = try! NSRegularExpression(
-        pattern: #"(?<![0-9])(\d{1,2})(?:st|nd|rd|th|º)?(?: +de)?[ \-/.]*([A-Za-zñÑ]{3,10})\.?(?: +de)?[ \-/.,]*(\d{4}|\d{2})(?![0-9])"#
+        pattern: #"(?<![0-9])(\d{1,2})(?:st|nd|rd|th|º)?(?: +de)?[ \-/.]*(\p{L}{3,10})\.?(?: +de)?[ \-/.,]*(\d{4}|\d{2})(?![0-9])"#
     )
     private static let monthNameDayPattern = try! NSRegularExpression(
-        pattern: #"(?<![A-Za-z])([A-Za-zñÑ]{3,10})\.? +(\d{1,2})(?:st|nd|rd|th)?,? +(\d{4})(?![0-9])"#
+        pattern: #"(?<!\p{L})(\p{L}{3,10})\.? +(\d{1,2})(?:st|nd|rd|th)?,? +(\d{4})(?![0-9])"#
     )
 
     private static func matches(in line: String) -> [Raw] {
@@ -157,19 +157,31 @@ public struct DateParser: Sendable {
         return found.sorted { $0.location < $1.location }.map(\.raw)
     }
 
+    /// Month names in English, Spanish, German and French, without accents (see `monthNumber`).
     private static let months: [(names: [String], number: Int)] = [
-        (["january", "enero"], 1), (["february", "febrero"], 2), (["march", "marzo"], 3),
-        (["april", "abril"], 4), (["may", "mayo"], 5), (["june", "junio"], 6),
-        (["july", "julio"], 7), (["august", "agosto"], 8),
-        (["september", "septiembre", "setiembre"], 9), (["october", "octubre"], 10),
-        (["november", "noviembre"], 11), (["december", "diciembre"], 12),
+        (["january", "enero", "januar", "janvier"], 1),
+        (["february", "febrero", "februar", "fevrier"], 2),
+        (["march", "marzo", "marz", "maerz", "mars"], 3),
+        (["april", "abril", "avril"], 4),
+        (["may", "mayo", "mai"], 5),
+        (["june", "junio", "juni", "juin"], 6),
+        (["july", "julio", "juli", "juillet"], 7),
+        (["august", "agosto", "aout"], 8),
+        (["september", "septiembre", "setiembre", "septembre"], 9),
+        (["october", "octubre", "oktober", "octobre"], 10),
+        (["november", "noviembre", "novembre"], 11),
+        (["december", "diciembre", "dezember", "decembre"], 12),
     ]
-    /// Spanish and English abbreviations that are not a prefix of the full name.
-    private static let abbreviations = ["ene": 1, "abr": 4, "ago": 8, "dic": 12, "sept": 9, "set": 9]
+    /// Abbreviations that are not a prefix of the full name: Spanish, German and French.
+    private static let abbreviations = [
+        "ene": 1, "abr": 4, "ago": 8, "dic": 12, "sept": 9, "set": 9, "okt": 10, "dez": 12,
+        "janv": 1, "fevr": 2, "avr": 4, "juil": 7, "aout": 8,
+    ]
 
-    /// A month name or abbreviation (`oct`, `Oct.`, `octubre`), or `nil` for any other word.
+    /// A month name or abbreviation (`oct`, `Oct.`, `octubre`, `März`, `févr`), or `nil` for any
+    /// other word. Accents are ignored: `déc` and `dec` are the same word.
     private static func monthNumber(_ word: String) -> Int? {
-        let lower = word.lowercased()
+        let lower = word.folding(options: [.diacriticInsensitive, .caseInsensitive], locale: Locale(identifier: "en_US_POSIX"))
         if let number = abbreviations[lower] { return number }
         guard lower.count >= 3 else { return nil }
         return months.first { entry in entry.names.contains { $0.hasPrefix(lower) } }?.number

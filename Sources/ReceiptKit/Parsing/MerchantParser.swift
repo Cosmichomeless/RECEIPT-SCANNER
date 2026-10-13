@@ -80,7 +80,7 @@ public struct MerchantParser: Sendable {
         if matches(phonePattern, line) || matches(postalPattern, line) { return true }
         if matches(datePattern, line) || matches(timePattern, line) || matches(amountPattern, line) { return true }
         if taxIDKeywords.contains(where: { containsWord(upper, $0) }) { return true }
-        if boilerplate.contains(where: { containsWord(upper, $0) }) { return true }
+        if boilerplate.contains(where: { containsWord(upper, $0) && !isBrandUse(of: $0, in: upper) }) { return true }
         if isAddress(upper) { return true }
         return false
     }
@@ -110,6 +110,12 @@ public struct MerchantParser: Sendable {
         "THANK", "GRACIAS", "TOTAL", "SUBTOTAL", "CASHIER", "CAJERO", "CAJA", "TEL", "PHONE", "FAX", "ORDER", "TABLE",
         "MESA", "COPY", "DUPLICATE", "CUSTOMER", "SERVER", "DATE", "FECHA", "TIME", "HORA",
     ]
+    /// `TOTAL` is also a fuel brand: `STATION TOTAL LES PINS`, `TOTAL ACCESS`. It only counts as a
+    /// brand next to a word that says it is a station, never on a line of its own.
+    private static func isBrandUse(of word: String, in upper: String) -> Bool {
+        word == "TOTAL" && ["STATION", "ENERGIES", "ACCESS", "RELAIS", "CARBURANTS"].contains { containsWord(upper, $0) }
+    }
+
     private static let companySuffixes = ["INC", "LLC", "LTD", "CORP", "CO", "GMBH", "SA", "SL", "SAS", "SRL", "CIA"]
 
     // MARK: - Patterns

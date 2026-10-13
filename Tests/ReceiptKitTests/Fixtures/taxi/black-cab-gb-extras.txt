@@ -1,0 +1,6 @@
+LONDON BLACK CAB
+Licence 55412
+06/10/2026 21:05
+Fare         £22.00
+Extras        £2.00
+TOTAL        £24.00

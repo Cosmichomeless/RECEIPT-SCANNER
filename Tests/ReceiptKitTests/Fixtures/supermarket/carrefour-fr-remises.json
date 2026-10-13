@@ -1,0 +1,10 @@
+{
+  "locale": "fr_FR",
+  "merchant": "CARREFOUR CITY",
+  "date": "2026-10-06",
+  "total": "12.40",
+  "currency": null,
+  "issues": [
+    "missingCurrency"
+  ]
+}

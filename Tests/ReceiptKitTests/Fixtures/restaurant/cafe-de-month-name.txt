@@ -1,0 +1,7 @@
+Café Sonnenschein
+Leopoldstraße 8
+80802 München
+Datum: 6. Oktober 2026
+Kaffee         3,20
+Käsekuchen     4,50
+Gesamt         7,70 €

@@ -17,7 +17,7 @@ public struct TaxParser: Sendable {
     public init() {}
 
     /// Rates printed in Spain (4, 10, 21), Germany (7, 19) and France (5.5, 10, 20), among others.
-    static let knownRates: [Decimal] = [4, 5, Decimal(string: "5.5")!, 7, 10, 19, 20, 21]
+    static let knownRates: [Decimal] = [Decimal(string: "2.1")!, 4, 5, Decimal(string: "5.5")!, 7, 10, 19, 20, 21]
 
     public func parse(_ text: NormalizedText, total: Decimal?) -> TaxBreakdown? {
         let lines = text.lines.map(Line.init)
@@ -128,6 +128,8 @@ public struct TaxParser: Sendable {
         for line in lines where line.hasTaxWord || line.hasQuotaWord {
             if line.hasTaxWord, let rate = line.rate, rateHint == nil { rateHint = rate }
             if line.isIncluded { included = true }
+            // `TOTAL INCL VAT 7.20` is the total, not the tax.
+            guard !TotalParser.isInclusiveTotal(line.upper) else { continue }
             guard line.amounts.count == 1, let amount = line.amounts.first, amount > 0 else { continue }
             let isTotal = line.upper.contains("TOTAL") || line.hasQuotaWord
             taxEntries.append((amount, line.rate, isTotal))

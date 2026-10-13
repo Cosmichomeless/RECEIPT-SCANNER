@@ -1,0 +1,11 @@
+{
+  "locale": "fr_FR",
+  "merchant": "Brasserie Le Central",
+  "date": "2026-10-06",
+  "total": "56.00",
+  "currency": "EUR",
+  "issues": [],
+  "taxBase": "50.91",
+  "taxRate": "10",
+  "taxAmount": "5.09"
+}

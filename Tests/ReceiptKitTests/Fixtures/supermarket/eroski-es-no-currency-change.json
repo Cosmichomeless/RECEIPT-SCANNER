@@ -1,0 +1,10 @@
+{
+  "locale": "es_ES",
+  "merchant": "EROSKI CITY",
+  "date": "2026-10-06",
+  "total": "6.53",
+  "currency": null,
+  "issues": [
+    "missingCurrency"
+  ]
+}

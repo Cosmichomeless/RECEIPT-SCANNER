@@ -1,0 +1,11 @@
+{
+  "locale": "en_GB",
+  "merchant": "BP CONNECT",
+  "date": "2026-10-06",
+  "total": "40.50",
+  "currency": "GBP",
+  "issues": [],
+  "taxBase": "33.75",
+  "taxRate": "20",
+  "taxAmount": "6.75"
+}

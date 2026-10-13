@@ -1,0 +1,10 @@
+{
+  "locale": "en_US",
+  "merchant": "JOE'S DINER",
+  "date": "2026-10-06",
+  "total": "23.41",
+  "currency": null,
+  "issues": [
+    "missingCurrency"
+  ]
+}
