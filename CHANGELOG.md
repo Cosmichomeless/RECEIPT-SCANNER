@@ -1,7 +1,18 @@
 # Changelog
 
-## Unreleased
+## 1.1.0 — 2026-10-14
 
+- Export: CSV, PDF and a ZIP of kept scans through the share sheet, optionally limited to a date range. The Images
+  format only appears when a receipt has a kept scan; the app does not keep scans yet, so today it is CSV and PDF.
+- Tax: VAT, tax breakdown and merchant tax ID are extracted from receipts and included in the export.
+- Localization: the app is translated into Spanish, French and German (`Localizable.xcstrings`,
+  `InfoPlist.xcstrings`).
+- App Store compliance: `PrivacyInfo.xcprivacy` (no tracking, no collected data, no required-reason APIs) and a
+  privacy policy in English and Spanish (`docs/privacy.md`).
+- CI: `.github/workflows/ci.yml` runs `swift test`, checks that `xcodegen generate` leaves the project unchanged, and
+  builds the app.
+- App Store Connect metadata (listing text in en/es/fr/de, privacy and age-rating answers, review notes) in
+  `docs/app-store/`.
 - Memory: after a scan is processed, the review state keeps a 1200 px image instead of the full-resolution
   capture (about 48 MB at 12 MP), and captures delivered while one is processing are ignored.
 - `docs/device-testing.md`: checklist for what must be tried on a physical iPhone.

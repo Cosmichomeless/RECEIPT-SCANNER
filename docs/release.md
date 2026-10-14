@@ -1,9 +1,9 @@
 # Release notes and checklist
 
-Version **1.0.0** (build 1), the portfolio MVP. This is a source tag, not an App Store release. Version numbers live in `project.yml` (`MARKETING_VERSION`,
+Version **1.1.0** (build 1), the first App Store candidate (1.0.0 was the portfolio MVP). Version numbers live in `project.yml` (`MARKETING_VERSION`,
 `CURRENT_PROJECT_VERSION`); run `xcodegen generate` after changing them.
 
-## What is in 1.0.0
+## What is in 1.1.0
 
 - Document scanning with VisionKit; on-device text recognition with Vision (no network use).
 - Text normalization and heuristic parsing of merchant, date, total and currency, with ambiguity reported
@@ -11,16 +11,22 @@ Version **1.0.0** (build 1), the portfolio MVP. This is a source tag, not an App
 - Review screen to correct or fill any field before saving.
 - Local history with SwiftData: list, detail, delete, persists across launches.
 - 89-receipt fixture suite (es, de, fr, en) and regression tests; per-field accuracy report; parse-time budget.
+- Export to CSV and PDF (and a ZIP of kept scans, unused until scans can be kept) through the share sheet.
+- VAT, tax breakdown and merchant tax ID extraction.
+- Spanish, French and German localization; privacy manifest and privacy policy.
 - Debug builds only: "Try sample receipt" for running the flow without a camera.
 
 ## Known limitations
 
 See [performance.md](performance.md) and [ocr-and-parsing.md](ocr-and-parsing.md). In short: real-world
-accuracy on real tickets is unmeasured (fixtures are clean text; see `scripts/measure-accuracy.sh`), dates with OCR errors are not repaired, scanned images are not kept, and there is no export, sync or search.
+accuracy on real tickets is unmeasured (fixtures are clean text; see `scripts/measure-accuracy.sh`), dates with OCR errors are not repaired, scanned images are not kept, and there is no sync or search.
 
 ## Checklist before shipping a build
 
 Automated, run from the repo root:
+
+These three run in `.github/workflows/ci.yml` on every push to `main` and every pull request; confirm the run is green
+on the commit you tag. Locally:
 
 - [ ] `swift test` passes (all suites).
 - [ ] `xcodegen generate` leaves `ReceiptScanner.xcodeproj` unchanged in git.
@@ -44,12 +50,14 @@ Distribution (requires the developer's own Apple account; none of this is done b
 
 - [ ] Set the signing team and a unique bundle identifier (currently `dev.cosmichomeless.ReceiptScanner`).
 - [x] Include an app icon in the asset catalog.
-- [ ] For the App Store, provide a privacy policy and the "Data Not Collected" privacy answers
-  (the app has no network use or analytics).
+- [x] Privacy manifest (`ReceiptScanner/PrivacyInfo.xcprivacy`) and policy text (`docs/privacy.md`).
+- [ ] Publish the policy and support page (GitHub Pages from `/docs`, see [app-store/README.md](app-store/README.md)) and enter
+  the URLs, the "Data Not Collected" privacy answers, the age rating and the EU trader status in App Store Connect.
+  Everything to paste is in [app-store/](app-store/).
 - [ ] Archive, upload to TestFlight, and test the uploaded build.
 - [ ] Only then submit for review.
 
 ## Tagging
 
-Tag the verified main commit as `v1.0.0` and push that tag to GitHub. A GitHub Release is a separate,
+Tag the verified main commit as `v1.1.0` and push that tag to GitHub. A GitHub Release is a separate,
 optional publication; no App Store submission or TestFlight upload is implied by this tag.

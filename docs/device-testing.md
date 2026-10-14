@@ -74,9 +74,10 @@ recognition time and parsing time.
   you saved.
 - [ ] Open detail, delete a receipt, relaunch: it stays deleted.
 - [ ] History with 100+ receipts (add many quickly with real scans or by re-saving): scrolling stays smooth.
-- [ ] Export CSV/JSON: the share sheet opens and the file opens correctly in Files or Numbers.
+- [ ] Export CSV and PDF: the share sheet opens and the file opens correctly in Files, Numbers or Preview. The
+  Images format is absent (no scans are kept).
 - [ ] Largest accessibility text size and dark appearance: nothing is cut off on the smallest iPhone.
-- [ ] Spanish and English phone language: all text is translated and fits.
+- [ ] Spanish, French, German and English phone language: all text is translated and fits.
 - [ ] The Debug-only "Try sample receipt" action is absent in the Release build.
 
 ## Results

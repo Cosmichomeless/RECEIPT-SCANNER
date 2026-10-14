@@ -73,5 +73,5 @@ Confirmed exclusions, as stated in the README:
 - External OCR APIs
 - Collaborative receipts
 
-Also deliberately not in the MVP: multi-page receipts, line-item extraction, export,
-and importing images from the photo library.
+Also deliberately not in the MVP: multi-page receipts, line-item extraction,
+and importing images from the photo library. (Export to CSV and PDF was added in 1.1.0.)

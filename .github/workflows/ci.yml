@@ -1,0 +1,27 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  test:
+    runs-on: macos-26
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Swift tests
+        run: swift test
+
+      - name: Project is in sync with project.yml
+        run: |
+          brew install xcodegen
+          xcodegen generate
+          git diff --exit-code ReceiptScanner.xcodeproj
+
+      - name: Build the app
+        run: |
+          xcodebuild -project ReceiptScanner.xcodeproj -scheme ReceiptScanner \
+            -destination 'generic/platform=iOS Simulator' \
+            CODE_SIGNING_ALLOWED=NO build
