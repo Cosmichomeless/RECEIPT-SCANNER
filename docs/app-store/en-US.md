@@ -1,7 +1,7 @@
 # en-US
 
 ## Name
-Receipt Scanner
+Receipt Scanner Offline
 
 ## Subtitle
 Scan receipts, stay private
@@ -10,7 +10,7 @@ Scan receipts, stay private
 Scan a paper receipt and get the merchant, date, total and VAT in seconds. Everything is read on your iPhone. No account, no upload.
 
 ## Keywords
-receipt,scanner,expense,tax,vat,invoice,ocr,ticket,budget,accounting,freelance,offline
+expense,tax,vat,invoice,ocr,ticket,budget,accounting,freelance,csv,pdf,bill,cash
 
 ## Description
 Receipt Scanner turns paper receipts into clean, editable records, and it does it entirely on your iPhone. Nothing is uploaded, there is no account to create and no ads.

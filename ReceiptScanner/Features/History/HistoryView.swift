@@ -6,9 +6,9 @@ struct HistoryView: View {
     let history: HistoryStore
     @State private var isExporting = false
 
-    // The same addresses go in App Store Connect; keep them in sync with docs/release/store-listing.md.
-    private static let privacyURL = URL(string: "https://github.com/Cosmichomeless/RECEIPT-SCANNER/blob/main/docs/privacy.md")!
-    private static let supportURL = URL(string: "https://github.com/Cosmichomeless/RECEIPT-SCANNER/blob/main/docs/support.md")!
+    // The same addresses go in App Store Connect; keep them in sync with docs/app-store/.
+    private static let privacyURL = URL(string: "https://cosmichomeless.github.io/RECEIPT-SCANNER/privacy/")!
+    private static let supportURL = URL(string: "https://cosmichomeless.github.io/RECEIPT-SCANNER/")!
 
     var body: some View {
         List {

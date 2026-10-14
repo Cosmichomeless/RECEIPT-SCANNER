@@ -1,7 +1,7 @@
 # fr-FR
 
 ## Name
-Receipt Scanner
+Receipt Scanner Offline
 
 ## Subtitle
 Scannez vos tickets en privé
@@ -10,7 +10,7 @@ Scannez vos tickets en privé
 Scannez un ticket papier et obtenez commerçant, date, total et TVA en quelques secondes. Tout est lu sur votre iPhone. Sans compte, sans envoi.
 
 ## Keywords
-ticket,reçu,scanner,dépenses,facture,tva,ocr,comptabilité,indépendant,budget,hors ligne
+ticket,reçu,dépenses,facture,tva,ocr,comptabilité,indépendant,budget,hors ligne,csv,pdf
 
 ## Description
 Receipt Scanner transforme vos tickets papier en fiches claires et modifiables, entièrement sur votre iPhone. Rien n'est envoyé, aucun compte à créer, aucune publicité.

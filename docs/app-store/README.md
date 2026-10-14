@@ -11,8 +11,8 @@ or by an automation (for example an App Store Connect MCP). Nothing here has bee
    - Privacy Policy URL: <https://cosmichomeless.github.io/RECEIPT-SCANNER/privacy/>
 2. **Finish the device checks** in [../device-testing.md](../device-testing.md) (issues #37 and #38). These need a
    physical iPhone and real receipts and cannot be done by the repo.
-3. **Signing.** Set a development team for the `ReceiptScanner` target (bundle id `dev.cosmichomeless.ReceiptScanner`,
-   iPhone only, iOS 17+). `project.yml` has no team yet; add `DEVELOPMENT_TEAM` there and run `xcodegen generate`.
+3. **Signing.** `project.yml` pins `DEVELOPMENT_TEAM` for the `ReceiptScanner` target (bundle id
+   `dev.cosmichomeless.ReceiptScanner`, iPhone only, iOS 17+). Run `xcodegen generate` after changing it.
 4. **Tag and archive.** With CI green on the commit, tag `v1.1.0`, archive, upload to TestFlight (#47) and test the
    uploaded build.
 5. **App Store Connect:** create the app record, then apply [listing text](#listing-text) and
@@ -37,3 +37,34 @@ Length limits (name and subtitle 30, promotional text 170, keywords 100, descrip
   the simulator or device in each language; `docs/screenshots/` holds English simulator captures only.
 - **Pricing and territories.** Not decided in the repo.
 - **Copyright holder and contact details** for App Store Connect.
+
+The store name is **Receipt Scanner Offline**: "Receipt Scanner" and "Private Receipt Scanner" were taken by other apps.
+It already contains "receipt", "scanner" and "offline", so the keyword lists do not repeat them. The icon label on the
+home screen stays "Receipt Scanner" (`CFBundleDisplayName`). The Support URL is the site's home page, which has the FAQ
+and the link to open an issue.
+
+## Category, price and other fields
+
+| Field | Proposal |
+|-------|----------|
+| Primary category | Finance |
+| Secondary category | Productivity (or Business) |
+| Price | Free, no in-app purchases (the goal is to launch without monetization) |
+| Devices | iPhone only (`TARGETED_DEVICE_FAMILY: 1`); portrait |
+| Version / build | 1.1.0 (1) |
+| Content rights | Does not contain, show or access third-party content |
+| Advertising identifier (IDFA) | No |
+
+## Screenshot captions (value messages, not just screens)
+
+Needed sizes: 6.9" (1320x2868) is mandatory; #47 also asks for 6.5". Capture them from the simulator named
+"iPhone 17 Pro Max" with the demo data in [demo.md](../demo.md) (do not commit them). Repeat for each language (#46). Suggested order and captions:
+
+| # | Screen | English caption | Español |
+|---|--------|-----------------|---------|
+| 1 | Scan | Scan any receipt in seconds | Escanea cualquier ticket en segundos |
+| 2 | Review | Check every detail before you save | Revisa cada dato antes de guardar |
+| 3 | Review with a highlighted field | It asks instead of guessing | Pregunta en vez de adivinar |
+| 4 | VAT fields | VAT, base and tax ID, ready for your accountant | IVA, base y NIF, listos para tu gestor |
+| 5 | Export | Export to CSV or PDF | Exporta a CSV o PDF |
+| 6 | History | Private: everything stays on your iPhone | Privado: todo se queda en tu iPhone |

@@ -1,7 +1,7 @@
 # de-DE
 
 ## Name
-Receipt Scanner
+Receipt Scanner Offline
 
 ## Subtitle
 Belege scannen, privat bleiben
@@ -10,7 +10,7 @@ Belege scannen, privat bleiben
 Scannen Sie einen Papierbeleg und erhalten Sie Händler, Datum, Summe und MwSt. in Sekunden. Alles wird auf Ihrem iPhone gelesen. Kein Konto, kein Upload.
 
 ## Keywords
-beleg,quittung,scanner,ausgaben,rechnung,mwst,ocr,buchhaltung,freiberufler,budget,offline,kassenbon
+beleg,quittung,ausgaben,rechnung,mwst,ocr,buchhaltung,freiberufler,budget,kassenbon,csv,pdf
 
 ## Description
 Receipt Scanner macht aus Papierbelegen übersichtliche, bearbeitbare Einträge – komplett auf Ihrem iPhone. Es wird nichts hochgeladen, Sie brauchen kein Konto und es gibt keine Werbung.

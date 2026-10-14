@@ -1,7 +1,7 @@
 # es-ES (reutilizar también para es-MX)
 
 ## Name
-Receipt Scanner
+Receipt Scanner Offline
 
 ## Subtitle
 Escanea tickets, sin subirlos
@@ -10,7 +10,7 @@ Escanea tickets, sin subirlos
 Escanea un ticket en papel y obtén comercio, fecha, total e IVA en segundos. Todo se lee en tu iPhone. Sin cuenta y sin subir nada.
 
 ## Keywords
-ticket,recibo,escáner,gastos,factura,iva,ocr,contabilidad,autónomo,presupuesto,sin conexión
+ticket,recibo,escáner,gastos,factura,iva,ocr,contabilidad,autónomo,presupuesto,sin conexión,csv,pdf
 
 ## Description
 Receipt Scanner convierte tickets en papel en registros claros y editables, y lo hace por completo en tu iPhone. No se sube nada, no hay que crear cuenta y no hay publicidad.
