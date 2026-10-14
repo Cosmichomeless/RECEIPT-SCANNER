@@ -28,7 +28,7 @@ Automated, run from the repo root:
 These three run in `.github/workflows/ci.yml` on every push to `main` and every pull request; confirm the run is green
 on the commit you tag. Locally:
 
-- [ ] `swift test` passes (all suites).
+- [ ] `swift test` passes (all suites) on a Mac. CI skips the real-Vision OCR tests (see `.github/workflows/ci.yml`), so this local run is the one that covers them.
 - [ ] `xcodegen generate` leaves `ReceiptScanner.xcodeproj` unchanged in git.
 - [ ] `xcodebuild -project ReceiptScanner.xcodeproj -scheme ReceiptScanner -destination 'platform=iOS Simulator,name=iPhone 17 Pro' build` succeeds.
 

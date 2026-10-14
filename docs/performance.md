@@ -65,7 +65,7 @@ noise the fixtures only partly imitate (see limitations).
 
 Cause: `String.range(of:options: .regularExpression)` recompiled its pattern for every line and every
 keyword in `MerchantParser`, and `CurrencyParser` built two regexes per line. `RegexCache` now compiles each
-pattern once. `QualityReportTests.parsingStaysCheap` fails if the average exceeds 5 ms or any receipt 50 ms.
+pattern once. `QualityReportTests.parsingStaysCheap` fails if the average exceeds 5 ms or any receipt 50 ms (250 ms when the `CI` environment variable is set, because one slow sample on a shared virtual machine says little about the parser).
 
 Parsing is now negligible next to OCR, which dominates a scan.
 

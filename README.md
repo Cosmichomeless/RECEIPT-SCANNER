@@ -75,7 +75,7 @@ flowchart LR
 
 - 157 Swift tests pass, including the 89-receipt fixture suite and OCR/performance checks on macOS.
 - FullFlowUITests exercises sample → review → correction → save → detail → delete on a simulator; it does not test a real camera.
-- `.github/workflows/ci.yml` runs the tests, the project-sync check and a build on GitHub Actions. No public deployment is claimed.
+- `.github/workflows/ci.yml` runs the tests, the project-sync check and a build on GitHub Actions. The tests that use real Vision OCR (`recognizesRenderedText`, `blankImageReportsNoTextFound`, `EndToEndFlowTests`) run in a separate non-blocking step because GitHub's virtual macOS runners have no Neural Engine; `downscalingKeepsTheTotalReadable` is a measurement and only runs locally. Run plain `swift test` on a Mac before a release. No public deployment is claimed.
 
 ## Documentation
 
