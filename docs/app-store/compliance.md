@@ -7,14 +7,14 @@ If any of that changes (for example iCloud sync, issue #48), revisit this file f
 
 | Field | Value |
 | --- | --- |
-| Name | Receipt Scanner |
+| Name | Receipt Scanner Offline (the home-screen name, `CFBundleDisplayName`, stays "Receipt Scanner") |
 | Bundle ID | `dev.cosmichomeless.ReceiptScanner` |
 | SKU | `receipt-scanner-ios` |
 | Primary category | Finance |
 | Secondary category | Productivity |
 | Devices | iPhone only (`TARGETED_DEVICE_FAMILY = 1`), portrait, iOS 17.0+ |
 | Primary language | English (U.S.); localized into es, fr, de |
-| Price | To be decided by the developer |
+| Price | Free (USD 0.00 price point, no in-app purchases) |
 
 ## App Privacy ("nutrition label")
 
