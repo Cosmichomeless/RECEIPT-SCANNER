@@ -3,8 +3,7 @@
 What has to be checked on a physical iPhone before the App Store build. The simulator has no camera and a
 Mac has far more memory than a phone, so none of this can be replaced by `swift test`.
 
-Use a **Release** or TestFlight build (Debug adds overhead and shows the sample-receipt action). Test on the
-oldest and smallest iPhone you own as well as the newest one if you have both. Write the results in the
+Use a **Release** or TestFlight build (Debug adds overhead and shows the sample-receipt action). Issue #37 asks for an iPhone with 4-6 GB of RAM; also try the oldest and smallest iPhone you own, if you have one. Write the results in the
 table at the end and copy the numbers into [performance.md](performance.md#device-measurements).
 
 ## What the code already does for memory (reviewed, not measured)
@@ -36,12 +35,14 @@ What is **not** known without a device: real OCR time on small thermal print, pe
   (in the phone's language).
 - [ ] Deny it: the app shows the "camera unavailable" message, no crash. Settings > ReceiptScanner > Camera
   re-enables it and the next scan works.
+- [ ] Revoke the permission from Settings while the app is in the background, come back and tap Scan: the
+  "camera unavailable" message appears, no crash.
 - [ ] Cancel the document camera without taking a photo: back to the home screen, nothing saved.
 
 ## 3. Real tickets (also feeds #38)
 
-Scan at least 10 tickets: supermarket, restaurant, fuel, pharmacy, a crumpled one, a faded thermal one, a
-long one that needs several shots, and one in a language other than your phone's.
+Scan 20 tickets (the goal of #37): supermarket, restaurant, fuel, pharmacy, in low light, crumpled, faded thermal
+print, a long one that needs several shots, and one in a language other than your phone's.
 
 For each ticket note: did the merchant, date, total and currency come out right? Did the app ask about
 anything it should not have (or fail to ask)? Then in **Review > Diagnostics** write down image size, text
