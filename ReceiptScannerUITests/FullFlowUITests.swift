@@ -30,7 +30,9 @@ final class FullFlowUITests: XCTestCase {
         XCTAssertTrue(more.waitForExistence(timeout: 5), app.debugDescription)
         more.tap()
         shot("2-menu")
-        app.buttons["Try sample receipt"].tap()
+        let sample = app.buttons["Try sample receipt"]
+        XCTAssertTrue(sample.waitForExistence(timeout: 5), app.debugDescription)
+        sample.tap()
 
         XCTAssertTrue(app.navigationBars["Review"].waitForExistence(timeout: 20))
         shot("3-review")
@@ -111,7 +113,9 @@ final class FullFlowUITests: XCTestCase {
             let more = app.buttons["OverflowBarButtonItem"].firstMatch
             XCTAssertTrue(more.waitForExistence(timeout: 5), app.debugDescription)
             more.tap()
-            app.buttons["Try sample receipt"].tap()
+            let sample = app.buttons["Try sample receipt"]
+            XCTAssertTrue(sample.waitForExistence(timeout: 5), app.debugDescription)
+            sample.tap()
             XCTAssertTrue(app.navigationBars[language.review].waitForExistence(timeout: 20), app.debugDescription)
             shot("\(language.code)-2-review")
             app.swipeUp()

@@ -9,6 +9,10 @@ settings:
     SWIFT_VERSION: "6.0"
     MARKETING_VERSION: "1.1.0"
     CURRENT_PROJECT_VERSION: "1"
+    DEVELOPMENT_TEAM: X8H9Y77VL5
+    # Xcode's automatic extraction marks translated keys as stale and adds empty ones; the catalogs are kept by hand
+    # and LocalizationTests enforces that every key is translated.
+    SWIFT_EMIT_LOC_STRINGS: NO
 packages:
   ReceiptKit:
     path: .

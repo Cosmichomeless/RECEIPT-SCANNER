@@ -196,23 +196,24 @@ struct AccuracyReport {
         let parsers = Dictionary(uniqueKeysWithValues: fixtures.map { ($0.testDescription, DefaultReceiptParser(locale: Locale(identifier: $0.expected.locale))) })
         let rounds = 20
         let clock = ContinuousClock()
-        var worst: Duration = .zero
+        var samples: [Duration] = []
         let total = clock.measure {
             for _ in 0..<rounds {
                 for fixture in fixtures {
                     let ocr = OCRResult(text: fixture.text)
-                    let elapsed = clock.measure { _ = parsers[fixture.testDescription]!.parse(ocr) }
-                    worst = max(worst, elapsed)
+                    samples.append(clock.measure { _ = parsers[fixture.testDescription]!.parse(ocr) })
                 }
             }
         }
-        let average = total / (rounds * fixtures.count)
-        print("Parse time: average \(average), worst \(worst) over \(rounds * fixtures.count) runs")
+        samples.sort()
+        let average = total / samples.count
+        let worst = samples[samples.count - 1]
+        // Suites run in parallel, so one sample can lose the CPU for a while; the 99th percentile still
+        // catches a real slowdown without flaking on that.
+        let p99 = samples[samples.count * 99 / 100]
+        print("Parse time: average \(average), p99 \(p99), worst \(worst) over \(samples.count) runs")
         // OCR takes hundreds of milliseconds; parsing must stay far below that.
         #expect(average < .milliseconds(5))
-        // The slowest single run is one sample out of 1780, so a shared CI runner (a busy virtual machine running
-        // other tests in parallel) gets more room. The average above is the same everywhere.
-        let worstBudget: Duration = ProcessInfo.processInfo.environment["CI"] != nil ? .milliseconds(250) : .milliseconds(50)
-        #expect(worst < worstBudget)
+        #expect(p99 < .milliseconds(50))
     }
 }

@@ -11,17 +11,17 @@ with `keyword_insights` and `competitor_snapshot` from asc) before submitting.
 
 | Field | Text | Chars |
 |-------|------|-------|
-| Name | Receipt Scanner | 15 |
+| Name | Receipt Scanner Offline | 23 |
 | Subtitle | Private receipt & VAT scanner | 29 |
-| Keywords | scan,expense,tracker,invoice,tax,ocr,csv,pdf,offline,freelance,accountant,bill,purchase,tickets,cash | 100 |
+| Keywords | scan,expense,tracker,invoice,tax,ocr,csv,pdf,budget,freelance,accountant,bill,purchase,tickets,cash | 99 |
 | Support URL | https://github.com/Cosmichomeless/RECEIPT-SCANNER/blob/main/docs/support.md | |
 | Privacy policy URL | https://github.com/Cosmichomeless/RECEIPT-SCANNER/blob/main/docs/privacy.md | |
 | Marketing URL (optional) | https://github.com/Cosmichomeless/RECEIPT-SCANNER | |
 | Copyright | 2026 (your name) | |
 
-If "Receipt Scanner" is already taken when you create the app record, App Store Connect says so. Fallbacks,
-all within 30 characters: `Receipt Scanner Private`, `Receipt Scanner: VAT`, `Private Receipt Scanner`. The name on
-the home screen stays "Receipt Scanner" whatever you choose (`CFBundleDisplayName`).
+"Receipt Scanner" and "Private Receipt Scanner" were already taken by other apps, so the app record was created as
+"Receipt Scanner Offline". "Offline" is in the name, so it is not repeated in the keywords. The name on the home
+screen stays "Receipt Scanner" whatever the store name is (`CFBundleDisplayName`).
 
 **Promotional text** (170, can be changed later without a new version):
 
@@ -67,9 +67,9 @@ First release.
 
 | Campo | Texto | Caracteres |
 |-------|-------|------------|
-| Nombre | Receipt Scanner | 15 |
+| Nombre | Receipt Scanner Offline | 23 |
 | Subtítulo | Tickets e IVA, todo privado | 27 |
-| Palabras clave | recibo,factura,gastos,ocr,autónomo,escáner,cámara,csv,pdf,offline,privado,gestor,contabilidad,nota | 98 |
+| Palabras clave | recibo,factura,gastos,ocr,autónomo,escáner,cámara,csv,pdf,compras,privado,gestor,contabilidad,nota | 98 |
 | URL de soporte | https://github.com/Cosmichomeless/RECEIPT-SCANNER/blob/main/docs/support.md | |
 | URL de política de privacidad | https://github.com/Cosmichomeless/RECEIPT-SCANNER/blob/main/docs/privacy.md | |
 
