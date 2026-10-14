@@ -1,3 +1,17 @@
 title: Receipt Scanner
 description: Scan paper receipts on your iPhone. Everything stays on the device.
-theme: jekyll-theme-minimal
+baseurl: "/RECEIPT-SCANNER"
+url: "https://cosmichomeless.github.io"
+markdown: kramdown
+# Developer documentation is for the repository, not the site.
+exclude:
+  - app-store
+  - architecture.md
+  - demo.md
+  - device-testing.md
+  - ocr-and-parsing.md
+  - performance.md
+  - privacy-and-storage.md
+  - product-flows.md
+  - release.md
+  - screenshots/build-showcase.py

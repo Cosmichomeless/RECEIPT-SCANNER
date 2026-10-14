@@ -1,13 +1,25 @@
 ---
+layout: default
+lang: en
 title: Privacy Policy — Receipt Scanner
+description: "What Receipt Scanner does with your data. Short version: nothing leaves your device."
 permalink: /privacy/
+body_class: page-plain
 ---
+
+<div class="wrap" markdown="1"><div class="prose" markdown="1">
+
+<div class="lang-switch"><a href="#en">English</a><a href="#es">Español</a></div>
+
+<a id="en"></a>
 
 # Privacy Policy — Receipt Scanner
 
-*Last updated: October 14, 2026.* · [Español más abajo](#política-de-privacidad)
+*Last updated: October 14, 2026.* · [Español más abajo](#es)
 
+<div class="summary-box" markdown="1">
 **Summary: Receipt Scanner does not collect your data.** There are no accounts, no analytics, no advertising and no third-party SDKs. The app does not track you.
+</div>
 
 ## What the app does with your data
 
@@ -42,13 +54,17 @@ If this policy changes, the new version will be published at this address with a
 
 Questions about privacy: open an issue at <https://github.com/Cosmichomeless/RECEIPT-SCANNER/issues>.
 
----
+<hr>
+
+<a id="es"></a>
 
 # Política de privacidad
 
 *Última actualización: 14 de octubre de 2026.*
 
+<div class="summary-box" markdown="1">
 **Resumen: Receipt Scanner no recoge tus datos.** No hay cuentas, ni analíticas, ni publicidad, ni SDK de terceros. La app no te rastrea.
+</div>
 
 ## Qué hace la app con tus datos
 
@@ -82,3 +98,5 @@ Si esta política cambia, la nueva versión se publicará en esta misma direcci�
 ## Contacto
 
 Dudas sobre privacidad: abre una incidencia en <https://github.com/Cosmichomeless/RECEIPT-SCANNER/issues>.
+
+</div></div>

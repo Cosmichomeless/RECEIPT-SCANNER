@@ -1,0 +1,57 @@
+<!doctype html>
+{% assign es = false %}{% if page.lang == "es" %}{% assign es = true %}{% endif %}
+<html lang="{{ page.lang | default: 'en' }}">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{{ page.title | default: site.title }}</title>
+  <meta name="description" content="{{ page.description | default: site.description }}">
+  <meta name="theme-color" content="#1632a6">
+  <meta name="color-scheme" content="light dark">
+  <meta property="og:title" content="{{ page.title | default: site.title }}">
+  <meta property="og:description" content="{{ page.description | default: site.description }}">
+  <meta property="og:image" content="{{ site.url }}{{ site.baseurl }}/assets/icon-512.png">
+  <link rel="icon" type="image/png" href="{{ site.baseurl }}/assets/favicon.png">
+  <link rel="apple-touch-icon" href="{{ site.baseurl }}/assets/apple-touch-icon.png">
+  <link rel="stylesheet" href="{{ site.baseurl }}/assets/style.css">
+</head>
+<body class="{{ page.body_class }}">
+  <a class="skip" href="#main">{% if es %}Saltar al contenido{% else %}Skip to content{% endif %}</a>
+  <header class="site-header">
+    <div class="wrap">
+      <a class="brand" href="{{ site.baseurl }}{% if es %}/es/{% else %}/{% endif %}">
+        <img src="{{ site.baseurl }}/assets/apple-touch-icon.png" width="38" height="38" alt="">
+        <span>Receipt Scanner</span>
+      </a>
+      <nav class="nav" aria-label="{% if es %}Principal{% else %}Main{% endif %}">
+        {% if es %}
+        <a class="hide-sm" href="{{ site.baseurl }}/es/#funciones">Funciones</a>
+        <a class="hide-sm" href="{{ site.baseurl }}/es/#preguntas">Preguntas</a>
+        <a href="{{ site.baseurl }}/privacy/#es"{% if page.url contains 'privacy' %} aria-current="page"{% endif %}>Privacidad</a>
+        <a class="lang" href="{{ page.alt_url | default: '/' | prepend: site.baseurl }}" hreflang="en" lang="en">English</a>
+        {% else %}
+        <a class="hide-sm" href="{{ site.baseurl }}/#features">Features</a>
+        <a class="hide-sm" href="{{ site.baseurl }}/#faq">FAQ</a>
+        <a href="{{ site.baseurl }}/privacy/#en"{% if page.url contains 'privacy' %} aria-current="page"{% endif %}>Privacy</a>
+        <a class="lang" href="{{ page.alt_url | default: '/es/' | prepend: site.baseurl }}" hreflang="es" lang="es">Español</a>
+        {% endif %}
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+{{ content }}
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap">
+      <span>© 2026 Receipt Scanner · {% if es %}Sin cuentas, sin análisis, sin rastreo.{% else %}No accounts, no analytics, no tracking.{% endif %}</span>
+      <span>
+        <a href="{{ site.baseurl }}/privacy/{% if es %}#es{% else %}#en{% endif %}">{% if es %}Privacidad{% else %}Privacy{% endif %}</a> ·
+        <a href="https://github.com/Cosmichomeless/RECEIPT-SCANNER/issues">{% if es %}Soporte{% else %}Support{% endif %}</a> ·
+        <a href="https://github.com/Cosmichomeless/RECEIPT-SCANNER">GitHub</a>
+      </span>
+    </div>
+  </footer>
+</body>
+</html>

@@ -88,7 +88,7 @@ flowchart LR
 | [Privacy and storage](docs/privacy-and-storage.md) | What remains on the device. |
 | [Demo and release](docs/demo.md) · [Checklist](docs/release.md) | Walkthrough and remaining device checks. |
 | [App Store pack](docs/app-store/README.md) | Listing text (en/es/fr/de), privacy and age-rating answers, review notes. |
-| [Privacy policy](docs/privacy.md) · [Support](docs/index.md) | Published with GitHub Pages from `/docs`. |
+| [Privacy policy](docs/privacy.md) · [Website](https://cosmichomeless.github.io/RECEIPT-SCANNER/) | The site (support page and privacy policy, English and Spanish) is published with GitHub Pages from `/docs`. |
 
 ## Repository layout
 

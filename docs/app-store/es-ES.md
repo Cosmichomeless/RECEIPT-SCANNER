@@ -42,7 +42,7 @@ Receipt Scanner necesita un dispositivo con cámara para escanear.
 Primera versión en la App Store: escanea tickets con IVA y NIF, exporta a CSV o PDF y usa la app en español, inglés, francés o alemán.
 
 ## Support URL
-https://cosmichomeless.github.io/RECEIPT-SCANNER/
+https://cosmichomeless.github.io/RECEIPT-SCANNER/es/
 
 ## Privacy Policy URL
 https://cosmichomeless.github.io/RECEIPT-SCANNER/privacy/
