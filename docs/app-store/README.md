@@ -68,3 +68,16 @@ Needed sizes: 6.9" (1320x2868) is mandatory; #47 also asks for 6.5". Capture the
 | 4 | VAT fields | VAT, base and tax ID, ready for your accountant | IVA, base y NIF, listos para tu gestor |
 | 5 | Export | Export to CSV or PDF | Exporta a CSV o PDF |
 | 6 | History | Private: everything stays on your iPhone | Privado: todo se queda en tu iPhone |
+
+## Header and search-results artwork
+
+The creative components of the product page ("Header" and "Search results" tabs in App Store Connect) are in
+[assets/](assets/), one folder per language (`en`, `es`, `fr`, `de`). They are uploaded by hand with "Upload"; the
+public API does not expose them.
+
+| Folder | File | Size |
+|--------|------|------|
+| `assets/header/<lang>/` | `header-5244x2950.png`, `header-3840x1646.png` | 16:9 and wide banner |
+| `assets/search/<lang>/` | `search-5244x2950.png` (same artwork as the header), `search-3840x2560.png`, `search-1920x1280.png` | 16:9 and 3:2 |
+
+Blue background, app icon, "Receipt Scanner Offline", the localized tagline and two screenshots (Review and History).
