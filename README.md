@@ -19,6 +19,8 @@ Receipt Scanner uses VisionKit and on-device Vision OCR to extract a merchant, d
 - **Scan and recognize:** capture a receipt with VisionKit; text recognition runs on the device.
 - **Review before saving:** correct any field, see a scan thumbnail, and leave ambiguous values unset instead of guessing.
 - **Local history:** open, relaunch and delete saved receipts; scanned images are not retained.
+- **Export:** share a CSV or PDF of your receipts (with VAT and tax ID) through the share sheet, optionally for a date range.
+- **Localized:** English, Spanish, French and German.
 - **Offline workflow:** OCR, parsing and persistence require no external service.
 - **Reproducible demo:** a Debug-only sample receipt runs through real OCR on the simulator.
 
@@ -66,14 +68,14 @@ flowchart LR
 
 - Accuracy on real-world receipts has not been measured; the 89 fixtures are clean text written by hand (es, de, fr, en), not a field benchmark. `scripts/ocr-tickets.sh` and `scripts/measure-accuracy.sh` measure real tickets once available.
 - OCR-damaged dates and tips added by hand are not repaired; the app asks instead.
-- There is no export, search, account or sync; history stays on this device.
+- There is no search, account or sync; history stays on this device. Export is manual, through the share sheet.
 - Physical-device camera, permission, memory and TestFlight checks in [the release checklist](docs/release.md) are still pending; an App Store release is not promised.
 
 ## Quality
 
 - 157 Swift tests pass, including the 89-receipt fixture suite and OCR/performance checks on macOS.
 - FullFlowUITests exercises sample → review → correction → save → detail → delete on a simulator; it does not test a real camera.
-- No hosted CI or public deployment is claimed here.
+- `.github/workflows/ci.yml` runs the tests, the project-sync check and a build on GitHub Actions. No public deployment is claimed.
 
 ## Documentation
 
@@ -85,6 +87,8 @@ flowchart LR
 | [Performance](docs/performance.md) | Fixture accuracy, timings and limits. |
 | [Privacy and storage](docs/privacy-and-storage.md) | What remains on the device. |
 | [Demo and release](docs/demo.md) · [Checklist](docs/release.md) | Walkthrough and remaining device checks. |
+| [App Store pack](docs/app-store/README.md) | Listing text (en/es/fr/de), privacy and age-rating answers, review notes. |
+| [Privacy policy](docs/privacy.md) · [Support](docs/index.md) | Published with GitHub Pages from `/docs`. |
 
 ## Repository layout
 
@@ -96,4 +100,4 @@ flowchart LR
 
 ## Distribution and license
 
-The source is tagged v1.0.0 for the portfolio. No GitHub Release, TestFlight or App Store build has been published. Signing, privacy answers and physical-device checks are documented in [the release checklist](docs/release.md). Licensed under [MIT](LICENSE).
+Version 1.1.0 is the App Store candidate; listing text, privacy answers and review notes are in [docs/app-store](docs/app-store/). No TestFlight or App Store build has been published yet. Signing, privacy answers and physical-device checks are documented in [the release checklist](docs/release.md). Licensed under [MIT](LICENSE).

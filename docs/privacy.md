@@ -1,6 +1,11 @@
+---
+title: Privacy Policy — Receipt Scanner
+permalink: /privacy/
+---
+
 # Privacy Policy — Receipt Scanner
 
-*Last updated: October 13, 2026.* · [Español más abajo](#política-de-privacidad)
+*Last updated: October 14, 2026.* · [Español más abajo](#política-de-privacidad)
 
 **Summary: Receipt Scanner does not collect your data.** There are no accounts, no analytics, no advertising and no third-party SDKs. The app does not track you.
 
@@ -8,6 +13,10 @@
 
 Receipts you scan are read on your device using Apple's Vision framework. The photo of the receipt is kept only in memory while you review it and is discarded when you save or cancel. The extracted text (merchant, date, total, currency and the recognised text) is stored only on your device.
 
+
+## Exporting
+
+If you export your receipts (CSV or PDF), the file is created on your device in a temporary folder and handed to the iOS share sheet. You choose where it goes (Files, Mail, AirDrop…); the app never sends it anywhere by itself and deletes the temporary file when you close the export screen.
 
 ## Permissions
 
@@ -37,7 +46,7 @@ Questions about privacy: open an issue at <https://github.com/Cosmichomeless/REC
 
 # Política de privacidad
 
-*Última actualización: 13 de octubre de 2026.*
+*Última actualización: 14 de octubre de 2026.*
 
 **Resumen: Receipt Scanner no recoge tus datos.** No hay cuentas, ni analíticas, ni publicidad, ni SDK de terceros. La app no te rastrea.
 
@@ -45,6 +54,10 @@ Questions about privacy: open an issue at <https://github.com/Cosmichomeless/REC
 
 Los tickets que escaneas se leen en tu dispositivo con el framework Vision de Apple. La foto del ticket solo se mantiene en memoria mientras la revisas y se descarta al guardar o cancelar. El texto extraído (comercio, fecha, total, divisa y texto reconocido) se guarda solo en tu dispositivo.
 
+
+## Exportar
+
+Si exportas tus tickets (CSV o PDF), el archivo se crea en tu dispositivo en una carpeta temporal y se entrega a la hoja de compartir de iOS. Tú eliges el destino (Archivos, Mail, AirDrop…); la app nunca lo envía por su cuenta y borra el archivo temporal al cerrar la pantalla de exportación.
 
 ## Permisos
 
