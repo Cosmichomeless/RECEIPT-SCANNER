@@ -6,6 +6,10 @@ struct HistoryView: View {
     let history: HistoryStore
     @State private var isExporting = false
 
+    // The same addresses go in App Store Connect; keep them in sync with docs/release/store-listing.md.
+    private static let privacyURL = URL(string: "https://github.com/Cosmichomeless/RECEIPT-SCANNER/blob/main/docs/privacy.md")!
+    private static let supportURL = URL(string: "https://github.com/Cosmichomeless/RECEIPT-SCANNER/blob/main/docs/support.md")!
+
     var body: some View {
         List {
             Section {
@@ -71,6 +75,12 @@ struct HistoryView: View {
                 Button("Export", systemImage: "square.and.arrow.up") { isExporting = true }
                     .disabled(history.receipts.isEmpty)
                     .accessibilityIdentifier("exportButton")
+            }
+            ToolbarItem(placement: .secondaryAction) {
+                Link("Privacy policy", destination: Self.privacyURL)
+            }
+            ToolbarItem(placement: .secondaryAction) {
+                Link("Support", destination: Self.supportURL)
             }
         }
         .sheet(isPresented: $isExporting) { ExportView(receipts: history.receipts) }
