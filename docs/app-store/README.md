@@ -81,3 +81,7 @@ public API does not expose them.
 | `assets/search/<lang>/` | `search-5244x2950.png` (same artwork as the header), `search-3840x2560.png`, `search-1920x1280.png` | 16:9 and 3:2 |
 
 Blue background, app icon, "Receipt Scanner Offline", the localized tagline and two screenshots (Review and History).
+
+To regenerate them (new tagline, new screenshots), run
+`python3 scripts/make-store-artwork.py <shots-folder>`; the folder holds `<lang>/2-review.png` and
+`<lang>/6-history.png`. It needs Pillow and macOS.
